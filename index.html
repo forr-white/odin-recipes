@@ -1,22 +1,105 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Forrest's Recipes</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Forrest's Recipe Index</title>
+  <style>
+    body { font-family: Arial, sans-serif; background: #f8fafc; margin: 0; padding: 20px; }
+    .container { max-width: 980px; margin: 0 auto; }
+    header { margin-bottom: 16px; }
+    h1 { margin-bottom: 12px; }
+    nav a { margin-right: 12px; text-decoration: none; color: #0369a1; }
+    input, select { padding: 6px; margin-bottom: 12px; border-radius: 6px; border: 1px solid #ccc; width: 100%; max-width: 300px; display: block; }
+    ul { list-style: none; padding: 0; }
+    li { margin-bottom: 6px; }
+    a { color: #0369a1; text-decoration: none; }
+  </style>
 </head>
 <body>
-    <h1>Forrest's Saved Recipes</h1>
-    <img src="./images/YourOpinionIsNotPartOfTheRecipe.svg" alt="Your opinion is not part of the recipe" width="350">
-    <h4><ul>
-    <li><a href="pages/appetizers.html">Appetizers</a></li>
-    <li><a href="pages/bread.html">Bread</a></li>
-    <li><a href="pages/breakfast.html">Breakfast</a><br></li>
-    <li><a href="pages/desserts.html">Desserts</a></li>
-    <li><a href="pages/dinner.html">Dinner</a></li>
-    <li><a href="pages/drinks.html">Drinks</a></li>
-    <li><a href="pages/sides.html">Sides</a></li>
-    <li><a href="pages/soups.html">Soups</a></li>
-    </ul></h4>
+  <div class="container">
+    <header>
+      <h1>Forrest's Recipe Index</h1>
+      <nav>
+        <a href="../odin-recipes/pages/appetizers.html">Appetizers</a>
+        <a href="../odin-recipes/pages/bread.html">Bread</a>
+        <a href="../odin-recipes/pages/breakfast.html">Breakfast</a>
+        <a href="../odin-recipes/pages/desserts.html">Desserts</a>
+        <a href="../odin-recipes/pages/dinner.html">Dinner</a>
+        <a href="../odin-recipes/pages/drinks.html">Drinks</a>
+        <a href="../odin-recipes/pages/sides.html">Sides</a>
+        <a href="../odin-recipes/pages/soups.html">Soups</a>
+      </nav>
+    </header>
+
+    <label for="filter-category">Filter by Category</label>
+    <select id="filter-category">
+      <option value="">All</option>
+      <option value="appetizers">Appetizers</option>
+      <option value="bread">Bread</option>
+      <option value="breakfast">Breakfast</option>
+      <option value="desserts">Desserts</option>
+      <option value="dinner">Dinner</option>
+      <option value="drinks">Drinks</option>
+      <option value="sides">Sides</option>
+      <option value="soups">Soups</option>
+    </select>
+
+    <label for="search">Search Recipes</label>
+    <input type="text" id="search" placeholder="Search by name">
+
+    <ul id="recipe-list"></ul>
+  </div>
+
+  <script>
+    const recipes = [
+      { name: "5 Layer Dip", category: "appetizers", url: "../odin-recipes/recipes/five-layer-dip.html" },
+      { name: "Buffalo Chicken Dip", category: "appetizers", url: "../odin-recipes/recipes/buffalo-chicken-dip.html" },
+      { name: "Creamy Green Salsa", category: "appetizers", url: "../odin-recipes/recipes/creamy-green-salsa.html" },
+      { name: "Buttery Flour Tortillas", category: "bread", url: "../odin-recipes/recipes/buttery-flour-tortillas.html" },
+      { name: "Golden Sweet Cornbread", category: "bread", url: "../odin-recipes/recipes/cornbread.html" },
+      { name: "Focaccia Bread", category: "bread", url: "../odin-recipes/recipes/focaccia-bread.html" },
+      { name: "Homemade Corn Tortillas", category: "bread", url: "../odin-recipes/recipes/homemade-corn-tortillas.html" },
+      { name: "Homemade Rolls", category: "bread", url: "../odin-recipes/recipes/rolls.html" },
+      { name: "No-Knead Crusty Artisan Bread", category: "bread", url: "../odin-recipes/recipes/artisan-bread.html" },
+      { name: "Red Lobster Cheddar Bay Biscuits", category: "bread", url: "../odin-recipes/recipes/cheddar-bay-biscuits.html" },
+      { name: "Chorizo and Eggs", category: "breakfast", url: "../odin-recipes/recipes/chorizo-eggs.html" },
+      { name: "Egg White Bites", category: "breakfast", url: "../odin-recipes/recipes/egg-white-bites.html" },
+      { name: "Wafflemaker Hash Browns", category: "breakfast", url: "../odin-recipes/recipes/wafflemaker-hash-browns.html" },
+      { name: "Blueberry Muffins with Streusel Crumb Topping", category: "desserts", url: "../odin-recipes/recipes/blueberry-muffins.html" },
+      { name: "Cheesecake", category: "desserts", url: "../odin-recipes/recipes/cheesecake.html" },
+      { name: "Classic Tres Leches Cake", category: "desserts", url: "../odin-recipes/recipes/tres-leches.html" },
+      { name: "Soft Sugar Cookies with Royal Icing", category: "desserts", url: "../odin-recipes/recipes/soft-sugar-cookies.html" },
+      { name: "Beef Carne Guisada", category: "dinner", url: "../odin-recipes/recipes/beef-carne-guisada.html" },
+      { name: "Best Lemon Garlic Shrimp", category: "dinner", url: "../odin-recipes/recipes/lemon-garlic-shrimp.html" },
+      { name: "Braised Beef Short Ribs", category: "dinner", url: "../odin-recipes/recipes/braised-beef-short-ribs.html"},
+      { name: "Carne Asada Street Tacos", category: "dinner", url: "../odin-recipes/recipes/carne-asada.html" },
+      { name: "Carne Guisada", category: "dinner", url: "../odin-recipes/recipes/carne-guisada.html"},
+      { name: "Chicken Tikka Masala", category: "dinner", url: "../odin-recipes/recipes/chicken-tikka-masala.html"},
+      { name: "Creole Succotash from Treme", category: "dinner", url: "../odin-recipes/recipes/creole-succotash.html"},
+      //{ name: "", category: "", url: ""},
+    ];
+
+    const listEl = document.getElementById('recipe-list');
+    const searchInput = document.getElementById('search');
+    const filterCategory = document.getElementById('filter-category');
+
+    function renderList() {
+      const term = searchInput.value.toLowerCase();
+      const category = filterCategory.value;
+      listEl.innerHTML = '';
+      recipes
+        .filter(r => (!category || r.category === category) && r.name.toLowerCase().includes(term))
+        .forEach(r => {
+          const li = document.createElement('li');
+          li.innerHTML = `<a href="${r.url}">${r.name} (${r.category})</a>`;
+          listEl.appendChild(li);
+        });
+    }
+
+    searchInput.oninput = renderList;
+    filterCategory.onchange = renderList;
+    renderList();
+  </script>
 </body>
 </html>
