@@ -176,6 +176,7 @@
     generateBtn.addEventListener('click', () => {
       const name = document.getElementById('new-name').value.trim();
       const category = document.getElementById('new-category').value;
+      const imageUrl = document.getElementById('new-image').value.trim();
       const ingredients = document.getElementById('new-ingredients').value.trim().split("\n").filter(l => l);
       const directions = document.getElementById('new-directions').value.trim();
 
@@ -198,6 +199,7 @@
     header { margin-bottom: 16px; }
     h1 { margin-bottom: 12px; }
     nav a { margin-right: 12px; text-decoration: none; color: #0369a1; }
+    img { max-width: 100%; height: auto; margin-bottom: 20px; border-radius: 8px; }
     input, select { padding: 6px; margin-bottom: 12px; border-radius: 6px; border: 1px solid #ccc; width: 100%; max-width: 300px; display: block; }
     ul { list-style: none; padding: 0; }
     li { margin-bottom: 6px; }
@@ -212,6 +214,7 @@
         <a href="https://forr-white.github.io/odin-recipes/index.html">Home</a>
     </nav>
     </header>
+      ${imageUrl ? `<img src="${imageUrl}" alt="${name}">` : ""}
   <h2>Ingredients</h2>
   <ul>
   ${ingredients.map(i => `<li>${i}</li>`).join("\n")}
