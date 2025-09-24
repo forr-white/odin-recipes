@@ -50,31 +50,35 @@
 
     <!-- Recipe Builder -->
     <div class="builder">
-      <h2>Add a New Recipe</h2>
-      <label for="new-name">Recipe Name</label>
-      <input type="text" id="new-name">
+  <h2>Add a New Recipe</h2>
 
-      <label for="new-category">Category</label>
-      <select id="new-category">
-        <option value="appetizers">Appetizers</option>
-        <option value="bread">Bread</option>
-        <option value="breakfast">Breakfast</option>
-        <option value="desserts">Desserts</option>
-        <option value="dinner">Dinner</option>
-        <option value="drinks">Drinks</option>
-        <option value="sauce">Sauce</option>
-        <option value="sides">Sides</option>
-        <option value="soups">Soups</option>
-      </select>
+  <label for="new-name">Recipe Name</label>
+  <input type="text" id="new-name">
 
-      <label for="new-ingredients">Ingredients (one per line)</label>
-      <textarea id="new-ingredients"></textarea>
+  <label for="new-category">Category</label>
+  <select id="new-category">
+    <option value="appetizers">Appetizers</option>
+    <option value="bread">Bread</option>
+    <option value="breakfast">Breakfast</option>
+    <option value="desserts">Desserts</option>
+    <option value="dinner">Dinner</option>
+    <option value="drinks">Drinks</option>
+    <option value="sauce">Sauce</option>
+    <option value="sides">Sides</option>
+    <option value="soups">Soups</option>
+  </select>
 
-      <label for="new-directions">Directions</label>
-      <textarea id="new-directions"></textarea>
+  <label for="new-image">Image URL (optional)</label>
+  <input type="text" id="new-image" placeholder="https://example.com/recipe.jpg">
 
-      <button id="generate-btn">Generate Recipe File</button>
-    </div>
+  <label for="new-ingredients">Ingredients (one per line)</label>
+  <textarea id="new-ingredients"></textarea>
+
+  <label for="new-directions">Directions (one step per line)</label>
+  <textarea id="new-directions"></textarea>
+
+  <button id="generate-btn">Generate Recipe File</button>
+</div>
   </div>
 
   <script>
