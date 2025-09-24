@@ -10,10 +10,14 @@
     header { margin-bottom: 16px; }
     h1 { margin-bottom: 12px; }
     nav a { margin-right: 12px; text-decoration: none; color: #0369a1; }
-    input, select { padding: 6px; margin-bottom: 12px; border-radius: 6px; border: 1px solid #ccc; width: 100%; max-width: 300px; display: block; }
+    input, select, textarea { padding: 6px; margin-bottom: 12px; border-radius: 6px; border: 1px solid #ccc; width: 100%; max-width: 600px; display: block; }
+    textarea { height: 100px; }
     ul { list-style: none; padding: 0; }
     li { margin-bottom: 6px; }
     a { color: #0369a1; text-decoration: none; }
+    .builder { margin-top: 40px; padding: 20px; background: #fff; border-radius: 8px; box-shadow: 0 2px 6px rgba(0,0,0,0.1); }
+    button { padding: 10px 16px; border: none; background: #0369a1; color: #fff; border-radius: 6px; cursor: pointer; }
+    button:hover { background: #02597f; }
   </style>
 </head>
 <body>
@@ -22,8 +26,8 @@
       <h1>Forrest's Recipe Index</h1>
     </header>
 
-<img src="../odin-recipes/images/YourOpinionIsNotPartOfTheRecipe.svg" width="350">
-<br>
+    <img src="../odin-recipes/images/YourOpinionIsNotPartOfTheRecipe.svg" width="350">
+    <br>
 
     <label for="filter-category">Filter by Category</label>
     <select id="filter-category">
@@ -42,6 +46,33 @@
     <input type="text" id="search" placeholder="Search by name">
 
     <ul id="recipe-list"></ul>
+
+    <!-- Recipe Builder -->
+    <div class="builder">
+      <h2>Add a New Recipe</h2>
+      <label for="new-name">Recipe Name</label>
+      <input type="text" id="new-name">
+
+      <label for="new-category">Category</label>
+      <select id="new-category">
+        <option value="appetizers">Appetizers</option>
+        <option value="bread">Bread</option>
+        <option value="breakfast">Breakfast</option>
+        <option value="desserts">Desserts</option>
+        <option value="dinner">Dinner</option>
+        <option value="drinks">Drinks</option>
+        <option value="sides">Sides</option>
+        <option value="soups">Soups</option>
+      </select>
+
+      <label for="new-ingredients">Ingredients (one per line)</label>
+      <textarea id="new-ingredients"></textarea>
+
+      <label for="new-directions">Directions</label>
+      <textarea id="new-directions"></textarea>
+
+      <button id="generate-btn">Generate Recipe File</button>
+    </div>
   </div>
 
   <script>
@@ -128,6 +159,65 @@
     searchInput.oninput = renderList;
     filterCategory.onchange = renderList;
     renderList();
+
+    // Recipe Builder
+    const generateBtn = document.getElementById('generate-btn');
+    generateBtn.addEventListener('click', () => {
+      const name = document.getElementById('new-name').value.trim();
+      const category = document.getElementById('new-category').value;
+      const ingredients = document.getElementById('new-ingredients').value.trim().split("\n").filter(l => l);
+      const directions = document.getElementById('new-directions').value.trim();
+
+      if (!name || !ingredients.length || !directions) {
+        alert("Please fill out all fields.");
+        return;
+      }
+
+      // Create HTML content for the recipe page
+      const recipeHTML = `
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>${name}</title>
+  <style>
+    body { font-family: Arial, sans-serif; background: #fdfdfd; padding: 20px; }
+    h1 { margin-bottom: 16px; }
+    h2 { margin-top: 24px; }
+    ul { list-style: disc; padding-left: 20px; }
+    ol { padding-left: 20px; }
+  </style>
+</head>
+<body>
+  <h1>${name}</h1>
+  <h2>Ingredients</h2>
+  <ul>
+    ${ingredients.map(i => `<li>${i}</li>`).join("\n")}
+  </ul>
+  <h2>Directions</h2>
+  <p>${directions.replace(/\n/g, "<br>")}</p>
+</body>
+</html>`;
+
+      // Download as .html file
+      const blob = new Blob([recipeHTML], { type: "text/html" });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      const fileName = name.toLowerCase().replace(/\s+/g, "-") + ".html";
+      a.href = url;
+      a.download = fileName;
+      a.click();
+      URL.revokeObjectURL(url);
+
+      // Also add to in-memory recipe list for immediate use
+      recipes.push({
+        name,
+        category,
+        url: "../odin-recipes/recipes/" + fileName
+      });
+      renderList();
+    });
   </script>
 </body>
 </html>
