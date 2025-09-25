@@ -56,19 +56,6 @@
   <label for="new-name">Recipe Name</label>
   <input type="text" id="new-name">
 
-  <label for="new-category">Category</label>
-  <select id="new-category">
-    <option value="appetizers">Appetizers</option>
-    <option value="bread">Bread</option>
-    <option value="breakfast">Breakfast</option>
-    <option value="desserts">Desserts</option>
-    <option value="dinner">Dinner</option>
-    <option value="drinks">Drinks</option>
-    <option value="sauce">Sauce</option>
-    <option value="sides">Sides</option>
-    <option value="soups">Soups</option>
-  </select>
-
   <label for="new-image">Image URL (optional)</label>
   <input type="text" id="new-image" placeholder="https://example.com/recipe.jpg">
 
@@ -181,7 +168,6 @@
     const generateBtn = document.getElementById('generate-btn');
     generateBtn.addEventListener('click', () => {
       const name = document.getElementById('new-name').value.trim();
-      const category = document.getElementById('new-category').value;
       const imageUrl = document.getElementById('new-image').value.trim();
       const ingredients = document.getElementById('new-ingredients').value.trim().split("\n").filter(l => l);
       const directions = document.getElementById('new-directions').value.trim();
@@ -245,7 +231,6 @@
       // Also add to in-memory recipe list for immediate use
       recipes.push({
         name,
-        category,
         url: "../odin-recipes/recipes/" + fileName
       });
       renderList();
