@@ -1,0 +1,12 @@
+{
+  "name": "odin-recipes",
+  "version": "1.0.0",
+  "description": "Current project is that I will build a basic recipe website with different headings, paragraphs, and nested lists# odin-recipes",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
