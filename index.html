@@ -92,6 +92,20 @@
         <label for="new-image">Image URL (optional)</label>
         <input type="text" id="new-image" placeholder="https://example.com/recipe.jpg">
 
+        <label for="new-category">Category</label>
+        <select id="new-category">
+          <option value="select a category">Select a Category</option>
+      <option value="appetizers">Appetizers</option>
+      <option value="bread">Bread</option>
+      <option value="breakfast">Breakfast</option>
+      <option value="desserts">Desserts</option>
+      <option value="dinner">Dinner</option>
+      <option value="drinks">Drinks</option>
+      <option value="sauce">Sauce</option>
+      <option value="sides">Sides</option>
+      <option value="soups">Soups</option>
+      </select>
+
         <label for="new-ingredients">Ingredients (one per line)</label>
         <textarea id="new-ingredients"></textarea>
 
@@ -224,6 +238,7 @@
     const generateBtn = document.getElementById('generate-btn');
     generateBtn.addEventListener('click', () => {
       const name = document.getElementById('new-name').value.trim();
+      const category = document.getElementById('new-category').value.trim();
       const imageUrl = document.getElementById('new-image').value.trim();
       const ingredients = document.getElementById('new-ingredients').value.trim().split("\n").filter(l => l);
       const directions = document.getElementById('new-directions').value.trim();
@@ -259,6 +274,7 @@
   <div class="container">
     <header>
       <h1>${name}</h1>
+      ${category ? `<h3>Category: ${category}</h3>` : ''}
       <nav>
         <a href="../index.html">Home</a>
     </nav>
