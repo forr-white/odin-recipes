@@ -51,8 +51,12 @@
     <ul id="recipe-list"></ul>
 
     <!-- Recipe Builder -->
-    <div class="builder">
-  <h2>Add a New Recipe</h2>
+     <details>
+  <summary style="cursor:pointer; font-size:1.2em; font-weight:bold; margin-bottom:10px;">
+    ➕ Create a New Recipe
+  </summary>
+
+    <div class="builder" style="margin-top: 15px;">
 
   <label for="new-name">Recipe Name</label>
   <input type="text" id="new-name">
@@ -66,8 +70,13 @@
   <label for="new-directions">Directions (one step per line)</label>
   <textarea id="new-directions"></textarea>
 
+  <label for="new-notes">Notes (one per line, optional)</label>
+  <textarea id="new-notes"></textarea>
+
   <button id="generate-btn">Generate Recipe File</button>
 </div>
+</details>
+
   </div>
 
   <script>
@@ -182,6 +191,7 @@
       const imageUrl = document.getElementById('new-image').value.trim();
       const ingredients = document.getElementById('new-ingredients').value.trim().split("\n").filter(l => l);
       const directions = document.getElementById('new-directions').value.trim();
+      const notes = document.getElementById('new-notes').value.trim().split("\n").filter(n => n);
 
       if (!name || !ingredients.length || !directions) {
         alert("Please fill out all fields.");
@@ -226,6 +236,12 @@
 <ol>
   ${directions.split("\n").filter(d => d.trim() !== "").map(d => `<li>${d.trim()}</li>`).join("\n")}
 </ol>
+${notes.length ? `
+    <h2>Notes</h2>
+    <ol>
+      ${notes.map(n => `<li>${n}</li>`).join("\n")}
+    </ol>` : ""}
+  </div>
 </body>
 </html>`;
 
