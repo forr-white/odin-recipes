@@ -1,4 +1,28 @@
-<!doctype html>
+const fs = require("fs");
+const path = require("path");
+
+const recipesDir = path.join(__dirname, "../recipes");
+const indexPath = path.join(__dirname, "../index.html");
+
+function titleCase(str) {
+  return str
+    .replace(/-/g, " ")
+    .replace(/\b\w/g, c => c.toUpperCase());
+}
+
+// Find all recipe HTML files
+const files = fs.readdirSync(recipesDir).filter(f => f.endsWith(".html"));
+
+// Build recipe links
+const recipeLinks = files
+  .map(f => {
+    const name = titleCase(f.replace(".html", ""));
+    return `<li><a href="./recipes/${f}">${name}</a></li>`;
+  })
+  .join("\n");
+
+// Simple HTML template
+const html = `<!doctype html>
 <html lang="en">
 <head>
   <meta charset="utf-8">
@@ -25,4 +49,13 @@
         <a href="../index.html">Home</a>
     </nav>
     </header>
+  <ul>
+    ${recipeLinks}
+  </ul>
+</body>
+</html>`;
 
+// Write new index.html
+fs.writeFileSync(indexPath, html);
+
+console.log("✅ index.html updated with", files.length, "recipes");
