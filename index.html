@@ -244,7 +244,7 @@
       const directions = document.getElementById('new-directions').value.trim();
       const notes = document.getElementById('new-notes').value.trim().split("\n").filter(n => n);
 
-      if (!name || !ingredients.length || !directions) {
+      if (!name || !ingredients.length || !directions || !category) {
         alert("Please fill out all fields.");
         return;
       }
