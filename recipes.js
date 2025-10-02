@@ -58,7 +58,7 @@ const recipes = [
   { name: "Mongolian Beef", category: "dinner", url: "../odin-recipes/recipes/mongolian-beef.html", image: "https://www.spendwithpennies.com/wp-content/uploads/2023/06/1200-Easy-Mongolian-Beef-2-SpendWithPennies-800x1200.jpg" },
   { name: "No-Knead Crusty Artisan Bread", category: "bread", url: "../odin-recipes/recipes/artisan-bread.html", image: "https://www.thecomfortofcooking.com/wp-content/uploads/2013/04/NoKneadCrustyArtisanBread5.jpg"},
   { name: "Pepper Steak Stir Fry", category: "dinner", url: "../odin-recipes/recipes/pepper-steak.html", image: "https://www.dinneratthezoo.com/wp-content/uploads/2018/06/pepper-steak-3.jpg" },
-  { name: "Picadillo", category: "dinner", url: "../odin-recipes/recipes/picadillo.html", image: "../images/picadillo.png" },
+  { name: "Picadillo", category: "dinner", url: "../odin-recipes/recipes/picadillo.html", image: "https://images.themodernproper.com/production/posts/2021/Picadillo_6.jpg?w=800&q=82&auto=format&fit=crop&dm=1751476007&s=19daa69b1d5e0b5e48274e6fa7b2db5e" },
   { name: "Pineapple Upside Down Cake", category: "desserts", url: "../odin-recipes/recipes/pineapple-upside-down-cake.html", image: "https://theforkedspoon.com/wp-content/uploads/2024/10/Pineapple-Upside-Down-Cake-2-700x700.jpg" },
   { name: "Pinto Beans", category: "sides", url: "../odin-recipes/recipes/pinto-beans.html", image: "https://thecaglediaries.com/wp-content/uploads/2020/11/crock-pot-pinto-beans-hero-2.jpg" },
   { name: "Pinto Beans for Refried Beans", category: "sides", url: "../odin-recipes/recipes/pinto-refried-beans.html", image: "https://cdn.loveandlemons.com/wp-content/uploads/2024/01/refried-beans-recipe-580x853.jpg" },
