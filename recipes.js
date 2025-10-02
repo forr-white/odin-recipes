@@ -105,7 +105,15 @@ function renderList() {
   listEl.innerHTML = '';
 
   recipes
-    .filter(r => (!category || r.category === category) && r.name.toLowerCase().includes(term))
+    .filter(r => {
+      const matchesCategory = !category || r.category === category;
+      const matchesSearch =
+        r.name.toLowerCase().includes(term) ||
+        (r.tags && r.tags.some(tag => tag.toLowerCase().includes(term))) ||
+        (r.cuisine && r.cuisine.toLowerCase().includes(term));
+
+      return matchesCategory && matchesSearch;
+    })
     .forEach(r => {
       const card = document.createElement('div');
       card.className = 'info-item';
@@ -123,6 +131,7 @@ function renderList() {
       listEl.appendChild(card);
     });
 }
+
 
 
 // ===== Event Listeners =====
