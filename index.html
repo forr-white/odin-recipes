@@ -4,121 +4,101 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>Forrest's Recipe Index</title>
-  <style>
-    body { font-family: Arial, sans-serif; background: #f8fafc; margin: 0; padding: 20px; }
-    .container { max-width: 980px; margin: 0 auto; }
-    header { margin-bottom: 16px; }
-    h1 { margin-bottom: 12px; }
-    nav a { margin-right: 12px; text-decoration: none; color: #0369a1; }
-    img { max-width: 60%; height: auto; margin-bottom: 20px; border-radius: 8px; }
-    input, select, textarea { padding: 6px; margin-bottom: 12px; border-radius: 6px; border: 1px solid #ccc; width: 100%; max-width: 600px; display: block; }
-    textarea { height: 100px; }
-    ul { list-style: none; padding: 0; }
-    li { margin-bottom: 6px; }
-    a { color: #0369a1; text-decoration: none; }
-    .builder { margin-top: 40px; padding: 20px; background: #fff; border-radius: 8px; box-shadow: 0 2px 6px rgba(0,0,0,0.1); }
-    button { padding: 10px 16px; border: none; background: #0369a1; color: #fff; border-radius: 6px; cursor: pointer; }
-    button:hover { background: #02597f; }
-
-    /* Back to top button */
-    #back-to-top {
-      position: fixed;
-      bottom: 20px;
-      right: 20px;
-      background: #0369a1;
-      border: none;
-      border-radius: 50%;
-      width: 42px;
-      height: 42px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.2);
-      transition: background 0.3s ease, opacity 0.3s ease;
-      z-index: 999;
-      display: none; /* hidden until scroll */
-    }
-    #back-to-top svg {
-      width: 20px;
-      height: 20px;
-      fill: #fff;
-    }
-    #back-to-top:hover {
-      background: #02597f;
-    }
-  </style>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <div class="container">
-    <header>
-      <h1>Forrest's Recipe Index</h1>
-    </header>
 
-    <img src="../odin-recipes/images/YourOpinionIsNotPartOfTheRecipe.svg">
-    <br>
+  <!-- Header -->
+  <header class="header">
+    <div class="logo">Forrest's Recipe Index</div>
+    <nav class="nav">
+      <a href="#">Home</a>
+      <a href="#builder">Add Recipe</a>
+    </nav>
+  </header>
 
-    <label for="filter-category"></label>
-    <select id="filter-category">
-      <option value="select a category">Select a Category</option>
-      <option value="">All</option>
-      <option value="appetizers">Appetizers</option>
-      <option value="bread">Bread</option>
-      <option value="breakfast">Breakfast</option>
-      <option value="desserts">Desserts</option>
-      <option value="dinner">Dinner</option>
-      <option value="drinks">Drinks</option>
-      <option value="sauce">Sauce</option>
-      <option value="sides">Sides</option>
-      <option value="soups">Soups</option>
-    </select>
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="hero-text">
+      <h1>Find & Build Your Favorite Recipes</h1>
+      <p>Browse recipes by category, search by name, or create your own custom recipe file.</p>
+      <button onclick="document.getElementById('builder').scrollIntoView({behavior: 'smooth'})">Create a Recipe</button>
+    </div>
+    <div class="hero-image">
+      <img src="../odin-recipes/images/YourOpinionIsNotPartOfTheRecipe.svg" alt="Recipe illustration" style="max-width:100%; height:auto; border-radius:8px;">
+    </div>
+  </section>
 
-    <label for="search"></label>
-    <input type="text" id="search" placeholder="Select category before searching">
+  <!-- Info Section -->
+  <section class="info">
+    <h2>Recipe Library</h2>
 
-    <ul id="recipe-list"></ul>
+    <!-- Filters -->
+    <div style="max-width:600px; margin:0 auto 30px auto;">
+      <select id="filter-category">
+        <option value="" selected disabled>Filter by Category</option>
+        <option value="appetizers">Appetizers</option>
+        <option value="bread">Bread</option>
+        <option value="breakfast">Breakfast</option>
+        <option value="desserts">Desserts</option>
+        <option value="dinner">Dinner</option>
+        <option value="drinks">Drinks</option>
+        <option value="sauce">Sauce</option>
+        <option value="sides">Sides</option>
+        <option value="soups">Soups</option>
+      </select>
+      <input type="text" id="search" placeholder="Search recipes by name...">
+    </div>
 
-    <!-- Recipe Builder -->
-    <details>
-      <summary style="cursor:pointer; font-size:1.2em; font-weight:bold; margin-bottom:10px;">
-        ➕ Create a New Recipe
-      </summary>
+    <!-- Recipe List -->
+    <ul id="recipe-list" class="info-cards"></ul>
+  </section>
 
-      <div class="builder" style="margin-top: 15px;">
+  <!-- Recipe Builder -->
+  <section id="builder" class="cta">
+  <div class="cta-left">
+    <h3>Create a New Recipe</h3>
+    <p>Fill out the form below to generate a custom recipe page you can download and save.</p>
+  </div>
+<div class="cta-right">
+      <label for="new-name">Recipe Name</label>
+      <input type="text" id="new-name">
 
-        <label for="new-name">Recipe Name</label>
-        <input type="text" id="new-name">
+      <label for="new-image">Image URL (optional)</label>
+      <input type="text" id="new-image" placeholder="https://example.com/recipe.jpg">
 
-        <label for="new-image">Image URL (optional)</label>
-        <input type="text" id="new-image" placeholder="https://example.com/recipe.jpg">
-
-        <label for="new-category">Category</label>
-        <select id="new-category">
-          <option value="select a category">Select a Category</option>
-      <option value="appetizers">Appetizers</option>
-      <option value="bread">Bread</option>
-      <option value="breakfast">Breakfast</option>
-      <option value="desserts">Desserts</option>
-      <option value="dinner">Dinner</option>
-      <option value="drinks">Drinks</option>
-      <option value="sauce">Sauce</option>
-      <option value="sides">Sides</option>
-      <option value="soups">Soups</option>
+      <label for="new-category">Category</label>
+      <select id="new-category">
+        <option value="">Select a Category</option>
+        <option value="appetizers">Appetizers</option>
+        <option value="bread">Bread</option>
+        <option value="breakfast">Breakfast</option>
+        <option value="desserts">Desserts</option>
+        <option value="dinner">Dinner</option>
+        <option value="drinks">Drinks</option>
+        <option value="sauce">Sauce</option>
+        <option value="sides">Sides</option>
+        <option value="soups">Soups</option>
       </select>
 
-        <label for="new-ingredients">Ingredients (one per line)</label>
-        <textarea id="new-ingredients"></textarea>
+      <label for="new-ingredients">Ingredients (one per line)</label>
+      <textarea id="new-ingredients"></textarea>
 
-        <label for="new-directions">Directions (one step per line)</label>
-        <textarea id="new-directions"></textarea>
+      <label for="new-directions">Directions (one step per line)</label>
+      <textarea id="new-directions"></textarea>
 
-        <label for="new-notes">Notes (one per line, optional)</label>
-        <textarea id="new-notes"></textarea>
+      <label for="new-notes">Notes (optional, one per line)</label>
+      <textarea id="new-notes"></textarea>
 
-        <button id="generate-btn">Generate Recipe File</button>
-      </div>
-    </details>
-  </div>
+      <button id="generate-btn">Generate Recipe File</button>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <p>© 2025 Forrest's Recipe Index</p>
+  </footer>
 
   <!-- Back to top button -->
   <button id="back-to-top" aria-label="Back to top">
@@ -127,210 +107,8 @@
     </svg>
   </button>
 
-  <script>
-    const recipes = [
-  { name: "5 Layer Dip", category: "appetizers", url: "../odin-recipes/recipes/five-layer-dip.html" },
-  { name: "Authentic Mexican Rice", category: "sides", url: "../odin-recipes/recipes/authentic-mexican-rice.html"},
-  { name: "Beef Carne Guisada", category: "dinner", url: "../odin-recipes/recipes/beef-carne-guisada.html" },
-  { name: "Best Lemon Garlic Shrimp", category: "dinner", url: "../odin-recipes/recipes/lemon-garlic-shrimp.html" },
-  { name: "Biscuits and Gravy Cassarole", category: "breakfast", url: "../odin-recipes/recipes/biscuits-and-gravy-casserole.html"},
-  { name: "Black-Eyed Peas with Bacon and Pork", category: "sides", url: "../odin-recipes/recipes/black-eyed-peas.html"},
-  { name: "Bloody Mary Coctails", category: "drinks", url: "../odin-recipes/recipes/bloody-marys.html"},
-  { name: "Bloody Mary Mix", category: "drinks", url: "../odin-recipes/recipes/bloody-mary-mix.html"},
-  { name: "Blueberry Muffins with Streusel Crumb Topping", category: "desserts", url: "../odin-recipes/recipes/blueberry-muffins.html" },
-  { name: "Braised Beef Short Ribs", category: "dinner", url: "../odin-recipes/recipes/braised-beef-short-ribs.html"},
-  { name: "Buffalo Chicken Dip", category: "appetizers", url: "../odin-recipes/recipes/buffalo-chicken-dip.html" },
-  { name: "Buttery Flour Tortillas", category: "bread", url: "../odin-recipes/recipes/buttery-flour-tortillas.html" },
-  { name: "Carne Asada Street Tacos", category: "dinner", url: "../odin-recipes/recipes/carne-asada.html" },
-  { name: "Carne Guisada", category: "dinner", url: "../odin-recipes/recipes/carne-guisada.html"},
-  { name: "Cheesecake", category: "desserts", url: "../odin-recipes/recipes/cheesecake.html" },
-  { name: "Chicken Tikka Masala", category: "dinner", url: "../odin-recipes/recipes/chicken-tikka-masala.html"},
-  { name: "Chimichurri", category: "sauce", url: "../odin-recipes/recipes/chimichurri.html"},
-  { name: "Chipotle Ranch", category: "sauce", url: "../odin-recipes/recipes/chipotle-ranch.html"},
-  { name: "Chow Mein", category: "sides", url: "../odin-recipes/recipes/chow-mein.html"},
-  { name: "Chorizo and Eggs", category: "breakfast", url: "../odin-recipes/recipes/chorizo-eggs.html" },
-  { name: "Classic Tres Leches Cake", category: "desserts", url: "../odin-recipes/recipes/tres-leches.html" },
-  { name: "Creamy Green Salsa", category: "sauce", url: "../odin-recipes/recipes/creamy-green-salsa.html" },
-  { name: "Creole Succotash from Treme", category: "dinner", url: "../odin-recipes/recipes/creole-succotash.html"},
-  { name: "Cucumber Lime Agua Fresca", category: "drinks", url: "../odin-recipes/recipes/cucumber-lime-agua-fresca.html"},
-  { name: "Easy Healthy Taco Rice Bowl", category: "dinner", url: "../odin-recipes/recipes/taco-rice-bowl.html"},
-  { name: "Egg White Bites", category: "breakfast", url: "../odin-recipes/recipes/egg-white-bites.html" },
-  { name: "Filipino Chicken Adobo", category: "dinner", url: "../odin-recipes/recipes/filipino-chicken-adobo.html"},
-  { name: "Focaccia Bread", category: "bread", url: "../odin-recipes/recipes/focaccia-bread.html" },
-  { name: "Fried Cabbage", category: "sides", url: "../odin-recipes/recipes/fried-cabbage.html"},
-  { name: "Fresh Lime Margarita", category: "drinks", url: "../odin-recipes/recipes/fresh-lime-margarita.html"},
-  { name: "Gains Protein Bowl", category: "dinner", url: "../odin-recipes/recipes/gains-protein-bowl.html"},
-  { name: "Garlic Mashed Potatoes", category: "sides", url: "../odin-recipes/recipes/garlic-mashed-potatoes.html"},
-  { name: "General Tso Chicken", category: "dinner", url: "../odin-recipes/recipes/general-tso-chicken.html"},
-  { name: "Golden Sweet Cornbread", category: "bread", url: "../odin-recipes/recipes/cornbread.html" },
-  { name: "Goulash", category: "dinner", url: "../odin-recipes/recipes/goulash.html"},
-  { name: "Greek Chickpea Salad", category: "sides", url: "../odin-recipes/recipes/greek-chickpea-salad.html"},
-  { name: "Ground Beef Tostadas with Refried Beans", category: "dinner", url: "../odin-recipes/recipes/ground-beef-tostadas-with-refried-beans"},
-  { name: "High Protein Potato Bowls", category: "dinner", url: "../odin-recipes/recipes/high-protein-potato-bowls.html"},
-  { name: "Homemade Caesar Dressing", category: "sauce", url: "../odin-recipes/recipes/caesar-dressing.html"},
-  { name: "Homemade Chicken and Dumplings", category: "soups", url: "../odin-recipes/recipes/chicken-and-dumplings.html"},
-  { name: "Homemade Chili", category: "soups", url: "../odin-recipes/recipes/homemade-chili.html"},
-  { name: "Homemade Corn Tortillas", category: "bread", url: "../odin-recipes/recipes/homemade-corn-tortillas.html" },
-  { name: "Homemade Rolls", category: "bread", url: "../odin-recipes/recipes/rolls.html" },
-  { name: "Homemade Sourdough Pizza Crust", category: "bread", url: "../odin-recipes/recipes/homemade-sourdough-pizza-crust.html"},
-  { name: "Honey-Lime Grilled Chicken", category: "dinner", url: "../odin-recipes/recipes/honey-lime-grilled-chicken.html"},
-  { name: "Instant Pot Crack Chicken", category: "dinner", url: "../odin-recipes/recipes/instant-pot-crack-chicken.html"},
-  { name: "Jalapeño Cream Gravy", category: "sauce", url: "../odin-recipes/recipes/jalapeno-cream-gravy.html"},
-  { name: "Jalapeno Margarita", category: "drinks", url: "../odin-recipes/recipes/jalapeno-margarita.html"},
-  { name: "Jalapeno Popper Loaded Potatoes", category: "sides", url: "../odin-recipes/recipes/jalapeno-popper-potatoes.html"},
-  { name: "La Ninfa's Green Sauce", category: "sauce", url: "../odin-recipes/recipes/la-ninfas-green-sauce.html"},
-  { name: "Lemon Garlic Pasta with Fresh Veggies", category: "dinner", url: "../odin-recipes/recipes/lemon-garlic-pasta.html"},
-  { name: "Mashed Potatoes", category: "sides", url: "../odin-recipes/recipes/mashed-potatoes.html"},
-  { name: "Mexican Grilled Chicken", category: "dinner", url: "../odin-recipes/recipes/mexican-grilled-chicken.html"},
-  { name: "Mississippi Pot Roast", category: "dinner", url: "../odin-recipes/recipes/mississippi-pot-roast.html"},
-  { name: "Mongolian Beef", category: "dinner", url: "../odin-recipes/recipes/mongolian-beef.html"},
-  { name: "No-Knead Crusty Artisan Bread", category: "bread", url: "../odin-recipes/recipes/artisan-bread.html" },
-  { name: "Pepper Steak Stir Fry", category: "dinner", url: "../odin-recipes/recipes/pepper-steak.html"},
-  { name: "Picadillo", category: "dinner", url: "../odin-recipes/recipes/picadillo.html"},
-  { name: "Pineapple Upside Down Cake", category: "desserts", url: "../odin-recipes/recipes/pineapple-upside-down-cake.html"},
-  { name: "Pinto Beans", category: "sides", url: "../odin-recipes/recipes/pinto-beans.html"},
-  { name: "Pinto Beans for Refried Beans", category: "sides", url: "../odin-recipes/recipes/pinto-refried-beans.html"},
-  { name: "Potato Soup", category: "soups", url: "../odin-recipes/recipes/potato-soup.html"},
-  { name: "Red Lobster Cheddar Bay Biscuits", category: "bread", url: "../odin-recipes/recipes/cheddar-bay-biscuits.html" },
-  { name: "Red Chili Sauce", category: "sauce", url: "../odin-recipes/recipes/red-chili-sauce.html" },
-  { name: "Restaurant Style Mexican Salsa", category: "sauce", url: "../odin-recipes/recipes/restaurant-style-mexican-salsa.html"},
-  { name: "Rigatoni with Sausage, Tomatoes, and Zucchini", category: "dinner", url: "../odin-recipes/recipes/sausage-rigatoni.html"},
-  { name: "Roasted Vegetable Salsa", category: "sauce", url: "../odin-recipes/recipes/roasted-vegetable-salsa.html"},
-  { name: "Royal Icing", category: "desserts", url: "../odin-recipes/recipes/royal-icing.html" },
-  { name: "Sheet Pan Quesadillas", category: "dinner", url: "../odin-recipes/recipes/sheet-pan-quesadillas.html" },
-  { name: "Shepherd's Pie", category: "dinner", url: "../odin-recipes/recipes/shepherds-pie.html"},
-  { name: "Shrimp Bowl with Corn Salsa and Creamy Sauce", category: "dinner", url: "../odin-recipes/recipes/shrimp-bowl-corn-salsa.html"},
-  { name: "Smashed Potatoes", category: "sides", url: "../odin-recipes/recipes/smashed-potatoes.html"},
-  { name: "Soft Sugar Cookies with Royal Icing", category: "desserts", url: "../odin-recipes/recipes/soft-sugar-cookies.html" },
-  { name: "Sourdough Bagels", category: "bread", url: "../odin-recipes/recipes/sourdough-bagels.html"},
-  { name: "Sourdough Baguette", category: "bread", url: "../odin-recipes/recipes/sourdough-baguette.html"},
-  { name: "Sourdough Bread", category: "bread", url: "../odin-recipes/recipes/sourdough-bread.html"},
-  { name: "Sourdough Ciabatta", category: "bread", url: "../odin-recipes/recipes/sourdough-ciabatta.html"},
-  { name: "Sourdough Garlic Knots", category: "bread", url: "../odin-recipes/recipes/sourdough-garlic-knots.html"},
-  { name: "Sourdough Italian Bread", category: "bread", url: "../odin-recipes/recipes/sourdough-italian-bread.html"},
-  { name: "Sourdough Starter", category: "bread", url: "../odin-recipes/recipes/sourdough-starter.html"},
-  { name: "Steak Avocado Corn Bowl", category: "dinner", url: "../odin-recipes/recipes/steak-avocado-corn-bowl.html"},
-  { name: "Sweet Pepper Sausage Pasta", category: "dinner", url: "../odin-recipes/recipes/sweet-pepper-sausage-pasta.html" },
-  { name: "Tamarind Agua Fresca", category: "drinks", url: "../odin-recipes/recipes/tamarind-agua-fresca.html"},
-  { name: "Tomato Basil Soup", category: "soups", url: "../odin-recipes/recipes/tomato-basil-soup.html"},
-  { name: "Tradional Pork Tamales with Red Chili Sauce", category: "dinner", url: "../odin-recipes/recipes/traditional-pork-tamales.html"},
-  { name: "Wafflemaker Hash Browns", category: "breakfast", url: "../odin-recipes/recipes/wafflemaker-hash-browns.html" },
-  { name: "Watermelon Agua Fresca", category: "drinks", url: "../odin-recipes/recipes/watermelon-agua-fresca.html" },
-  { name: "Whole Wheat Sourdough Dinnder Rolls", category: "bread", url: "../odin-recipes/recipes/whole-wheat-sourdough-dinner-rolls.html"},
-];
+  <!-- Scripts (unchanged) -->
+  <script src="recipes.js"></script>
 
-
-    const listEl = document.getElementById('recipe-list');
-    const searchInput = document.getElementById('search');
-    const filterCategory = document.getElementById('filter-category');
-
-    function renderList() {
-      const term = searchInput.value.toLowerCase();
-      const category = filterCategory.value;
-      listEl.innerHTML = '';
-      recipes
-        .filter(r => (!category || r.category === category) && r.name.toLowerCase().includes(term))
-        .forEach(r => {
-          const li = document.createElement('li');
-          li.innerHTML = `<a href="${r.url}">${r.name} (${r.category})</a>`;
-          listEl.appendChild(li);
-        });
-    }
-
-    searchInput.oninput = renderList;
-    filterCategory.onchange = renderList;
-    renderList();
-
-    // Recipe Builder
-    const generateBtn = document.getElementById('generate-btn');
-    generateBtn.addEventListener('click', () => {
-      const name = document.getElementById('new-name').value.trim();
-      const category = document.getElementById('new-category').value.trim();
-      const imageUrl = document.getElementById('new-image').value.trim();
-      const ingredients = document.getElementById('new-ingredients').value.trim().split("\n").filter(l => l);
-      const directions = document.getElementById('new-directions').value.trim();
-      const notes = document.getElementById('new-notes').value.trim().split("\n").filter(n => n);
-
-      if (!name || !ingredients.length || !directions || !category) {
-        alert("Please fill out all fields.");
-        return;
-      }
-
-      // Create HTML content for the recipe page
-      const recipeHTML = `
-<!doctype html>
-<html lang="en">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>${name}</title>
-  <style>
-    body { font-family: Arial, sans-serif; background: #f8fafc; margin: 0; padding: 20px; }
-    .container { max-width: 980px; margin: 0 auto; }
-    header { margin-bottom: 16px; }
-    h1 { margin-bottom: 12px; }
-    nav a { margin-right: 12px; text-decoration: none; color: #0369a1; }
-    img { max-width: 60%; height: auto; margin-bottom: 20px; border-radius: 8px; }
-    input, select { padding: 6px; margin-bottom: 12px; border-radius: 6px; border: 1px solid #ccc; width: 100%; max-width: 300px; display: block; }
-    ul { list-style: none; padding: 0; }
-    li { margin-bottom: 6px; }
-    a { color: #0369a1; text-decoration: none; }
-  </style>
-</head>
-<body>
-  <div class="container">
-    <header>
-      <h1>${name}</h1>
-      ${category ? `<h4>${category}</h4>` : ''}
-      <nav>
-        <a href="../index.html">Home</a>
-    </nav>
-    </header>
-      ${imageUrl ? `<img src="${imageUrl}" alt="${name}">` : ""}
-  <h2>Ingredients</h2>
-  <ul>
-  ${ingredients.map(i => `<li>${i}</li>`).join("\n")}
-</ul>
-<h2>Directions</h2>
-<ol>
-  ${directions.split("\n").filter(d => d.trim() !== "").map(d => `<li>${d.trim()}</li>`).join("\n")}
-</ol>
-${notes.length ? `
-    <h2>Notes</h2>
-    <ol>
-      ${notes.map(n => `<li>${n}</li>`).join("\n")}
-    </ol>` : ""}
-  </div>
-</body>
-</html>`;
-
-      // Download as .html file
-      const blob = new Blob([recipeHTML], { type: "text/html" });
-      const url = URL.createObjectURL(blob);
-      const a = document.createElement('a');
-      const fileName = name.toLowerCase().replace(/\s+/g, "-") + ".html";
-      a.href = url;
-      a.download = fileName;
-      a.click();
-      URL.revokeObjectURL(url);
-
-      // Also add to in-memory recipe list for immediate use
-      recipes.push({
-        name,
-        url: "../odin-recipes/recipes/" + fileName
-      });
-      renderList();
-    });
-
-    // Back-to-top logic
-    const backToTopBtn = document.getElementById("back-to-top");
-    window.addEventListener("scroll", () => {
-      backToTopBtn.style.display = window.scrollY > 300 ? "flex" : "none";
-    });
-    backToTopBtn.addEventListener("click", () => {
-      window.scrollTo({ top: 0, behavior: "smooth" });
-    });
-  </script>
-  
 </body>
 </html>
