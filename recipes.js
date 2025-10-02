@@ -212,7 +212,7 @@ generateBtn.addEventListener("click", () => {
     <header>
       <h1>${name}</h1>
       <nav>
-        <a href="../index.html">Home</a>
+        <a href="https://forr-white.github.io/odin-recipes/index.html">Home</a>
       </nav>
     </header>
 
