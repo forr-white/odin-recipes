@@ -609,6 +609,14 @@ const recipes = [
     image: "https://www.theclevercarrot.com/wp-content/uploads/2013/12/bread-cloth-1-of-1.jpg" 
   },
   {
+    name: "Sourdough Breadsticks",
+    category: "bread",
+    cuisine: "Italian-American",
+    tags: ["breadsticks", "sourdough", "appetizer", "garlic"],
+    url: "../odin-recipes/recipes/sourdough_breadsticks.html",
+    image: "https://www.farmhouseonboone.com/wp-content/uploads/2023/03/sourdough-breadsticks-19-1024x683.jpg"
+  },
+  {
     name: "Sourdough Brioche Rolls",
     category: "bread",
     cuisine: "French",
@@ -641,6 +649,14 @@ const recipes = [
     image: "https://www.farmhouseonboone.com/wp-content/uploads/2023/01/sourdough-ciabatta-19-300x300.jpg" 
   },
   {
+    name: "Sourdough Discard Focaccia",
+    category: "bread",
+    cuisine: "Italian",
+    tags: ["focaccia", "sourdough discard", "flatbread", "herbs"],
+    url: "../odin-recipes/recipes/sourdough_discard_focaccia.html",
+    image: "https://www.farmhouseonboone.com/wp-content/uploads/2023/01/sourdough-discard-focaccia-6-683x1024.jpg"
+  },
+  {
     name: "Sourdough Discard Naan",
     category: "bread",
     cuisine: "Indian",
@@ -648,7 +664,15 @@ const recipes = [
     url: "../odin-recipes/recipes/sourdough_discard_naan_recipe.html",
     image: "https://www.farmhouseonboone.com/wp-content/uploads/2024/04/sourdough-naan-9-683x1024.jpg"
   },
-    {
+  {
+    name: "Sourdough Discard Pretzels",
+    category: "snacks",
+    cuisine: "German-American",
+    tags: ["pretzels", "sourdough discard", "snacks", "homemade"],
+    url: "../odin-recipes/recipes/sourdough_discard_pretzels.html",
+    image: "https://www.farmhouseonboone.com/wp-content/uploads/2023/06/sourdough-discard-pretzels-17-683x1024.jpg"
+  },
+  {
     name: "Sourdough French Bread",
     category: "bread",
     cuisine: "French",
