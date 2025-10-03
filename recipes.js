@@ -616,6 +616,14 @@ const recipes = [
     url: "../odin-recipes/recipes/sourdough-ciabatta.html", 
     image: "https://www.farmhouseonboone.com/wp-content/uploads/2023/01/sourdough-ciabatta-19-300x300.jpg" 
   },
+    {
+    name: "Sourdough French Bread",
+    category: "bread",
+    cuisine: "French",
+    tags: ["sourdough", "french bread", "artisan", "homemade"],
+    url: "../odin-recipes/recipes/sourdough-french-bread.html",
+    image: "https://www.farmhouseonboone.com/wp-content/uploads/2021/04/sourdough-french-bread-18-1024x683.jpg"
+  },
   { 
     name: "Sourdough Garlic Knots", 
     category: "bread", 
@@ -704,7 +712,6 @@ const recipes = [
     url: "../odin-recipes/recipes/whole-wheat-sourdough-dinner-rolls.html", 
     image: "https://www.farmhouseonboone.com/wp-content/uploads/2025/04/whole-wheat-sourdough-dinner-rolls-5-300x300.jpg" 
   },
-
 ];
 
 // ===== DOM Elements =====
