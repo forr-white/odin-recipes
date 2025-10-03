@@ -608,6 +608,30 @@ const recipes = [
     url: "../odin-recipes/recipes/sourdough-bread.html", 
     image: "https://www.theclevercarrot.com/wp-content/uploads/2013/12/bread-cloth-1-of-1.jpg" 
   },
+  {
+    name: "Sourdough Brioche Rolls",
+    category: "bread",
+    cuisine: "French",
+    tags: ["brioche", "sourdough", "soft rolls", "breakfast"],
+    url: "../odin-recipes/recipes/sourdough_brioche_rolls.html",
+    image: "https://www.farmhouseonboone.com/wp-content/uploads/2024/10/Sourdogh-Brioche-Rolls-09-1024x1536.jpg"
+  },
+  {
+    name: "Sourdough Buttermilk Pancakes",
+    category: "breakfast",
+    cuisine: "American",
+    tags: ["pancakes", "sourdough", "buttermilk", "fluffy"],
+    url: "../odin-recipes/recipes/sourdough_buttermilk_pancakes.html",
+    image: "https://www.farmhouseonboone.com/wp-content/uploads/2023/06/sourdough-buttermilk-pancakes-22-1024x683.jpg"
+  },
+  {
+    name: "Sourdough Calzone",
+    category: "dinner",
+    cuisine: "Italian-American",
+    tags: ["calzone", "sourdough", "stuffed bread", "homemade"],
+    url: "../odin-recipes/recipes/sourdough_calzone.html",
+    image: "https://www.farmhouseonboone.com/wp-content/uploads/2024/04/sourdough-calzones-03-1024x683.jpg"
+  },
   { 
     name: "Sourdough Ciabatta", 
     category: "bread", 
@@ -615,6 +639,14 @@ const recipes = [
     tags: ["ciabatta", "sourdough", "artisan", "bread"], 
     url: "../odin-recipes/recipes/sourdough-ciabatta.html", 
     image: "https://www.farmhouseonboone.com/wp-content/uploads/2023/01/sourdough-ciabatta-19-300x300.jpg" 
+  },
+  {
+    name: "Sourdough Discard Naan",
+    category: "bread",
+    cuisine: "Indian",
+    tags: ["naan", "sourdough discard", "flatbread", "homemade"],
+    url: "../odin-recipes/recipes/sourdough_discard_naan_recipe.html",
+    image: "https://www.farmhouseonboone.com/wp-content/uploads/2024/04/sourdough-naan-9-683x1024.jpg"
   },
     {
     name: "Sourdough French Bread",
@@ -647,6 +679,14 @@ const recipes = [
     tags: ["starter", "sourdough", "yeast", "homemade"], 
     url: "../odin-recipes/recipes/sourdough-starter.html", 
     image: "https://www.theclevercarrot.com/wp-content/uploads/2019/03/How-to-Care-for-Your-Sourdough-Starter-2-900x1024.jpg" 
+  },
+  {
+    name: "Sourdough Stromboli",
+    category: "dinner",
+    cuisine: "Italian-American",
+    tags: ["stromboli", "sourdough", "stuffed bread", "homemade"],
+    url: "../odin-recipes/recipes/sourdough_stromboli.html",
+    image: "https://www.farmhouseonboone.com/wp-content/uploads/2024/10/sourdough-stromboli-10.jpg"
   },
   { 
     name: "Steak Avocado Corn Bowl", 
