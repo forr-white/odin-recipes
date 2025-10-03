@@ -696,6 +696,14 @@ const recipes = [
     url: "../odin-recipes/recipes/sourdough-italian-bread.html", 
     image: "https://www.farmhouseonboone.com/wp-content/uploads/2024/02/sourdough-italian-bread-11-300x300.jpg" 
   },
+  {
+    name: "Sourdough Pretzel Bites",
+    category: "snacks",
+    cuisine: "German-American",
+    tags: ["pretzels", "sourdough", "snacks", "bite-sized"],
+    url: "../odin-recipes/recipes/sourdough_pretzel_bites.html",
+    image: "https://www.farmhouseonboone.com/wp-content/uploads/2023/01/sourdough-pretzel-bites-6-683x1024.jpg"
+  },
   { 
     name: "Sourdough Starter", 
     category: "bread", 
