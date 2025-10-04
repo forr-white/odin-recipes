@@ -665,6 +665,14 @@ const recipes = [
     image: "https://www.farmhouseonboone.com/wp-content/uploads/2024/04/sourdough-naan-9-683x1024.jpg"
   },
   {
+    name: "Sourdough Discard Pizza Crust",
+    category: "bread",
+    cuisine: "Italian",
+    tags: ["pizza crust", "sourdough discard", "artisan", "homemade"],
+    url: "../odin-recipes/recipes/sourdough_discard_pizza_crust.html",
+    image: "https://www.farmhouseonboone.com/wp-content/uploads/2025/04/sourdough-discard-pizza-8-1024x683.jpg"
+  },
+  {
     name: "Sourdough Discard Pretzels",
     category: "snacks",
     cuisine: "German-American",
