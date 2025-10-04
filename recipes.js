@@ -112,6 +112,14 @@ const recipes = [
     url: "../odin-recipes/recipes/cheesecake.html", 
     image: "https://github.com/forr-white/odin-recipes/blob/main/images/cheesecake.jpg?raw=true" 
   },
+  {
+    name: "Chicken Corn Chowder",
+    category: "soups",
+    cuisine: "American",
+    tags: ["comfort food", "hearty", "creamy", "corn"],
+    url: "../odin-recipes/recipes/chicken_corn_chowder.html",
+    image: "https://www.farmhouseonboone.com/wp-content/uploads/2025/02/chicken-corn-chowder-9-1025x1536.jpg"
+  },
   { 
     name: "Chicken Tikka Masala", 
     category: "dinner", 
@@ -544,6 +552,14 @@ const recipes = [
     url: "../odin-recipes/recipes/royal-icing.html", 
     image: "https://cdn.apartmenttherapy.info/image/upload/f_jpg,q_auto:eco,c_fill,g_auto,w_1500,ar_1:1/k%2FPhoto%2FRecipes%2F2020-09-How-to-Make-Easy-Royal-Icing%2F2020_howto_royal_icing_shot09_146" 
   },
+  {
+    name: "Sausage and Saurkraut Skillet with Potatoes", 
+    category: "dinner", 
+    cuisine: "German-American", 
+    tags: ["hearty", "one-pan", "comfort food", "savory"], 
+    url: "../odin-recipes/recipes/sausage_and_sauerkraut_skillet_with_potatoes.html", 
+    image: "https://www.farmhouseonboone.com/wp-content/uploads/2023/04/sausage-and-sauerkraut-20-1024x683.jpg" 
+  },
   { 
     name: "Sheet Pan Quesadillas", 
     category: "dinner", 
@@ -727,6 +743,14 @@ const recipes = [
     tags: ["stromboli", "sourdough", "stuffed bread", "homemade"],
     url: "../odin-recipes/recipes/sourdough_stromboli.html",
     image: "https://www.farmhouseonboone.com/wp-content/uploads/2024/10/sourdough-stromboli-10.jpg"
+  },
+  {
+    name: "Southwest Chicken Salad",
+    category: "lunch",
+    cuisine: "American",
+    tags: ["chicken", "salad", "southwest", "healthy"],
+    url: "../odin-recipes/recipes/southwest_chicken_salad.html",
+    image: "https://www.farmhouseonboone.com/wp-content/uploads/2019/07/southwest-chicken-salad-1-e1728077252687.jpg"
   },
   { 
     name: "Steak Avocado Corn Bowl", 
