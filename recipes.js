@@ -105,7 +105,7 @@ const recipes = [
     image: "https://www.eatingonadime.com/wp-content/uploads/2024/03/carne-asada-5-1.jpg" 
   },
   { 
-    name: "Carne Guisada", 
+    name: "Pork Carne Guisada", 
     category: "dinner", 
     cuisine: "Tex-Mex", 
     tags: ["stew", "comfort food", "hearty", "slow-cooked"], 
