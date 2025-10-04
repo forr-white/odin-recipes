@@ -592,6 +592,14 @@ const recipes = [
     url: "../odin-recipes/recipes/shrimp-bowl-corn-salsa.html", 
     image: "https://masterthekitchen.net/wp-content/uploads/2025/04/Grilled-Shrimp-Bowl-768x960.webp" 
   },
+  {
+    name: "Skillet Potatoes",
+    category: "sides",
+    cuisine: "American",
+    tags: ["potatoes", "crispy", "easy", "side dish"],
+    url: "../odin-recipes/recipes/skillet_potatoes.html",
+    image: "https://www.farmhouseonboone.com/wp-content/uploads/2025/07/crispy-cast-iron-potatoes-9-1025x1536.jpg"
+  },
   { 
     name: "Smashed Potatoes", 
     category: "sides", 
