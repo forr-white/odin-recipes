@@ -806,7 +806,15 @@ const recipes = [
     cuisine: "Mexican", 
     tags: ["watermelon", "agua fresca", "refreshing", "drink"], 
     url: "../odin-recipes/recipes/watermelon-agua-fresca.html", 
-    image: "https://everydaylatina.com/wp-content/uploads/2025/07/Agua-de-Sandia-bottom-image-1200px.jpg" 
+    image: "https://www.farmhouseonboone.com/wp-content/uploads/2024/10/chicken-chili-10.jpg" 
+  },
+  {
+    name: "White Chicken Chili",
+    category: "soups",
+    cuisine: "American",
+    tags: ["chicken", "chili", "white beans", "spicy"],
+    url: "../odin-recipes/recipes/white_chicken_chili.html",
+    image: "https://www.cookingclassy.com/wp-content/uploads/2020/01/white-chicken-chili-21.jpg"
   },
   { 
     name: "Whole Wheat Sourdough Dinner Rolls", 
