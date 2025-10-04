@@ -50,4 +50,4 @@ Welcome to **Odin Recipes**! This project provides a simple interface for browsi
   To add recipes manually, create new HTML files in the `recipes/` folder following the existing format.
 
 - **Browser Support**
-    To be able to see recipes on mobile devices, you will need to download a coding platform, such as VS Code, and have a github account to submit commits to.
+    To be able to see recipes on mobile devices, you will need to download a coding platform on your computer, such as VS Code, and have a github account to submit commits to.
