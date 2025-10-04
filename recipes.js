@@ -806,7 +806,7 @@ const recipes = [
     cuisine: "Mexican", 
     tags: ["watermelon", "agua fresca", "refreshing", "drink"], 
     url: "../odin-recipes/recipes/watermelon-agua-fresca.html", 
-    image: "https://www.farmhouseonboone.com/wp-content/uploads/2024/10/chicken-chili-10.jpg" 
+    image: "https://everydaylatina.com/wp-content/uploads/2025/07/Agua-de-Sandia-bottom-image-1200px.jpg" 
   },
   {
     name: "White Chicken Chili",
