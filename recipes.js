@@ -814,7 +814,7 @@ const recipes = [
     cuisine: "American",
     tags: ["chicken", "chili", "white beans", "spicy"],
     url: "../odin-recipes/recipes/white_chicken_chili.html",
-    image: "https://www.cookingclassy.com/wp-content/uploads/2020/01/white-chicken-chili-21.jpg"
+    image: "https://www.farmhouseonboone.com/wp-content/uploads/2024/10/chicken-chili-10.jpg"
   },
   { 
     name: "Whole Wheat Sourdough Dinner Rolls", 
