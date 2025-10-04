@@ -105,14 +105,6 @@ const recipes = [
     image: "https://www.eatingonadime.com/wp-content/uploads/2024/03/carne-asada-5-1.jpg" 
   },
   { 
-    name: "Pork Carne Guisada", 
-    category: "dinner", 
-    cuisine: "Tex-Mex", 
-    tags: ["stew", "comfort food", "hearty", "slow-cooked"], 
-    url: "../odin-recipes/recipes/carne-guisada.html", 
-    image: "https://www.kitchengidget.com/wp-content/uploads/2018/12/Carne-Guisada-Recipe-3.jpg.webp" 
-  },
-  { 
     name: "Cheesecake", 
     category: "desserts", 
     cuisine: "American", 
@@ -487,6 +479,14 @@ const recipes = [
     tags: ["refried", "bean", "vegetarian", "side dish"], 
     url: "../odin-recipes/recipes/pinto-refried-beans.html", 
     image: "https://cdn.loveandlemons.com/wp-content/uploads/2024/01/refried-beans-recipe-580x853.jpg" 
+  },
+    { 
+    name: "Pork Carne Guisada", 
+    category: "dinner", 
+    cuisine: "Tex-Mex", 
+    tags: ["stew", "comfort food", "hearty", "slow-cooked"], 
+    url: "../odin-recipes/recipes/carne-guisada.html", 
+    image: "https://www.kitchengidget.com/wp-content/uploads/2018/12/Carne-Guisada-Recipe-3.jpg.webp" 
   },
   { 
     name: "Potato Soup", 
