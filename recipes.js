@@ -296,6 +296,14 @@ const recipes = [
     url: "../odin-recipes/recipes/ground-beef-tostadas-with-refried-beans.html", 
     image: "https://everydaylatina.com/wp-content/uploads/2023/04/Tostadas-de-Carne-Molida-bottom-image-1200px.jpg" 
   },
+  {
+    name: "Ham and Cheese Frittata",
+    category: "breakfast",
+    cuisine: "American",
+    tags: ["eggs", "cheese", "ham", "brunch"],
+    url: "../odin-recipes/recipes/ham_and_cheese_frittata.html",
+    image: "https://www.farmhouseonboone.com/wp-content/uploads/2023/12/ham-and-cheese-frittata-17-1024x683.jpg"
+  },
   { 
     name: "High Protein Potato Bowls", 
     category: "dinner", 
