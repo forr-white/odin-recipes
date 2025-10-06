@@ -681,6 +681,14 @@ const recipes = [
     image: "https://www.farmhouseonboone.com/wp-content/uploads/2023/01/sourdough-ciabatta-19-300x300.jpg" 
   },
   {
+    name: "Sourdough Discard Cinnamon Rolls",
+    category: "breakfast",
+    cuisine: "American",
+    tags: ["cinnamon rolls", "sourdough discard", "sweet", "breakfast"],
+    url: "../odin-recipes/recipes/sourdough_discard_cinnamon_rolls.html",
+    image: "https://www.farmhouseonboone.com/wp-content/uploads/2024/05/sourdough-discard-cinnamon-rolls-11-1024x683.jpg"
+  },
+  {
     name: "Sourdough Discard Focaccia",
     category: "bread",
     cuisine: "Italian",
