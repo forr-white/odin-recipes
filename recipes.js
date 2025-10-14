@@ -248,6 +248,14 @@ const recipes = [
     url: "../odin-recipes/recipes/gains-protein-bowl.html", 
     image: "https://cookiesandcups.com/wp-content/uploads/2023/03/taco-rice-10-768x1152.jpg" 
   },
+  {
+    name: "Garlic Butter Lobster Rolls",
+    category: "dinner",
+    cuisine: "American",
+    tags: ["lobster", "rolls", "sandwich", "hoagie", "seafood"],
+    url: "../odin-recipes/recipes/garlic_butter_lobster_rolls.html",
+    image: "https://deliciosareceta.com/wp-content/webp-express/webp-images/uploads/2025/06/Garlic_Butter_Lobster_Rolls_1.png.webp"
+  },
   { 
     name: "Garlic Mashed Potatoes", 
     category: "sides", 
