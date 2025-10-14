@@ -11,14 +11,28 @@ body {
   line-height: 1.6;
 }
 
-/* Header/Branding (optional logo area) */
-body::before {
-  content: "";
-  display: block;
-  height: 64px;
-  background: url("images/logo.png") no-repeat left center / 48px auto, #ffffff;
-  border-bottom: 1px solid #e5e7eb;
+/* Header / Logo */
+header.builder-header {
+  display: flex;
+  align-items: center;
+  padding: 16px 40px;
+  background-color: #ffffff;
   box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+  border-bottom: 1px solid #e5e7eb;
+  gap: 16px;
+}
+
+header.builder-header img {
+  width: 64px;
+  height: 64px;
+  object-fit: contain;
+}
+
+header.builder-header h1 {
+  font-size: 1.8rem;
+  font-weight: 900;
+  margin: 0;
+  color: #0f172a;
 }
 
 /* Section Layout */
@@ -135,8 +149,9 @@ section.cta {
   .cta-left, .cta-right {
     width: 100%;
   }
-  body::before {
-    background-position: center;
-    height: 56px;
+  header.builder-header {
+    flex-direction: column;
+    text-align: center;
+    gap: 8px;
   }
 }
