@@ -2,8 +2,12 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>Forrest's Recipe Index</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Forrest's Recipe Index | Cook Anything Kitchen</title>
+
+  <!-- Meta Tags -->
+  <meta name="description" content="Discover and organize your favorite recipes — search by cuisine, category, or tags at CookAnythingKitchen.com.">
+  <meta name="author" content="Forrest White">
 
   <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;900&display=swap" rel="stylesheet">
@@ -11,8 +15,11 @@
   <!-- CSS -->
   <link rel="stylesheet" href="style.css">
 
-  <!-- Tabletop & PapaParse -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/papaparse/5.4.1/papaparse.min.js"></script>
+  <!-- PapaParse -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js" defer></script>
+
+  <!-- JS -->
+  <script src="recipes.js" defer></script>
 </head>
 <body>
 
@@ -29,20 +36,22 @@
   <section class="hero">
     <div class="hero-text">
       <h1>Find & Build Your Favorite Recipes</h1>
-      <p>Browse recipes by category, cuisine, search by name, or create your own custom recipe file.</p>
-      <button onclick="document.getElementById('builder').scrollIntoView({behavior: 'smooth'})">Create a Recipe</button>
+      <p>Browse recipes by category, cuisine, tags, or search by name — and save your own for later.</p>
+      <button type="button" onclick="document.getElementById('builder').scrollIntoView({ behavior: 'smooth' })">
+        Create a Recipe
+      </button>
     </div>
     <div class="hero-image">
-      <img src="images/YourOpinionIsNotPartOfTheRecipe.svg" alt="Recipe illustration" style="max-width:100%; height:auto; border-radius:8px;">
+      <img src="images/YourOpinionIsNotPartOfTheRecipe.svg" alt="Recipe illustration" class="hero-img">
     </div>
   </section>
 
-  <!-- Recipe Finder Section -->
+  <!-- Recipe Finder -->
   <section class="info">
     <h2>Recipe Finder</h2>
 
     <!-- Filters -->
-    <div style="max-width:600px; margin:0 auto 30px auto; display:flex; flex-wrap:wrap; gap:10px;">
+    <div class="filter-bar">
       <select id="filter-category">
         <option value="">All Categories</option>
       </select>
@@ -51,8 +60,8 @@
         <option value="">All Cuisines</option>
       </select>
 
-      <input type="text" id="tagFilter" placeholder="Search by tag">
-      <input type="text" id="search" placeholder="Search recipes by name...">
+      <input type="text" id="tagFilter" placeholder="Search by tag" aria-label="Search by tag">
+      <input type="text" id="search" placeholder="Search recipes by name" aria-label="Search recipes by name">
     </div>
 
     <!-- Recipe Grid -->
@@ -62,20 +71,17 @@
   <!-- Footer -->
   <footer class="footer">
     <p>© 2025 Forrest's Recipe Index</p>
-    <br>
-    <a href="https://venmo.com/Forrest-WhiteIV">
-      <img src="https://upload.wikimedia.org/wikipedia/commons/8/84/Venmo_logo.png" alt="Venmo Logo" style="height:60px;">
+    <a href="https://venmo.com/Forrest-WhiteIV" target="_blank" rel="noopener noreferrer">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/8/84/Venmo_logo.png" alt="Venmo Logo" class="venmo-logo">
     </a>
   </footer>
 
-  <!-- Back to top button -->
+  <!-- Back to Top Button -->
   <button id="back-to-top" aria-label="Back to top">
-    <svg viewBox="0 0 24 24">
-      <path d="M12 4l-8 8h6v8h4v-8h6z"/>
+    <svg viewBox="0 0 24 24" width="24" height="24">
+      <path d="M12 4l-8 8h6v8h4v-8h6z"></path>
     </svg>
   </button>
 
-  <!-- JS -->
-  <script src="recipes.js"></script>
 </body>
 </html>
