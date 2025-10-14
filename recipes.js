@@ -27,24 +27,25 @@ async function fetchRecipes() {
 // Render recipes on the page
 function displayRecipes(recipes) {
   const container = document.getElementById("recipesContainer");
-  if (!container) return;
+  container.innerHTML = "";
 
   if (!recipes.length) {
     container.innerHTML = "<p>No recipes found.</p>";
     return;
   }
 
-  container.innerHTML = recipes.map(r => `
-    <div class="card info-item">
+  recipes.forEach(r => {
+    const div = document.createElement("div");
+    div.className = "recipe-card"; // uniform card class
+    div.innerHTML = `
       <img src="${r.image}" alt="${r.name}" loading="lazy" />
       <h3>${r.name}</h3>
-      <p><strong>Category:</strong> ${r.category || "N/A"}</p>
-      <p><strong>Cuisine:</strong> ${r.cuisine || "N/A"}</p>
-      <p><strong>Tags:</strong> ${r.tags.join(", ")}</p>
-      <a href="${r.link}" class="btn">View Recipe</a>
-    </div>
-  `).join("");
+      <p>${r.category} | ${r.cuisine}</p>
+    `;
+    container.appendChild(div);
+  });
 }
+
 
 // Populate filter dropdowns
 function populateFilters(recipes) {

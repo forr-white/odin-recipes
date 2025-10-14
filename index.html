@@ -5,12 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Forrest's Recipe Index | Cook Anything Kitchen</title>
 
-  <!-- Meta Tags -->
-  <meta name="description" content="Discover and organize your favorite recipes — search by cuisine, category, or tags at CookAnythingKitchen.com.">
-  <meta name="author" content="Forrest White">
-
   <!-- Google Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
 
   <!-- CSS -->
   <link rel="stylesheet" href="style.css">
@@ -35,22 +31,13 @@
   <!-- Hero Section -->
   <section class="hero">
     <div class="hero-text">
-      <h1>Find & Build Your Favorite Recipes</h1>
-      <p>Browse recipes by category, cuisine, tags, or search by name — and save your own for later.</p>
-      <button type="button" onclick="document.getElementById('builder').scrollIntoView({ behavior: 'smooth' })">
-        Create a Recipe
-      </button>
-    </div>
-    <div class="hero-image">
-      <img src="images/YourOpinionIsNotPartOfTheRecipe.svg" alt="Recipe illustration" class="hero-img">
+      <h1>Find & Build Recipes</h1>
+      <p>Search by category, cuisine, tags, or name — all in a single view.</p>
     </div>
   </section>
 
   <!-- Recipe Finder -->
   <section class="info">
-    <h2>Recipe Finder</h2>
-
-    <!-- Filters -->
     <div class="filter-bar">
       <select id="filter-category">
         <option value="">All Categories</option>
@@ -60,28 +47,13 @@
         <option value="">All Cuisines</option>
       </select>
 
-      <input type="text" id="tagFilter" placeholder="Search by tag" aria-label="Search by tag">
-      <input type="text" id="search" placeholder="Search recipes by name" aria-label="Search recipes by name">
+      <input type="text" id="tagFilter" placeholder="Search by tag">
+      <input type="text" id="search" placeholder="Search recipes by name">
     </div>
 
     <!-- Recipe Grid -->
     <div id="recipesContainer" class="info-cards"></div>
   </section>
-
-  <!-- Footer -->
-  <footer class="footer">
-    <p>© 2025 Forrest's Recipe Index</p>
-    <a href="https://venmo.com/Forrest-WhiteIV" target="_blank" rel="noopener noreferrer">
-      <img src="https://upload.wikimedia.org/wikipedia/commons/8/84/Venmo_logo.png" alt="Venmo Logo" class="venmo-logo">
-    </a>
-  </footer>
-
-  <!-- Back to Top Button -->
-  <button id="back-to-top" aria-label="Back to top">
-    <svg viewBox="0 0 24 24" width="24" height="24">
-      <path d="M12 4l-8 8h6v8h4v-8h6z"></path>
-    </svg>
-  </button>
 
 </body>
 </html>
