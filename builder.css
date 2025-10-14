@@ -1,0 +1,142 @@
+/* Reset and Base Styles */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: 'Roboto', sans-serif;
+  background-color: #f1f5f9;
+  color: #111827;
+  line-height: 1.6;
+}
+
+/* Header/Branding (optional logo area) */
+body::before {
+  content: "";
+  display: block;
+  height: 64px;
+  background: url("images/logo.png") no-repeat left center / 48px auto, #ffffff;
+  border-bottom: 1px solid #e5e7eb;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+}
+
+/* Section Layout */
+section.cta {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: flex-start;
+  max-width: 1100px;
+  margin: 40px auto;
+  background: #ffffff;
+  border-radius: 16px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+  padding: 40px;
+  gap: 40px;
+}
+
+/* Left Column */
+.cta-left {
+  flex: 1 1 280px;
+  min-width: 260px;
+}
+
+.cta-left h3 {
+  font-weight: 900;
+  font-size: 1.6rem;
+  margin-bottom: 10px;
+  color: #0f172a;
+}
+
+.cta-left nav a {
+  display: inline-block;
+  color: #0369a1;
+  text-decoration: none;
+  font-weight: 500;
+  margin-bottom: 16px;
+}
+
+.cta-left nav a:hover {
+  text-decoration: underline;
+}
+
+.cta-left p {
+  font-size: 0.95rem;
+  color: #374151;
+}
+
+/* Right Column (Form) */
+.cta-right {
+  flex: 2 1 520px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.cta-right label {
+  font-weight: 500;
+  color: #1e293b;
+}
+
+.cta-right input,
+.cta-right select,
+.cta-right textarea {
+  padding: 10px 12px;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  font-size: 1rem;
+  background: #f8fafc;
+  transition: border-color 0.2s, background 0.2s;
+}
+
+.cta-right input:focus,
+.cta-right select:focus,
+.cta-right textarea:focus {
+  outline: none;
+  border-color: #0369a1;
+  background: #ffffff;
+}
+
+/* Textareas */
+.cta-right textarea {
+  min-height: 100px;
+  resize: vertical;
+}
+
+/* Button */
+#generate-btn {
+  margin-top: 20px;
+  background: #0369a1;
+  color: #ffffff;
+  border: none;
+  border-radius: 8px;
+  padding: 12px 20px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.25s, transform 0.1s;
+}
+
+#generate-btn:hover {
+  background: #0284c7;
+}
+
+#generate-btn:active {
+  transform: scale(0.98);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  section.cta {
+    flex-direction: column;
+    padding: 24px;
+  }
+  .cta-left, .cta-right {
+    width: 100%;
+  }
+  body::before {
+    background-position: center;
+    height: 56px;
+  }
+}
