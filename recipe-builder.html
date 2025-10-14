@@ -96,7 +96,7 @@ generateBtn.addEventListener("click", async () => {
   form.append('notes', JSON.stringify(notes));
 
   try {
-    const resp = await fetch("https://script.google.com/macros/s/AKfycbyQwqRvM39nmWPHP-92h4oJgfitIHFUrFfCC7M4hctKCWsll18tllozN2sh8DU5d0Y2vg/exec", {
+    const resp = await fetch("https://script.google.com/macros/s/AKfycbxnZGlirHNibP1tXTYL4oN1G7_FliKrjfmnDZrrIQ4WA4JCwS6BBqJwA4Ee_Hu3gbpf-Q/exec", {
       method: "POST",
       body: form
       // NOTE: do NOT set Content-Type header — let the browser set it for FormData
