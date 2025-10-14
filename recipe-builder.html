@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Recipe Builder</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Recipe Builder -->
+  <section id="builder" class="cta">
+  <div class="cta-left">
+    <h3>Create a New Recipe</h3>
+    <p>Fill out the form below to generate a custom recipe page you can download and save.</p>
+  </div>
+<div class="cta-right">
+      <label for="new-name">Recipe Name</label>
+      <input type="text" id="new-name">
+
+      <label for="new-image">Image URL (optional)</label>
+      <input type="text" id="new-image" placeholder="https://example.com/recipe.jpg">
+
+      <label for="new-category">Category</label>
+      <select id="new-category">
+        <option value="">Select a Category</option>
+        <option value="appetizers">Appetizers</option>
+        <option value="bread">Bread</option>
+        <option value="breakfast">Breakfast</option>
+        <option value="desserts">Desserts</option>
+        <option value="dinner">Dinner</option>
+        <option value="drinks">Drinks</option>
+        <option value="lunch">Lunch</option>
+        <option value="salads">Salads</option>
+        <option value="sauce">Sauce</option>
+        <option value="sides">Sides</option>
+        <option value="snacks">Snacks</option>
+        <option value="soups">Soups</option>
+      </select>
+
+      <label for="new-ingredients">Ingredients (one per line)</label>
+      <textarea id="new-ingredients"></textarea>
+
+      <label for="new-directions">Directions (one step per line)</label>
+      <textarea id="new-directions"></textarea>
+
+      <label for="new-notes">Notes (optional, one per line)</label>
+      <textarea id="new-notes"></textarea>
+
+      <button id="generate-btn">Generate Recipe File</button>
+    </div>
+  </section>
+  </body>
+  </html>

@@ -1,4 +1,4 @@
-/* This is for the Project: Landing Page for the Odin Project */
+/* Reset & Base Styles */
 * {
   margin: 0;
   padding: 0;
@@ -9,6 +9,7 @@ body {
   font-family: 'Roboto', sans-serif;
 }
 
+/* Header */
 .header {
   background-color: #1F2937;
   color: #F9FAF8;
@@ -30,8 +31,9 @@ body {
   text-decoration: none;
 }
 
+/* Hero Section */
 .hero {
-  background-color: #ffffff;
+  background-color: #fff;
   color: #1F2937;
   display: flex;
   justify-content: space-between;
@@ -76,6 +78,7 @@ body {
   color: #E5E7EB;
 }
 
+/* Info Section */
 .info {
   text-align: center;
   padding: 60px 100px;
@@ -112,9 +115,10 @@ body {
   border-radius: 12px;
   width: 150px;
   height: 150px;
-  margin: 0 auto 10px auto;
+  margin: 0 auto 10px;
 }
 
+/* Quote Section */
 .quote {
   background-color: #E5E7EB;
   padding: 100px;
@@ -125,13 +129,14 @@ body {
 }
 
 .quote footer {
-  font-weight: 900;
-  text-align: right;
   display: block;
+  text-align: right;
   margin-top: 20px;
+  font-weight: 900;
   font-size: 24px;
 }
 
+/* Call to Action */
 .cta {
   background-color: #3882F6;
   margin: 80px 0;
@@ -139,24 +144,21 @@ body {
   border-radius: 8px;
 
   display: flex;
-  flex-direction: row;          /* side-by-side layout */
-  justify-content: space-between; /* spread left and right */
-  align-items: flex-start;      /* align to the top */
+  justify-content: space-between;
+  align-items: flex-start;
   gap: 40px;
-
   color: #F9FAF8;
-  width: 100%;                  /* span full width of page */
-  box-sizing: border-box;
+  width: 100%;
 }
 
 .cta-left {
-  flex: 1;                      /* take up remaining space */
+  flex: 1;
   text-align: left;
 }
 
 .cta-right {
-  flex: 1;                      /* form column */
-  max-width: 480px;             /* keep form from getting too wide */
+  flex: 1;
+  max-width: 480px;
 }
 
 .cta-right label {
@@ -185,6 +187,7 @@ body {
   margin-top: 10px;
 }
 
+/* Back to Top Button */
 #back-to-top {
   position: fixed;
   bottom: 20px;
@@ -194,26 +197,26 @@ body {
   border: none;
   border-radius: 50%;
   background-color: #0369a1;
-  color: white;
+  color: #fff;
   cursor: pointer;
-  display: flex; /* hidden by default */
+  display: flex;
   align-items: center;
   justify-content: center;
   box-shadow: 0 2px 6px rgba(0,0,0,0.2);
-  transition: opacity 0.3s ;
+  transition: opacity 0.3s;
 }
 
 #back-to-top svg {
   width: 24px;
   height: 24px;
-  fill: white;
+  fill: #fff;
 }
 
 #back-to-top.show {
-  display: flex; /* show button */
+  display: flex;
 }
 
-
+/* Footer */
 .footer {
   background-color: #1F2937;
   color: #F9FAF8;
@@ -221,8 +224,9 @@ body {
   padding: 30px;
 }
 
+/* Responsive */
 @media (max-width: 768px) {
-  .header {
+  .header, .cta {
     flex-direction: column;
     text-align: center;
     padding: 20px;
@@ -256,16 +260,6 @@ body {
     padding: 60px 20px;
     font-size: 24px;
   }
-
-  .cta {
-    flex-direction: column;
-    text-align: center;
-  }
-
-  .footer {
-    flex-direction: column;
-    text-align: center;
-  }
 }
 
 @media (max-width: 480px) {
@@ -289,4 +283,21 @@ body {
   .cta p {
     font-size: 16px;
   }
+}
+/* Tag chips */
+.tag-chip {
+  display: inline-block;
+  background-color: #E5E7EB;
+  color: #1F2937;
+  padding: 4px 10px;
+  border-radius: 12px;
+  font-size: 14px;
+  margin: 2px;
+  cursor: default;
+  transition: background-color 0.2s;
+}
+
+.tag-chip:hover {
+  background-color: #3882F6;
+  color: #F9FAF8;
 }
