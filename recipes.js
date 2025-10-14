@@ -1,4 +1,4 @@
-const SHEET_URL = "https://script.google.com/macros/s/AKfycbz13XDkevxqBEYk5yh3VNXyHDsl8R9G7Ilc66aldu6NyAD67PxOwcnRIJVmxpHqATzurw/exec";
+const SHEET_URL = "https://script.google.com/macros/s/AKfycbw83aizU1eh12CQAYM9XKKV53kplGmPGTxET3-XAaQnbADix0rDjepUgMZWNalp_frtvA/exec";
 
 // Fetch data from Google Apps Script Web App
 async function fetchRecipes() {

@@ -11,11 +11,12 @@
 
   <!-- Recipe Builder -->
   <section id="builder" class="cta">
-  <div class="cta-left">
-    <h3>Create a New Recipe</h3>
-    <p>Fill out the form below to generate a custom recipe page you can download and save.</p>
-  </div>
-<div class="cta-right">
+    <div class="cta-left">
+      <h3>Create a New Recipe</h3>
+      <p>Fill out the form below to generate a custom recipe page and save it to your sheet.</p>
+    </div>
+
+    <div class="cta-right">
       <label for="new-name">Recipe Name</label>
       <input type="text" id="new-name">
 
@@ -39,6 +40,12 @@
         <option value="soups">Soups</option>
       </select>
 
+      <label for="new-cuisine">Cuisine</label>
+      <input type="text" id="new-cuisine" placeholder="e.g. Italian, Mexican, American">
+
+      <label for="new-tags">Tags (comma separated)</label>
+      <input type="text" id="new-tags" placeholder="e.g. easy, gluten-free, family">
+
       <label for="new-ingredients">Ingredients (one per line)</label>
       <textarea id="new-ingredients"></textarea>
 
@@ -48,61 +55,69 @@
       <label for="new-notes">Notes (optional, one per line)</label>
       <textarea id="new-notes"></textarea>
 
-      <button id="generate-btn">Generate Recipe File</button>
+      <button id="generate-btn">Generate & Save Recipe</button>
     </div>
   </section>
-    <script>
-  const generateBtn = document.getElementById("generate-btn");
+
+  <script>
+const generateBtn = document.getElementById("generate-btn");
 
 generateBtn.addEventListener("click", async () => {
   const name = document.getElementById("new-name").value.trim();
   const image = document.getElementById("new-image").value.trim();
   const category = document.getElementById("new-category").value;
-  const ingredients = document.getElementById("new-ingredients").value
-                        .split("\n").map(i => i.trim()).filter(i => i);
-  const directions = document.getElementById("new-directions").value
-                        .split("\n").map(d => d.trim()).filter(d => d);
-  const notes = document.getElementById("new-notes").value
-                        .split("\n").map(n => n.trim()).filter(n => n);
+  const cuisine = document.getElementById("new-cuisine").value.trim();
+  const tagsArray = document.getElementById("new-tags").value.split(",").map(t => t.trim()).filter(Boolean);
+  const tags = tagsArray.join(", ");
+  const ingredients = document.getElementById("new-ingredients").value.split("\n").map(i => i.trim()).filter(Boolean);
+  const directions = document.getElementById("new-directions").value.split("\n").map(d => d.trim()).filter(Boolean);
+  const notes = document.getElementById("new-notes").value.split("\n").map(n => n.trim()).filter(Boolean);
 
-  if (!name || !category || !ingredients.length || !directions.length) {
-    alert("Please fill in at least name, category, ingredients, and directions.");
+  if (!name || !category || ingredients.length === 0 || directions.length === 0) {
+    alert("Please fill in at least the name, category, ingredients, and directions.");
     return;
   }
 
-  const recipeData = {
-    name,
-    category,
-    image,
-    ingredients,
-    directions,
-    notes
-  };
+  const filename = `${name.replace(/\s+/g, "-").toLowerCase()}.html`;
+  const link = `recipes/${filename}`;
 
-  // 1️⃣ POST to Google Sheet
+  // Build FormData to avoid preflight
+  const form = new FormData();
+  form.append('name', name);
+  form.append('category', category);
+  form.append('link', link);
+  form.append('cuisine', cuisine);
+  form.append('tags', tags);
+  // Optionally include image, ingredients/directions/notes as JSON strings (if you want to store them)
+  form.append('image', image);
+  form.append('ingredients', JSON.stringify(ingredients));
+  form.append('directions', JSON.stringify(directions));
+  form.append('notes', JSON.stringify(notes));
+
   try {
-    const response = await fetch("https://script.google.com/macros/s/AKfycbz13XDkevxqBEYk5yh3VNXyHDsl8R9G7Ilc66aldu6NyAD67PxOwcnRIJVmxpHqATzurw/exec", {
+    const resp = await fetch("https://script.google.com/macros/s/AKfycbw83aizU1eh12CQAYM9XKKV53kplGmPGTxET3-XAaQnbADix0rDjepUgMZWNalp_frtvA/exec", {
       method: "POST",
-      body: JSON.stringify(recipeData),
-      headers: { "Content-Type": "application/json" }
+      body: form
+      // NOTE: do NOT set Content-Type header — let the browser set it for FormData
     });
-    const result = await response.json();
+
+    // If the server returns JSON, read it
+    const result = await resp.json();
     if (result.status === "success") {
-      alert("Recipe successfully saved to Google Sheet!");
+      alert("Recipe saved to Google Sheet successfully!");
     } else {
-      alert("Error saving recipe: " + result.message);
+      alert("Error saving recipe: " + (result.message || "unknown"));
     }
+
   } catch (err) {
+    // If something still blocks the fetch, we'll see the error here
     alert("Network or server error: " + err.message);
+    console.error(err);
   }
 
-  // 2️⃣ Generate HTML file
-  const htmlContent = `
-<!doctype html>
-<html lang="en">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+  // Generate HTML file locally (same as before)
+  const htmlContent = `<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
 <title>${name}</title>
 <style>
 body { font-family: Arial, sans-serif; background: #f8fafc; margin: 0; padding: 20px; }
@@ -114,52 +129,39 @@ img { max-width: 60%; height: auto; margin-bottom: 20px; border-radius: 8px; }
 ul, ol { padding-left: 20px; }
 li { margin-bottom: 6px; }
 a { color: #0369a1; text-decoration: none; }
-</style>
-</head>
-<body>
+</style></head><body>
 <div class="container">
-<header>
-<h1>${name}</h1>
-<h4>${category}</h4>
-<nav>
-<a href="../index.html">Home</a>
-</nav>
-</header>
-${image ? `<img src="${image}" alt="${name}">` : ""}
+<header><h1>${escapeHtml(name)}</h1><h4>${escapeHtml(category)}${cuisine ? " • " + escapeHtml(cuisine) : ""}</h4><nav><a href="../index.html">Home</a></nav></header>
+${image ? `<img src="${escapeHtml(image)}" alt="${escapeHtml(name)}">` : ""}
 <h2>Ingredients</h2>
-<ul>
-${ingredients.map(i => `<li>${i}</li>`).join("\n")}
-</ul>
+<ul>${ingredients.map(i => `<li>${escapeHtml(i)}</li>`).join("")}</ul>
 <h2>Directions</h2>
-<ol>
-${directions.map(d => `<li>${d}</li>`).join("\n")}
-</ol>
-${notes.length ? `<h2>Notes</h2>
-<ol>
-${notes.map(n => `<li>${n}</li>`).join("\n")}
-</ol>` : ""}
-</div>
-</body>
-</html>
-  `;
+<ol>${directions.map(d => `<li>${escapeHtml(d)}</li>`).join("")}</ol>
+${notes.length ? `<h2>Notes</h2><ol>${notes.map(n => `<li>${escapeHtml(n)}</li>`).join("")}</ol>` : ""}
+</div></body></html>`;
 
-  // Trigger download
+  // download
   const blob = new Blob([htmlContent], { type: "text/html" });
   const url = URL.createObjectURL(blob);
-  const link = document.createElement("a");
-  link.href = url;
-  link.download = `${name.replace(/\s+/g, "-").toLowerCase()}.html`;
-  link.click();
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = filename;
+  a.click();
   URL.revokeObjectURL(url);
 
-  // Optional: clear form
-  document.getElementById("new-name").value = "";
-  document.getElementById("new-image").value = "";
-  document.getElementById("new-category").value = "";
-  document.getElementById("new-ingredients").value = "";
-  document.getElementById("new-directions").value = "";
-  document.getElementById("new-notes").value = "";
+  // clear form fields
+  document.querySelectorAll("#new-name,#new-image,#new-category,#new-cuisine,#new-tags,#new-ingredients,#new-directions,#new-notes").forEach(el => el.value = "");
 });
+
+// small helper to avoid XSS in generated HTML
+function escapeHtml(str) {
+  return String(str)
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#039;");
+}
 </script>
-  </body>
-  </html>
+</body>
+</html>
