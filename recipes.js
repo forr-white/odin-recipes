@@ -38,8 +38,8 @@ function displayRecipes(recipes) {
     const div = document.createElement("div");
     div.className = "recipe-card"; // uniform card class
     div.innerHTML = `
-      <img src="${r.image}" alt="${r.name}" loading="lazy" />
-      <h3>${r.name}</h3>
+      <a href="${r.link}" class="btn"><img src="${r.image}" alt="${r.name}" loading="lazy" /></a>
+      <a href="${r.link}" class="btn"><h3>${r.name}</h3></a>
       <p>${r.category} | ${r.cuisine}</p>
     `;
     container.appendChild(div);
