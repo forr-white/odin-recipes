@@ -1,104 +1,106 @@
-<script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js"></script>
+const SHEET_URL = "https://script.google.com/macros/s/AKfycbz13XDkevxqBEYk5yh3VNXyHDsl8R9G7Ilc66aldu6NyAD67PxOwcnRIJVmxpHqATzurw/exec";
 
-const SHEET_URL = "https://script.google.com/macros/s/AKfycbw1ts-AqJowBQlXEaCLA1ZPJWN9MmuMkBVxVB-77-z6uA31RcZS4bQFpLeeB4SwMI21Yw/exec";
-
+// Fetch data from Google Apps Script Web App
 async function fetchRecipes() {
-  const res = await fetch(SHEET_URL);
-  const csv = await res.text();
+  try {
+    const response = await fetch(SHEET_URL);
+    if (!response.ok) throw new Error(`HTTP error! Status: ${response.status}`);
+    const data = await response.json();
 
-  const parsed = Papa.parse(csv, { header: true, skipEmptyLines: true });
-  console.log("Parsed CSV:", parsed.data); // 👈 check this in console
-
-  return parsed.data.map(r => ({
-    name: r.name?.trim() || "",
-    category: r.category?.trim() || "",
-    cuisine: r.cuisine?.trim() || "",
-    tags: r.tags ? r.tags.split(',').map(t => t.trim()) : [],
-    image: r["image url"]?.trim() || "",
-    link: r.link?.trim() || "",
-    date: r.date?.trim() || ""
-  }));
+    // Normalize data keys
+    return data.map(r => ({
+      name: r.name?.trim() || "",
+      category: r.category?.trim().toLowerCase() || "",
+      cuisine: r.cuisine?.trim().toLowerCase() || "",
+      tags: r.tags
+        ? r.tags.split(",").map(t => t.trim().toLowerCase())
+        : [],
+      image: r["image url"] || r.image || "",
+      link: r.link || "#"
+    }));
+  } catch (err) {
+    console.error("Error fetching recipes:", err);
+    return [];
+  }
 }
 
-function createTagChips(tags) {
-  return tags.map(t => `<span class="tag-chip">${t}</span>`).join(" ");
-}
-
+// Render recipes on the page
 function displayRecipes(recipes) {
   const container = document.getElementById("recipesContainer");
-  container.innerHTML = "";
+  if (!container) return;
 
   if (!recipes.length) {
     container.innerHTML = "<p>No recipes found.</p>";
     return;
   }
 
-  recipes.forEach(r => {
-    const div = document.createElement("div");
-    div.className = "info-item";
-    div.innerHTML = `
-      <div class="card">
-        ${r.image ? `<img src="${r.image}" alt="${r.name}" style="width:100%; height:100%; object-fit:cover; border-radius:8px;">` : ""}
-      </div>
+  container.innerHTML = recipes.map(r => `
+    <div class="card info-item">
+      <img src="${r.image}" alt="${r.name}" loading="lazy" />
       <h3>${r.name}</h3>
-      <p><strong>Category:</strong> ${r.category} | <strong>Cuisine:</strong> ${r.cuisine}</p>
-      <p class="tags">${createTagChips(r.tags)}</p>
-      ${r.link ? `<p><a href="${r.link}" target="_blank">View Recipe</a></p>` : ""}
-    `;
-    container.appendChild(div);
-  });
+      <p><strong>Category:</strong> ${r.category || "N/A"}</p>
+      <p><strong>Cuisine:</strong> ${r.cuisine || "N/A"}</p>
+      <p><strong>Tags:</strong> ${r.tags.join(", ")}</p>
+      <a href="${r.link}" class="btn">View Recipe</a>
+    </div>
+  `).join("");
 }
 
-async function populateFilters(recipes) {
-  const categories = [...new Set(recipes.map(r => r.category).filter(c => c))];
-  const cuisines = [...new Set(recipes.map(r => r.cuisine).filter(c => c))];
+// Populate filter dropdowns
+function populateFilters(recipes) {
+  const categorySet = new Set(recipes.map(r => r.category).filter(Boolean));
+  const cuisineSet = new Set(recipes.map(r => r.cuisine).filter(Boolean));
 
   const categoryFilter = document.getElementById("filter-category");
   const cuisineFilter = document.getElementById("cuisineFilter");
 
+  // Populate category dropdown
   categoryFilter.innerHTML = '<option value="">All Categories</option>';
-  categories.forEach(cat => {
+  categorySet.forEach(cat => {
     const opt = document.createElement("option");
     opt.value = cat;
-    opt.textContent = cat;
+    opt.textContent = cat.charAt(0).toUpperCase() + cat.slice(1);
     categoryFilter.appendChild(opt);
   });
 
+  // Populate cuisine dropdown
   cuisineFilter.innerHTML = '<option value="">All Cuisines</option>';
-  cuisines.forEach(c => {
+  cuisineSet.forEach(cui => {
     const opt = document.createElement("option");
-    opt.value = c;
-    opt.textContent = c;
+    opt.value = cui;
+    opt.textContent = cui.charAt(0).toUpperCase() + cui.slice(1);
     cuisineFilter.appendChild(opt);
   });
 }
 
-async function filterRecipes() {
-  const category = document.getElementById("filter-category").value;
-  const cuisine = document.getElementById("cuisineFilter").value;
-  const tag = document.getElementById("tagFilter").value.toLowerCase();
+// Apply filters and search
+function filterRecipes(recipes) {
+  const category = document.getElementById("filter-category").value.toLowerCase();
+  const cuisine = document.getElementById("cuisineFilter").value.toLowerCase();
+  const tagSearch = document.getElementById("tagFilter").value.toLowerCase();
   const nameSearch = document.getElementById("search").value.toLowerCase();
 
-  const recipes = await fetchRecipes();
-  const filtered = recipes.filter(r =>
-    (!category || r.category === category) &&
-    (!cuisine || r.cuisine === cuisine) &&
-    (!tag || r.tags.some(t => t.toLowerCase().includes(tag))) &&
-    (!nameSearch || r.name.toLowerCase().includes(nameSearch))
-  );
-
-  displayRecipes(filtered);
+  return recipes.filter(r => {
+    const matchesCategory = !category || r.category === category;
+    const matchesCuisine = !cuisine || r.cuisine === cuisine;
+    const matchesTags = !tagSearch || r.tags.some(tag => tag.includes(tagSearch));
+    const matchesName = !nameSearch || r.name.toLowerCase().includes(nameSearch);
+    return matchesCategory && matchesCuisine && matchesTags && matchesName;
+  });
 }
 
-document.getElementById("filter-category").addEventListener("change", filterRecipes);
-document.getElementById("cuisineFilter").addEventListener("change", filterRecipes);
-document.getElementById("tagFilter").addEventListener("input", filterRecipes);
-document.getElementById("search").addEventListener("input", filterRecipes);
+// Initialize the recipe list
+async function init() {
+  const allRecipes = await fetchRecipes();
+  populateFilters(allRecipes);
+  displayRecipes(allRecipes);
 
-(async () => {
-  const recipes = await fetchRecipes();
-  console.log("Recipes loaded:", recipes); // 👈 check this
-  populateFilters(recipes);
-  displayRecipes(recipes);
-})();
+  // Add live filtering
+  document.querySelectorAll("#filter-category, #cuisineFilter, #tagFilter, #search")
+    .forEach(el => el.addEventListener("input", () => {
+      const filtered = filterRecipes(allRecipes);
+      displayRecipes(filtered);
+    }));
+}
 
+document.addEventListener("DOMContentLoaded", init);
