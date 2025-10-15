@@ -121,7 +121,7 @@ generateBtn.addEventListener("click", async () => {
   }
 
   // Generate HTML file locally (same as before)
-  const htmlContent = `<!doctype html>
+const htmlContent = `<!doctype html>
 <html lang="en">
 <head>
 <meta charset="utf-8">
@@ -136,16 +136,13 @@ generateBtn.addEventListener("click", async () => {
 <header class="recipe-header">
   <a href="../index.html" class="logo">
     <img src="../images/logo.svg" alt="Cook Anything Kitchen Logo">
-    <h1>Cook Anything Kitchen</h1>
   </a>
-  <nav>
-    <a href="../index.html">Home</a>
-  </nav>
 </header>
 
-<main class="container">
+<main class="recipe-container">
   <h1 class="recipe-title">${escapeHtml(name)}</h1>
   <div class="recipe-meta">${escapeHtml(category)}${cuisine ? " • " + escapeHtml(cuisine) : ""}</div>
+
   ${image ? `<img src="${escapeHtml(image)}" alt="${escapeHtml(name)}" class="recipe-image">` : ""}
 
   <section>
@@ -167,6 +164,7 @@ generateBtn.addEventListener("click", async () => {
 
 </body>
 </html>`;
+
 
 
   // download
