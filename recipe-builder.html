@@ -129,12 +129,12 @@ const htmlContent = `<!doctype html>
 <title>${name}</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700;900&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../recipe.css">
+<link rel="stylesheet" href="recipe.css">
 </head>
 <body>
 
 <header class="recipe-header">
-  <a href="../index.html" class="logo">
+  <a href="../index.html">
     <img src="../images/logo.svg" alt="Cook Anything Kitchen Logo">
   </a>
 </header>
@@ -145,18 +145,18 @@ const htmlContent = `<!doctype html>
 
   ${image ? `<img src="${escapeHtml(image)}" alt="${escapeHtml(name)}" class="recipe-image">` : ""}
 
-  <section>
+  <section class="recipe-section">
     <h2>Ingredients</h2>
     <ul>${ingredients.map(i => `<li>${escapeHtml(i)}</li>`).join("")}</ul>
   </section>
 
-  <section>
+  <section class="recipe-section">
     <h2>Directions</h2>
     <ol>${directions.map(d => `<li>${escapeHtml(d)}</li>`).join("")}</ol>
   </section>
 
   ${notes.length ? `
-  <section class="notes">
+  <section class="recipe-section notes">
     <h2>Notes</h2>
     <ol>${notes.map(n => `<li>${escapeHtml(n)}</li>`).join("")}</ol>
   </section>` : ""}
