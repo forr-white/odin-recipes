@@ -61,6 +61,22 @@
       <label for="new-notes">Notes (optional, one per line)</label>
       <textarea id="new-notes"></textarea>
 
+      <div class="nutrition-inputs">
+  <h3>Nutrition (optional)</h3>
+  <label>Calories</label>
+  <input type="text" id="nutrition-calories" placeholder="e.g. 230">
+  
+  <label>Fat (g)</label>
+  <input type="text" id="nutrition-fat" placeholder="e.g. 8">
+  
+  <label>Carbs (g)</label>
+  <input type="text" id="nutrition-carbs" placeholder="e.g. 27">
+  
+  <label>Protein (g)</label>
+  <input type="text" id="nutrition-protein" placeholder="e.g. 5">
+</div>
+
+
       <button id="generate-btn">Generate & Save Recipe</button>
     </div>
   </section>
@@ -78,6 +94,12 @@ generateBtn.addEventListener("click", async () => {
   const ingredients = document.getElementById("new-ingredients").value.split("\n").map(i => i.trim()).filter(Boolean);
   const directions = document.getElementById("new-directions").value.split("\n").map(d => d.trim()).filter(Boolean);
   const notes = document.getElementById("new-notes").value.split("\n").map(n => n.trim()).filter(Boolean);
+  const nutrition = {
+  calories: document.getElementById("nutrition-calories").value,
+  fat: document.getElementById("nutrition-fat").value,
+  carbs: document.getElementById("nutrition-carbs").value,
+  protein: document.getElementById("nutrition-protein").value
+};
 
   if (!name || !category || ingredients.length === 0 || directions.length === 0) {
     alert("Please fill in at least the name, category, ingredients, and directions.");
@@ -161,6 +183,18 @@ const htmlContent = `<!doctype html>
     <h2>Notes</h2>
     <ol>${notes.map(n => `<li>${escapeHtml(n)}</li>`).join("")}</ol>
   </section>` : ""}
+
+  ${(nutrition.calories || nutrition.fat || nutrition.carbs || nutrition.protein) ? `
+<section class="recipe-section nutrition">
+  <h2>Nutritional Information</h2>
+  <div class="nutrition-card">
+    ${nutrition.calories ? `<p><strong>Calories:</strong> ${nutrition.calories}</p>` : ""}
+    ${nutrition.fat ? `<p><strong>Fat:</strong> ${nutrition.fat} g</p>` : ""}
+    ${nutrition.carbs ? `<p><strong>Carbohydrates:</strong> ${nutrition.carbs} g</p>` : ""}
+    ${nutrition.protein ? `<p><strong>Protein:</strong> ${nutrition.protein} g</p>` : ""}
+  </div>
+</section>` : ""}
+
 </main>
 <footer class="footer">
   <div class="footer-content">
