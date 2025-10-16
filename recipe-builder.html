@@ -95,7 +95,7 @@ generateBtn.addEventListener("click", async () => {
   const directions = document.getElementById("new-directions").value.split("\n").map(d => d.trim()).filter(Boolean);
   const notes = document.getElementById("new-notes").value.split("\n").map(n => n.trim()).filter(Boolean);
   const nutrition = {
-  servingSize: document.getElementById("nutrition-serving-size") ? document.getElementById("nutrition-serving-size").value : "",
+  servingSize: document.getElementById("nutrition-serving-size").value,
   calories: document.getElementById("nutrition-calories").value,
   fat: document.getElementById("nutrition-fat").value,
   carbs: document.getElementById("nutrition-carbs").value,
