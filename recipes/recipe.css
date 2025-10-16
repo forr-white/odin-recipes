@@ -125,6 +125,32 @@ li {
   border-radius: 12px;
 }
 
+/* Nutrition Card */
+.recipe-section.nutrition {
+  background: #ffffff;
+  border-left: 4px solid #16a34a; /* green accent line */
+}
+
+.nutrition-card {
+  display: flex;
+  flex-direction: column;
+  background: #f9fafb;
+  padding: 16px 20px;
+  border-radius: 12px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+  margin-top: 12px;
+}
+
+.nutrition-card p {
+  margin: 4px 0;
+  font-size: 0.95rem;
+  color: #1e293b;
+}
+
+.nutrition-card strong {
+  color: #0f172a;
+}
+
 footer.footer {
   display: flex;
   flex-direction: column;
