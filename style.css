@@ -122,8 +122,8 @@ header.header .nav a:hover {
   border-radius: 10px;
   font-weight: 600;
   border: 1px solid rgba(14, 21, 32, 0.06);
-  background: transparent;
-  color: var(--accent, #ef4444);
+  background: #0284c7;
+  color: var(--accent, white);
   transition: transform 0.12s ease, box-shadow 0.12s ease;
   box-shadow: 0 2px 8px rgba(14, 21, 32, 0.04);
 }
