@@ -1,5 +1,7 @@
 const SHEET_URL = "https://script.google.com/macros/s/AKfycbxnZGlirHNibP1tXTYL4oN1G7_FliKrjfmnDZrrIQ4WA4JCwS6BBqJwA4Ee_Hu3gbpf-Q/exec";
 
+let allRecipes = [];
+
 // Fetch data from Google Apps Script Web App
 async function fetchRecipes() {
   try {
@@ -16,7 +18,8 @@ async function fetchRecipes() {
         ? r.tags.split(",").map(t => t.trim().toLowerCase())
         : [],
       image: r["image url"] || r.image || "",
-      link: r.link || "#"
+      link: r.link || "#",
+      date: r.date || "" // use your actual sheet column for sorting
     }));
   } catch (err) {
     console.error("Error fetching recipes:", err);
@@ -36,7 +39,7 @@ function displayRecipes(recipes) {
 
   recipes.forEach(r => {
     const div = document.createElement("div");
-    div.className = "recipe-card"; // uniform card class
+    div.className = "recipe-card";
     div.innerHTML = `
       <a href="${r.link}" class="btn"><img src="${r.image}" alt="${r.name}" loading="lazy" /></a>
       <a href="${r.link}" class="btn"><h3>${r.name}</h3></a>
@@ -46,7 +49,6 @@ function displayRecipes(recipes) {
   });
 }
 
-
 // Populate filter dropdowns
 function populateFilters(recipes) {
   const categorySet = new Set(recipes.map(r => r.category).filter(Boolean));
@@ -55,7 +57,6 @@ function populateFilters(recipes) {
   const categoryFilter = document.getElementById("filter-category");
   const cuisineFilter = document.getElementById("cuisineFilter");
 
-  // Populate category dropdown
   categoryFilter.innerHTML = '<option value="">All Categories</option>';
   categorySet.forEach(cat => {
     const opt = document.createElement("option");
@@ -64,7 +65,6 @@ function populateFilters(recipes) {
     categoryFilter.appendChild(opt);
   });
 
-  // Populate cuisine dropdown
   cuisineFilter.innerHTML = '<option value="">All Cuisines</option>';
   cuisineSet.forEach(cui => {
     const opt = document.createElement("option");
@@ -74,7 +74,7 @@ function populateFilters(recipes) {
   });
 }
 
-// Apply filters and search
+// Filter recipes based on search + dropdowns
 function filterRecipes(recipes) {
   const category = document.getElementById("filter-category").value.toLowerCase();
   const cuisine = document.getElementById("cuisineFilter").value.toLowerCase();
@@ -90,7 +90,7 @@ function filterRecipes(recipes) {
   });
 }
 
-// NEW: Sorting function
+// Sort recipes
 function sortRecipes(recipes, criteria) {
   const sorted = [...recipes];
   switch (criteria) {
@@ -105,13 +105,13 @@ function sortRecipes(recipes, criteria) {
       break;
     case "recent":
     default:
-      sorted.sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp));
+      sorted.sort((a, b) => new Date(b.date) - new Date(a.date)); // use the sheet's 'date' column
       break;
   }
   return sorted;
 }
 
-// NEW: Update display based on filter + sort
+// Update the visible recipes
 function updateDisplay() {
   const filtered = filterRecipes(allRecipes);
   const sortValue = document.getElementById("sortSelect").value;
@@ -119,21 +119,18 @@ function updateDisplay() {
   displayRecipes(sorted);
 }
 
-// Initialize the recipe list
+// Initialize everything
 async function init() {
-  const allRecipes = await fetchRecipes();
+  allRecipes = await fetchRecipes();
   populateFilters(allRecipes);
   displayRecipes(allRecipes);
 
-  // Add live filtering
+  // Filter + Search listeners
   document.querySelectorAll("#filter-category, #cuisineFilter, #tagFilter, #search")
-    .forEach(el => el.addEventListener("input", () => {
-      const filtered = filterRecipes(allRecipes);
-      displayRecipes(filtered);
+    .forEach(el => el.addEventListener("input", updateDisplay));
 
-   // NEW: sort dropdown listener
+  // Sort listener
   document.getElementById("sortSelect").addEventListener("change", updateDisplay);
-    }));
 }
 
 document.addEventListener("DOMContentLoaded", init);
