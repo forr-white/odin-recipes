@@ -148,22 +148,20 @@ async function init() {
   populateFilters(allRecipes);
   displayRecipes(allRecipes);
 
+  // Load more button
   document.getElementById("loadMoreBtn").addEventListener("click", () => {
-  visibleCount += 24;
-  const filtered = filterRecipes(allRecipes);
-  displayRecipes(filtered);
-});
+    visibleCount += 24;
+    const filtered = filterRecipes(allRecipes);
+    displayRecipes(filtered);
+  });
 
-
- document.querySelectorAll("#filter-category, #cuisineFilter, #searchCombined, #sortSelect")
+  // Filters, search, and sorting
+  document.querySelectorAll("#filter-category, #cuisineFilter, #searchCombined, #sortSelect")
     .forEach(el => el.addEventListener("input", () => {
-      visibleCount = 24; // reset on filter change
+      visibleCount = 24; // reset on filter/sort/search change
       const filtered = filterRecipes(allRecipes);
       displayRecipes(filtered);
     }));
-
-  // Sort listener
-  document.getElementById("sortSelect").addEventListener("change", updateDisplay);
 }
 
 document.addEventListener("DOMContentLoaded", init);
