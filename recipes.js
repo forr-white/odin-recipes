@@ -1,9 +1,9 @@
 const SHEET_URL = "https://script.google.com/macros/s/AKfycbxnZGlirHNibP1tXTYL4oN1G7_FliKrjfmnDZrrIQ4WA4JCwS6BBqJwA4Ee_Hu3gbpf-Q/exec";
 
 let allRecipes = [];
-let visibleCount = 24; // recipes to show at once
+let visibleCount = 24; // how many to show at once
 
-// Fetch recipes from Google Sheets
+// Fetch data from Google Sheets
 async function fetchRecipes() {
   try {
     const response = await fetch(SHEET_URL);
@@ -27,7 +27,7 @@ async function fetchRecipes() {
   }
 }
 
-// Render recipes
+// Display recipes
 function displayRecipes(recipes) {
   const container = document.getElementById("recipesContainer");
   const loadMoreBtn = document.getElementById("loadMoreBtn");
@@ -51,20 +51,14 @@ function displayRecipes(recipes) {
     container.appendChild(div);
   });
 
-  // Load More visibility
   loadMoreBtn.style.display = recipes.length > visibleCount ? "block" : "none";
-
-  // Update Back to Top button visibility
-  handleScroll();
+  handleScroll(); // keep back-to-top consistent
 }
 
-// Populate filter dropdowns
+// Populate only category dropdown
 function populateFilters(recipes) {
   const categorySet = new Set(recipes.map(r => r.category).filter(Boolean));
-  const cuisineSet = new Set(recipes.map(r => r.cuisine).filter(Boolean));
-
   const categoryFilter = document.getElementById("filter-category");
-  const cuisineFilter = document.getElementById("cuisineFilter");
 
   categoryFilter.innerHTML = '<option value="">All Categories</option>';
   categorySet.forEach(cat => {
@@ -73,17 +67,9 @@ function populateFilters(recipes) {
     opt.textContent = cat.charAt(0).toUpperCase() + cat.slice(1);
     categoryFilter.appendChild(opt);
   });
-
-  cuisineFilter.innerHTML = '<option value="">All Cuisines</option>';
-  cuisineSet.forEach(cui => {
-    const opt = document.createElement("option");
-    opt.value = cui;
-    opt.textContent = cui.charAt(0).toUpperCase() + cui.slice(1);
-    cuisineFilter.appendChild(opt);
-  });
 }
 
-// Apply filters & search
+// Filter recipes
 function filterRecipes(recipes) {
   const category = document.getElementById("filter-category").value.toLowerCase();
   const search = document.getElementById("searchCombined").value.toLowerCase();
@@ -98,7 +84,6 @@ function filterRecipes(recipes) {
     return matchesCategory && matchesSearch;
   });
 }
-
 
 // Sort recipes
 function sortRecipes(recipes, criteria) {
@@ -121,7 +106,7 @@ function sortRecipes(recipes, criteria) {
   return sorted;
 }
 
-// Update display after filters, sort, search, or load more
+// Update the recipe grid
 function updateDisplay() {
   const filtered = filterRecipes(allRecipes);
   const sortValue = document.getElementById("sortSelect").value;
@@ -129,10 +114,10 @@ function updateDisplay() {
   displayRecipes(sorted);
 }
 
-// Back to Top button
+// Back to Top functionality
 const backToTopBtn = document.getElementById("backToTopBtn");
 function handleScroll() {
-  if (window.scrollY > 200 || window.pageYOffset > 200) {
+  if (window.scrollY > 200) {
     backToTopBtn.style.display = "block";
   } else {
     backToTopBtn.style.display = "none";
@@ -142,29 +127,25 @@ backToTopBtn.addEventListener("click", () => {
   window.scrollTo({ top: 0, behavior: "smooth" });
 });
 
-// Initialize everything
+// Initialize
 async function init() {
   allRecipes = await fetchRecipes();
   populateFilters(allRecipes);
-
   updateDisplay();
 
-  // Filters, search, sort
-document.querySelectorAll("#filter-category, #searchCombined, #sortSelect")
-  .forEach(el => el.addEventListener("input", () => {
-    visibleCount = 24; // reset on change
-    const filtered = filterRecipes(allRecipes);
-    displayRecipes(filtered);
-  }));
+  // Filters & sorting
+  document.querySelectorAll("#filter-category, #searchCombined, #sortSelect")
+    .forEach(el => el.addEventListener("input", () => {
+      visibleCount = 24; // reset
+      updateDisplay();
+    }));
 
-
-  // Load More
+  // Load more button
   document.getElementById("loadMoreBtn").addEventListener("click", () => {
     visibleCount += 24;
     updateDisplay();
   });
 
-  // Scroll listener for Back to Top
   window.addEventListener("scroll", handleScroll);
 }
 
