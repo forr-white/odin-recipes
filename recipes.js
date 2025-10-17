@@ -150,11 +150,13 @@ async function init() {
   updateDisplay();
 
   // Filters, search, sort
-  document.querySelectorAll("#filter-category, #cuisineFilter, #searchCombined, #sortSelect")
-    .forEach(el => el.addEventListener("input", () => {
-      visibleCount = 24; // reset on change
-      updateDisplay();
-    }));
+document.querySelectorAll("#filter-category, #searchCombined, #sortSelect")
+  .forEach(el => el.addEventListener("input", () => {
+    visibleCount = 24; // reset on change
+    const filtered = filterRecipes(allRecipes);
+    displayRecipes(filtered);
+  }));
+
 
   // Load More
   document.getElementById("loadMoreBtn").addEventListener("click", () => {
