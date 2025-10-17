@@ -144,21 +144,19 @@ function updateDisplay() {
 async function init() {
   allRecipes = await fetchRecipes();
   populateFilters(allRecipes);
-  displayRecipes(allRecipes);
+  updateDisplay(); // ensure initial sort is applied
 
   // Load more button
   document.getElementById("loadMoreBtn").addEventListener("click", () => {
     visibleCount += 24;
-    const filtered = filterRecipes(allRecipes);
-    displayRecipes(filtered);
+    updateDisplay();
   });
 
-  // Filters, search, and sorting
+  // Filters, search, sort
   document.querySelectorAll("#filter-category, #cuisineFilter, #searchCombined, #sortSelect")
     .forEach(el => el.addEventListener("input", () => {
-      visibleCount = 24; // reset on filter/sort/search change
-      const filtered = filterRecipes(allRecipes);
-      displayRecipes(filtered);
+      visibleCount = 24;
+      updateDisplay();
     }));
 }
 
