@@ -148,9 +148,19 @@ async function init() {
   populateFilters(allRecipes);
   displayRecipes(allRecipes);
 
-  // Filter + Search listeners
-document.querySelectorAll("#filter-category, #cuisineFilter, #searchCombined")
-    .forEach(el => el.addEventListener("input", updateDisplay));
+  document.getElementById("loadMoreBtn").addEventListener("click", () => {
+  visibleCount += 24;
+  const filtered = filterRecipes(allRecipes);
+  displayRecipes(filtered);
+});
+
+
+ document.querySelectorAll("#filter-category, #cuisineFilter, #searchCombined, #sortSelect")
+    .forEach(el => el.addEventListener("input", () => {
+      visibleCount = 24; // reset on filter change
+      const filtered = filterRecipes(allRecipes);
+      displayRecipes(filtered);
+    }));
 
   // Sort listener
   document.getElementById("sortSelect").addEventListener("change", updateDisplay);
