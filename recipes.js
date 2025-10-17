@@ -158,6 +158,31 @@ async function init() {
       visibleCount = 24;
       updateDisplay();
     }));
+
+  // Back to Top button
+const backToTopBtn = document.getElementById("backToTopBtn");
+
+// Show/hide button on scroll
+function handleScroll() {
+  if (window.scrollY > 200 || window.pageYOffset > 200) {
+    backToTopBtn.style.display = "block";
+  } else {
+    backToTopBtn.style.display = "none";
+  }
+}
+window.addEventListener("scroll", handleScroll);
+
+// Smooth scroll to top
+backToTopBtn.addEventListener("click", () => {
+  window.scrollTo({ top: 0, behavior: "smooth" });
+});
+
+// Optional: Scroll after "Load More" if user is far down
+function showRecipesAndCheckScroll(recipes) {
+  displayRecipes(recipes);
+  handleScroll(); // ensures button visibility updates after rendering
+}
+
 }
 
 document.addEventListener("DOMContentLoaded", init);
