@@ -101,6 +101,7 @@ section.cta {
   padding: 10px 12px;
   border: 1px solid #cbd5e1;
   border-radius: 8px;
+  align-items: left;
   font-size: 1rem;
   background: #f8fafc;
   transition: border-color 0.2s, background 0.2s;
