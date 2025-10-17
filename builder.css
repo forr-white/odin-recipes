@@ -85,7 +85,7 @@ section.cta {
 /* Right Column (Form) */
 .cta-right {
   flex: 2 1 520px;
-  display: inline-flex;
+  display: inline;
   flex-direction: column;
   gap: 14px;
 }
