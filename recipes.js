@@ -1,16 +1,15 @@
 const SHEET_URL = "https://script.google.com/macros/s/AKfycbxnZGlirHNibP1tXTYL4oN1G7_FliKrjfmnDZrrIQ4WA4JCwS6BBqJwA4Ee_Hu3gbpf-Q/exec";
 
 let allRecipes = [];
-let visibleCount = 24; // how many to show at once
+let visibleCount = 24; // recipes to show at once
 
-// Fetch data from Google Apps Script Web App
+// Fetch recipes from Google Sheets
 async function fetchRecipes() {
   try {
     const response = await fetch(SHEET_URL);
     if (!response.ok) throw new Error(`HTTP error! Status: ${response.status}`);
     const data = await response.json();
 
-    // Normalize data keys
     return data.map(r => ({
       name: r.name?.trim() || "",
       category: r.category?.trim().toLowerCase() || "",
@@ -20,7 +19,7 @@ async function fetchRecipes() {
         : [],
       image: r["image url"] || r.image || "",
       link: r.link || "#",
-      date: r.date || "" // use your actual sheet column for sorting
+      date: r.date || ""
     }));
   } catch (err) {
     console.error("Error fetching recipes:", err);
@@ -28,11 +27,10 @@ async function fetchRecipes() {
   }
 }
 
-// Render recipes on the page
+// Render recipes
 function displayRecipes(recipes) {
   const container = document.getElementById("recipesContainer");
   const loadMoreBtn = document.getElementById("loadMoreBtn");
-
   container.innerHTML = "";
 
   if (!recipes.length) {
@@ -41,31 +39,23 @@ function displayRecipes(recipes) {
     return;
   }
 
-  // Determine how many to show
   const toDisplay = recipes.slice(0, visibleCount);
-
   toDisplay.forEach(r => {
     const div = document.createElement("div");
     div.className = "recipe-card";
     div.innerHTML = `
-      <a href="${r.link}" class="btn"><img src="${r.image}" alt="${r.name}" loading="lazy" /></a>
+      <a href="${r.link}" class="btn"><img src="${r.image}" alt="${r.name}" loading="lazy"></a>
       <a href="${r.link}" class="btn"><h3>${r.name}</h3></a>
       <p>${r.category} | ${r.cuisine}</p>
     `;
     container.appendChild(div);
   });
 
-  // Toggle "Load More" visibility
-  if (recipes.length > visibleCount) {
-    loadMoreBtn.style.display = "block";
-  } else {
-    loadMoreBtn.style.display = "none";
-  }// Toggle "Load More" visibility
-  if (recipes.length > visibleCount) {
-    loadMoreBtn.style.display = "block";
-  } else {
-    loadMoreBtn.style.display = "none";
-  }
+  // Load More visibility
+  loadMoreBtn.style.display = recipes.length > visibleCount ? "block" : "none";
+
+  // Update Back to Top button visibility
+  handleScroll();
 }
 
 // Populate filter dropdowns
@@ -93,7 +83,7 @@ function populateFilters(recipes) {
   });
 }
 
-// Filter recipes based on search + dropdowns
+// Apply filters & search
 function filterRecipes(recipes) {
   const category = document.getElementById("filter-category").value.toLowerCase();
   const cuisine = document.getElementById("cuisineFilter").value.toLowerCase();
@@ -110,8 +100,7 @@ function filterRecipes(recipes) {
   });
 }
 
-
-// Sorting
+// Sort recipes
 function sortRecipes(recipes, criteria) {
   const sorted = [...recipes];
   switch (criteria) {
@@ -132,7 +121,7 @@ function sortRecipes(recipes, criteria) {
   return sorted;
 }
 
-// Update the visible recipes
+// Update display after filters, sort, search, or load more
 function updateDisplay() {
   const filtered = filterRecipes(allRecipes);
   const sortValue = document.getElementById("sortSelect").value;
@@ -140,30 +129,8 @@ function updateDisplay() {
   displayRecipes(sorted);
 }
 
-// Initialize everything
-async function init() {
-  allRecipes = await fetchRecipes();
-  populateFilters(allRecipes);
-  updateDisplay(); // ensure initial sort is applied
-
-  // Load more button
-  document.getElementById("loadMoreBtn").addEventListener("click", () => {
-    visibleCount += 24;
-    updateDisplay();
-  });
-
-  // Filters, search, sort
-document.getElementById("loadMoreBtn").addEventListener("click", () => {
-  visibleCount += 24;
-  const filtered = filterRecipes(allRecipes);
-  showRecipesAndCheckScroll(filtered);
-});
-
-
-  // Back to Top button
+// Back to Top button
 const backToTopBtn = document.getElementById("backToTopBtn");
-
-// Show/hide button on scroll
 function handleScroll() {
   if (window.scrollY > 200 || window.pageYOffset > 200) {
     backToTopBtn.style.display = "block";
@@ -171,19 +138,32 @@ function handleScroll() {
     backToTopBtn.style.display = "none";
   }
 }
-window.addEventListener("scroll", handleScroll);
-
-// Smooth scroll to top
 backToTopBtn.addEventListener("click", () => {
   window.scrollTo({ top: 0, behavior: "smooth" });
 });
 
-// Optional: Scroll after "Load More" if user is far down
-function showRecipesAndCheckScroll(recipes) {
-  displayRecipes(recipes);
-  handleScroll(); // ensures button visibility updates after rendering
-}
+// Initialize everything
+async function init() {
+  allRecipes = await fetchRecipes();
+  populateFilters(allRecipes);
 
+  updateDisplay();
+
+  // Filters, search, sort
+  document.querySelectorAll("#filter-category, #cuisineFilter, #searchCombined, #sortSelect")
+    .forEach(el => el.addEventListener("input", () => {
+      visibleCount = 24; // reset on change
+      updateDisplay();
+    }));
+
+  // Load More
+  document.getElementById("loadMoreBtn").addEventListener("click", () => {
+    visibleCount += 24;
+    updateDisplay();
+  });
+
+  // Scroll listener for Back to Top
+  window.addEventListener("scroll", handleScroll);
 }
 
 document.addEventListener("DOMContentLoaded", init);
