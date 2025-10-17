@@ -111,7 +111,7 @@ function filterRecipes(recipes) {
 }
 
 
-// Sort recipes
+// Sorting
 function sortRecipes(recipes, criteria) {
   const sorted = [...recipes];
   switch (criteria) {
@@ -126,7 +126,7 @@ function sortRecipes(recipes, criteria) {
       break;
     case "recent":
     default:
-      sorted.sort((a, b) => new Date(b.date) - new Date(a.date)); // use the sheet's 'date' column
+      sorted.sort((a, b) => new Date(b.date) - new Date(a.date));
       break;
   }
   return sorted;
