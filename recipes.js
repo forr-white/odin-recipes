@@ -86,19 +86,19 @@ function populateFilters(recipes) {
 // Apply filters & search
 function filterRecipes(recipes) {
   const category = document.getElementById("filter-category").value.toLowerCase();
+  const cuisine = document.getElementById("cuisineFilter").value.toLowerCase();
   const search = document.getElementById("searchCombined").value.toLowerCase();
 
   return recipes.filter(r => {
     const matchesCategory = !category || r.category === category;
+    const matchesCuisine = !cuisine || r.cuisine === cuisine;
     const matchesSearch =
       !search ||
       r.name.toLowerCase().includes(search) ||
-      r.cuisine.toLowerCase().includes(search) ||
       r.tags.some(tag => tag.includes(search));
-    return matchesCategory && matchesSearch;
+    return matchesCategory && matchesCuisine && matchesSearch;
   });
 }
-
 
 // Sort recipes
 function sortRecipes(recipes, criteria) {
@@ -150,13 +150,11 @@ async function init() {
   updateDisplay();
 
   // Filters, search, sort
- document.querySelectorAll("#filter-category, #searchCombined, #sortSelect")
-  .forEach(el => el.addEventListener("input", () => {
-    visibleCount = 24; // reset on change
-    const filtered = filterRecipes(allRecipes);
-    displayRecipes(filtered);
-  }));
-
+  document.querySelectorAll("#filter-category, #cuisineFilter, #searchCombined, #sortSelect")
+    .forEach(el => el.addEventListener("input", () => {
+      visibleCount = 24; // reset on change
+      updateDisplay();
+    }));
 
   // Load More
   document.getElementById("loadMoreBtn").addEventListener("click", () => {
