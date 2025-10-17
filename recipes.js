@@ -79,14 +79,16 @@ function filterRecipes(recipes) {
   const category = document.getElementById("filter-category").value.toLowerCase();
   const cuisine = document.getElementById("cuisineFilter").value.toLowerCase();
   const tagSearch = document.getElementById("tagFilter").value.toLowerCase();
-  const nameSearch = document.getElementById("search").value.toLowerCase();
+  const search = document.getElementById("searchCombined").value.toLowerCase();
 
   return recipes.filter(r => {
     const matchesCategory = !category || r.category === category;
     const matchesCuisine = !cuisine || r.cuisine === cuisine;
-    const matchesTags = !tagSearch || r.tags.some(tag => tag.includes(tagSearch));
-    const matchesName = !nameSearch || r.name.toLowerCase().includes(nameSearch);
-    return matchesCategory && matchesCuisine && matchesTags && matchesName;
+    const matchesSearch =
+      !search ||
+      r.name.toLowerCase().includes(search) ||
+      r.tags.some(tag => tag.includes(search));
+    return matchesCategory && matchesCuisine && matchesSearch;
   });
 }
 
