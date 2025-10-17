@@ -204,7 +204,7 @@ section.hero {
   font-size: 1rem;
   background: #f8fafc;
   transition: border-color 0.2s, background 0.2s;
-  width: 100px;
+  width: 150px;
 }
 
 .filter-bar input {
