@@ -153,11 +153,12 @@ async function init() {
   });
 
   // Filters, search, sort
-  document.querySelectorAll("#filter-category, #cuisineFilter, #searchCombined, #sortSelect")
-    .forEach(el => el.addEventListener("input", () => {
-      visibleCount = 24;
-      updateDisplay();
-    }));
+document.getElementById("loadMoreBtn").addEventListener("click", () => {
+  visibleCount += 24;
+  const filtered = filterRecipes(allRecipes);
+  showRecipesAndCheckScroll(filtered);
+});
+
 
   // Back to Top button
 const backToTopBtn = document.getElementById("backToTopBtn");
