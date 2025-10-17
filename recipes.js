@@ -128,7 +128,7 @@ async function init() {
   displayRecipes(allRecipes);
 
   // Filter + Search listeners
-  document.querySelectorAll("#filter-category, #cuisineFilter, #tagFilter, #search")
+  document.querySelectorAll("#filter-category, #cuisineFilter, ##searchCombined")
     .forEach(el => el.addEventListener("input", updateDisplay));
 
   // Sort listener
