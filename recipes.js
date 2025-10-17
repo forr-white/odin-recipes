@@ -118,6 +118,7 @@ function updateDisplay() {
   const sorted = sortRecipes(filtered, sortValue);
   displayRecipes(sorted);
 }
+
 // Initialize the recipe list
 async function init() {
   const allRecipes = await fetchRecipes();
@@ -129,6 +130,9 @@ async function init() {
     .forEach(el => el.addEventListener("input", () => {
       const filtered = filterRecipes(allRecipes);
       displayRecipes(filtered);
+
+   // NEW: sort dropdown listener
+  document.getElementById("sortSelect").addEventListener("change", updateDisplay);
     }));
 }
 
