@@ -280,6 +280,8 @@ section.hero {
 }
 
 .load-more-container {
+  display: flex;
+  justify-content: center;
   text-align: center;
   margin: 24px 0 60px;
 }
