@@ -191,7 +191,7 @@ section.hero {
   display: flex;
   flex-wrap: wrap;
   gap: 12px;
-  justify-content: space-around;
+  justify-content: center;
   margin: 24px auto;
   max-width: 1100px;
 }
