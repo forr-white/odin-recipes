@@ -1,27 +1,24 @@
 const SHEET_URL = "https://script.google.com/macros/s/AKfycbxnZGlirHNibP1tXTYL4oN1G7_FliKrjfmnDZrrIQ4WA4JCwS6BBqJwA4Ee_Hu3gbpf-Q/exec";
 
 let allRecipes = [];
-let displayedRecipes = [];
-let visibleCount = 24; // how many to show at once
+let visibleCount = 24;
 
-// Fetch data from Google Apps Script Web App
+// Fetch data
 async function fetchRecipes() {
   try {
     const response = await fetch(SHEET_URL);
     if (!response.ok) throw new Error(`HTTP error! Status: ${response.status}`);
     const data = await response.json();
 
-    // Normalize data keys
+    // Normalize data
     return data.map(r => ({
       name: r.name?.trim() || "",
       category: r.category?.trim().toLowerCase() || "",
       cuisine: r.cuisine?.trim().toLowerCase() || "",
-      tags: r.tags
-        ? r.tags.split(",").map(t => t.trim().toLowerCase())
-        : [],
+      tags: r.tags ? r.tags.split(",").map(t => t.trim().toLowerCase()) : [],
       image: r["image url"] || r.image || "",
       link: r.link || "#",
-      date: r.date || "" // use your actual sheet column for sorting
+      date: r.date || ""
     }));
   } catch (err) {
     console.error("Error fetching recipes:", err);
@@ -29,7 +26,7 @@ async function fetchRecipes() {
   }
 }
 
-// Render recipes on the page
+// Render recipes
 function displayRecipes(recipes) {
   const container = document.getElementById("recipesContainer");
   const loadMoreBtn = document.getElementById("loadMoreBtn");
@@ -42,9 +39,7 @@ function displayRecipes(recipes) {
     return;
   }
 
-  // Determine how many to show
   const toDisplay = recipes.slice(0, visibleCount);
-  displayedRecipes = toDisplay;
 
   toDisplay.forEach(r => {
     const div = document.createElement("div");
@@ -57,45 +52,11 @@ function displayRecipes(recipes) {
     container.appendChild(div);
   });
 
-  // Toggle "Load More" visibility
-  if (recipes.length > visibleCount) {
-    loadMoreBtn.style.display = "block";
-  } else {
-    loadMoreBtn.style.display = "none";
-  }// Toggle "Load More" visibility
-  if (recipes.length > visibleCount) {
-    loadMoreBtn.style.display = "block";
-  } else {
-    loadMoreBtn.style.display = "none";
-  }
+  // Show/hide Load More
+  loadMoreBtn.style.display = recipes.length > visibleCount ? "block" : "none";
 }
 
-// Populate filter dropdowns
-function populateFilters(recipes) {
-  const categorySet = new Set(recipes.map(r => r.category).filter(Boolean));
-  const cuisineSet = new Set(recipes.map(r => r.cuisine).filter(Boolean));
-
-  const categoryFilter = document.getElementById("filter-category");
-  const cuisineFilter = document.getElementById("cuisineFilter");
-
-  categoryFilter.innerHTML = '<option value="">All Categories</option>';
-  categorySet.forEach(cat => {
-    const opt = document.createElement("option");
-    opt.value = cat;
-    opt.textContent = cat.charAt(0).toUpperCase() + cat.slice(1);
-    categoryFilter.appendChild(opt);
-  });
-
-  cuisineFilter.innerHTML = '<option value="">All Cuisines</option>';
-  cuisineSet.forEach(cui => {
-    const opt = document.createElement("option");
-    opt.value = cui;
-    opt.textContent = cui.charAt(0).toUpperCase() + cui.slice(1);
-    cuisineFilter.appendChild(opt);
-  });
-}
-
-// Filter recipes based on search + dropdowns
+// Filters
 function filterRecipes(recipes) {
   const category = document.getElementById("filter-category").value.toLowerCase();
   const cuisine = document.getElementById("cuisineFilter").value.toLowerCase();
@@ -112,8 +73,7 @@ function filterRecipes(recipes) {
   });
 }
 
-
-// Sort recipes
+// Sorting
 function sortRecipes(recipes, criteria) {
   const sorted = [...recipes];
   switch (criteria) {
@@ -128,13 +88,13 @@ function sortRecipes(recipes, criteria) {
       break;
     case "recent":
     default:
-      sorted.sort((a, b) => new Date(b.date) - new Date(a.date)); // use the sheet's 'date' column
+      sorted.sort((a, b) => new Date(b.date) - new Date(a.date));
       break;
   }
   return sorted;
 }
 
-// Update the visible recipes
+// Combined update handler
 function updateDisplay() {
   const filtered = filterRecipes(allRecipes);
   const sortValue = document.getElementById("sortSelect").value;
@@ -142,25 +102,23 @@ function updateDisplay() {
   displayRecipes(sorted);
 }
 
-// Initialize everything
+// Initialize
 async function init() {
   allRecipes = await fetchRecipes();
   populateFilters(allRecipes);
-  displayRecipes(allRecipes);
+  updateDisplay(); // ensure initial sort is applied
 
   // Load more button
   document.getElementById("loadMoreBtn").addEventListener("click", () => {
     visibleCount += 24;
-    const filtered = filterRecipes(allRecipes);
-    displayRecipes(filtered);
+    updateDisplay();
   });
 
-  // Filters, search, and sorting
+  // Filters, search, sort
   document.querySelectorAll("#filter-category, #cuisineFilter, #searchCombined, #sortSelect")
     .forEach(el => el.addEventListener("input", () => {
-      visibleCount = 24; // reset on filter/sort/search change
-      const filtered = filterRecipes(allRecipes);
-      displayRecipes(filtered);
+      visibleCount = 24;
+      updateDisplay();
     }));
 }
 
