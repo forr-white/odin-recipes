@@ -1,6 +1,8 @@
 const SHEET_URL = "https://script.google.com/macros/s/AKfycbxnZGlirHNibP1tXTYL4oN1G7_FliKrjfmnDZrrIQ4WA4JCwS6BBqJwA4Ee_Hu3gbpf-Q/exec";
 
 let allRecipes = [];
+let displayedRecipes = [];
+let visibleCount = 24; // how many to show at once
 
 // Fetch data from Google Apps Script Web App
 async function fetchRecipes() {
