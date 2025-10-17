@@ -45,15 +45,20 @@
   </section>
 
   <!-- Recipe Finder -->
+  <section class="info">
     <div class="filter-bar">
-  <select id="filter-category">
-    <option value="">All Categories</option>
-  </select>
+      <select id="filter-category">
+        <option value="">All Categories</option>
+      </select>
 
-  <input type="text" id="searchCombined" placeholder="Search recipes by name, tag, or cuisine">
-</div>
+      <select id="cuisineFilter">
+        <option value="">All Cuisines</option>
+      </select>
 
-<div class="sort-bar">
+      <input type="text" id="searchCombined" placeholder="Search by name or tag...">
+    </div>
+
+    <div class="sort-bar">
   <label for="sortSelect">Sort by:</label>
   <select id="sortSelect">
     <option value="recent">Recently Added</option>
@@ -62,7 +67,6 @@
     <option value="category">Category</option>
   </select>
 </div>
-
     <!-- Recipe Grid -->
     <div id="recipesContainer" class="info-cards"></div>
   </section>
