@@ -90,6 +90,34 @@ function filterRecipes(recipes) {
   });
 }
 
+// NEW: Sorting function
+function sortRecipes(recipes, criteria) {
+  const sorted = [...recipes];
+  switch (criteria) {
+    case "name":
+      sorted.sort((a, b) => a.name.localeCompare(b.name));
+      break;
+    case "cuisine":
+      sorted.sort((a, b) => a.cuisine.localeCompare(b.cuisine));
+      break;
+    case "category":
+      sorted.sort((a, b) => a.category.localeCompare(b.category));
+      break;
+    case "recent":
+    default:
+      sorted.sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp));
+      break;
+  }
+  return sorted;
+}
+
+// NEW: Update display based on filter + sort
+function updateDisplay() {
+  const filtered = filterRecipes(allRecipes);
+  const sortValue = document.getElementById("sortSelect").value;
+  const sorted = sortRecipes(filtered, sortValue);
+  displayRecipes(sorted);
+}
 // Initialize the recipe list
 async function init() {
   const allRecipes = await fetchRecipes();
