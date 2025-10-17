@@ -78,7 +78,6 @@ function populateFilters(recipes) {
 function filterRecipes(recipes) {
   const category = document.getElementById("filter-category").value.toLowerCase();
   const cuisine = document.getElementById("cuisineFilter").value.toLowerCase();
-  const tagSearch = document.getElementById("tagFilter").value.toLowerCase();
   const search = document.getElementById("searchCombined").value.toLowerCase();
 
   return recipes.filter(r => {
@@ -91,6 +90,7 @@ function filterRecipes(recipes) {
     return matchesCategory && matchesCuisine && matchesSearch;
   });
 }
+
 
 // Sort recipes
 function sortRecipes(recipes, criteria) {
