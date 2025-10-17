@@ -266,6 +266,20 @@ section.hero {
   overflow: hidden;
 }
 
+.recipe-card {
+  opacity: 0;
+  transform: translateY(10px);
+  animation: fadeIn 0.4s ease forwards;
+}
+
+@keyframes fadeIn {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+
 footer.footer {
   display: flex;
   flex-direction: column;
