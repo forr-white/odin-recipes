@@ -32,14 +32,21 @@ async function fetchRecipes() {
 // Render recipes on the page
 function displayRecipes(recipes) {
   const container = document.getElementById("recipesContainer");
+  const loadMoreBtn = document.getElementById("loadMoreBtn");
+
   container.innerHTML = "";
 
   if (!recipes.length) {
     container.innerHTML = "<p>No recipes found.</p>";
+    loadMoreBtn.style.display = "none";
     return;
   }
 
-  recipes.forEach(r => {
+  // Determine how many to show
+  const toDisplay = recipes.slice(0, visibleCount);
+  displayedRecipes = toDisplay;
+
+  toDisplay.forEach(r => {
     const div = document.createElement("div");
     div.className = "recipe-card";
     div.innerHTML = `
@@ -49,6 +56,18 @@ function displayRecipes(recipes) {
     `;
     container.appendChild(div);
   });
+
+  // Toggle "Load More" visibility
+  if (recipes.length > visibleCount) {
+    loadMoreBtn.style.display = "block";
+  } else {
+    loadMoreBtn.style.display = "none";
+  }// Toggle "Load More" visibility
+  if (recipes.length > visibleCount) {
+    loadMoreBtn.style.display = "block";
+  } else {
+    loadMoreBtn.style.display = "none";
+  }
 }
 
 // Populate filter dropdowns
