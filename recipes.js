@@ -1,9 +1,10 @@
 const SHEET_URL = "https://script.google.com/macros/s/AKfycbxnZGlirHNibP1tXTYL4oN1G7_FliKrjfmnDZrrIQ4WA4JCwS6BBqJwA4Ee_Hu3gbpf-Q/exec";
 
 let allRecipes = [];
-let visibleCount = 24; // how many to show at once
+const recipesPerPage = 24;
+let currentPage = parseInt(new URLSearchParams(window.location.search).get("page")) || 1;
 
-// Fetch data from Google Sheets
+// Fetch recipes
 async function fetchRecipes() {
   try {
     const response = await fetch(SHEET_URL);
@@ -14,9 +15,7 @@ async function fetchRecipes() {
       name: r.name?.trim() || "",
       category: r.category?.trim().toLowerCase() || "",
       cuisine: r.cuisine?.trim().toLowerCase() || "",
-      tags: r.tags
-        ? r.tags.split(",").map(t => t.trim().toLowerCase())
-        : [],
+      tags: r.tags ? r.tags.split(",").map(t => t.trim().toLowerCase()) : [],
       image: r["image url"] || r.image || "",
       link: r.link || "#",
       date: r.date || ""
@@ -30,17 +29,14 @@ async function fetchRecipes() {
 // Display recipes
 function displayRecipes(recipes) {
   const container = document.getElementById("recipesContainer");
-  const loadMoreBtn = document.getElementById("loadMoreBtn");
   container.innerHTML = "";
 
   if (!recipes.length) {
     container.innerHTML = "<p>No recipes found.</p>";
-    loadMoreBtn.style.display = "none";
     return;
   }
 
-  const toDisplay = recipes.slice(0, visibleCount);
-  toDisplay.forEach(r => {
+  recipes.forEach(r => {
     const div = document.createElement("div");
     div.className = "recipe-card";
     div.innerHTML = `
@@ -49,23 +45,6 @@ function displayRecipes(recipes) {
       <p>${r.category} | ${r.cuisine}</p>
     `;
     container.appendChild(div);
-  });
-
-  loadMoreBtn.style.display = recipes.length > visibleCount ? "block" : "none";
-  handleScroll(); // keep back-to-top consistent
-}
-
-// Populate only category dropdown
-function populateFilters(recipes) {
-  const categorySet = new Set(recipes.map(r => r.category).filter(Boolean));
-  const categoryFilter = document.getElementById("filter-category");
-
-  categoryFilter.innerHTML = '<option value="">All Categories</option>';
-  categorySet.forEach(cat => {
-    const opt = document.createElement("option");
-    opt.value = cat;
-    opt.textContent = cat.charAt(0).toUpperCase() + cat.slice(1);
-    categoryFilter.appendChild(opt);
   });
 }
 
@@ -106,18 +85,102 @@ function sortRecipes(recipes, criteria) {
   return sorted;
 }
 
-// Update the recipe grid
-function updateDisplay() {
-  const filtered = filterRecipes(allRecipes);
-  const sortValue = document.getElementById("sortSelect").value;
-  const sorted = sortRecipes(filtered, sortValue);
-  displayRecipes(sorted);
+// Update pagination controls
+function updatePaginationControls(totalRecipes) {
+  const totalPages = Math.ceil(totalRecipes / recipesPerPage);
+  const pageNumbers = document.getElementById("pageNumbers");
+  const prevBtn = document.getElementById("prevPage");
+  const nextBtn = document.getElementById("nextPage");
+
+  // Clear current buttons
+  pageNumbers.innerHTML = "";
+
+  // Disable prev/next when appropriate
+  prevBtn.disabled = currentPage === 1;
+  nextBtn.disabled = currentPage === totalPages;
+
+  // Show max 5 numbered page buttons
+  const maxVisible = 5;
+  let startPage = Math.max(1, currentPage - Math.floor(maxVisible / 2));
+  let endPage = Math.min(totalPages, startPage + maxVisible - 1);
+  if (endPage - startPage < maxVisible - 1) {
+    startPage = Math.max(1, endPage - maxVisible + 1);
+  }
+
+  for (let i = startPage; i <= endPage; i++) {
+    const btn = document.createElement("button");
+    btn.textContent = i;
+    btn.className = "page-btn";
+    if (i === currentPage) btn.classList.add("active");
+    btn.addEventListener("click", () => {
+      currentPage = i;
+      updateDisplay(true);
+    });
+    pageNumbers.appendChild(btn);
+  }
 }
 
-// Back to Top functionality
+// Update display
+function updateDisplay(pushState = false) {
+  const filtered = filterRecipes(allRecipes);
+  const sorted = sortRecipes(filtered, document.getElementById("sortSelect").value);
+
+  const start = (currentPage - 1) * recipesPerPage;
+  const end = start + recipesPerPage;
+  const paginated = sorted.slice(start, end);
+
+  displayRecipes(paginated);
+  updatePaginationControls(filtered.length);
+
+  window.scrollTo({ top: 0, behavior: "smooth" });
+
+  if (pushState) {
+    const url = new URL(window.location);
+    url.searchParams.set("page", currentPage);
+    window.history.pushState({}, "", url);
+  }
+}
+
+// Setup previous/next buttons
+function setupPagination() {
+  const prevBtn = document.getElementById("prevPage");
+  const nextBtn = document.getElementById("nextPage");
+
+  prevBtn.addEventListener("click", () => {
+    if (currentPage > 1) {
+      currentPage--;
+      updateDisplay(true);
+    }
+  });
+
+  nextBtn.addEventListener("click", () => {
+    const totalRecipes = filterRecipes(allRecipes).length;
+    const totalPages = Math.ceil(totalRecipes / recipesPerPage);
+    if (currentPage < totalPages) {
+      currentPage++;
+      updateDisplay(true);
+    }
+  });
+}
+
+// Initialize filters dropdown
+function populateFilters(recipes) {
+  const categorySet = new Set(recipes.map(r => r.category).filter(Boolean));
+  const categoryFilter = document.getElementById("filter-category");
+
+  categoryFilter.innerHTML = '<option value="">All Categories</option>';
+  categorySet.forEach(cat => {
+    const opt = document.createElement("option");
+    opt.value = cat;
+    opt.textContent = cat.charAt(0).toUpperCase() + cat.slice(1);
+    categoryFilter.appendChild(opt);
+  });
+}
+
+// Back to top button
 const backToTopBtn = document.getElementById("backToTopBtn");
 function handleScroll() {
-  if (window.scrollY > 200) {
+  if (window.scrollY > 200 || window.pageYOffset > 200) {
     backToTopBtn.style.display = "block";
   } else {
     backToTopBtn.style.display = "none";
@@ -127,25 +190,21 @@ backToTopBtn.addEventListener("click", () => {
   window.scrollTo({ top: 0, behavior: "smooth" });
 });
 
-// Initialize
+// Initialize everything
 async function init() {
   allRecipes = await fetchRecipes();
   populateFilters(allRecipes);
   updateDisplay();
+  setupPagination();
 
-  // Filters & sorting
+  // Filters, search, sorting
   document.querySelectorAll("#filter-category, #searchCombined, #sortSelect")
     .forEach(el => el.addEventListener("input", () => {
-      visibleCount = 24; // reset
-      updateDisplay();
+      currentPage = 1;
+      updateDisplay(true);
     }));
 
-  // Load more button
-  document.getElementById("loadMoreBtn").addEventListener("click", () => {
-    visibleCount += 24;
-    updateDisplay();
-  });
-
+  // Scroll listener
   window.addEventListener("scroll", handleScroll);
 }
 
