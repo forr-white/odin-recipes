@@ -1,0 +1,50 @@
+// Code.gs (Google Apps Script)
+
+function doGet() {
+  const sheet = SpreadsheetApp.openById('Enter Sheet ID Here').getSheets()[0];
+  const rows = sheet.getDataRange().getValues();
+  const headers = rows.shift().map(h => h.toString().trim().toLowerCase());
+  const data = rows.map(r => {
+    let obj = {};
+    headers.forEach((h, i) => obj[h] = r[i]);
+    return obj;
+  });
+  return ContentService
+    .createTextOutput(JSON.stringify(data))
+    .setMimeType(ContentService.MimeType.JSON);
+}
+
+function doPost(e) {
+  try {
+    const sheet = SpreadsheetApp.openById('Enter Sheet ID Here').getSheets()[0];
+
+    // FormData sends data via e.parameter
+    const name = e.parameter.name || "";
+    const category = e.parameter.category || "";
+    const image = e.parameter.image || "";
+    const link = e.parameter.link || "";
+    const cuisine = e.parameter.cuisine || "";
+    const tags = e.parameter.tags || "";
+
+    // Append a new row (date, name, category, link, cuisine, tags)
+    sheet.appendRow([
+      new Date(),
+      name,
+      category,
+      image,
+      link,
+      cuisine,
+      tags
+    ]);
+
+    return ContentService
+      .createTextOutput(JSON.stringify({ status: "success" }))
+      .setMimeType(ContentService.MimeType.JSON);
+
+  } catch (err) {
+    return ContentService
+      .createTextOutput(JSON.stringify({ status: "error", message: err.message }))
+      .setMimeType(ContentService.MimeType.JSON);
+  }
+}
+
