@@ -18,11 +18,17 @@ header.header {
   align-items: center;
   justify-content: center;
   padding: 16px 40px;
-  background-color: #ffffff;
-  box-shadow: 0 1px 3px rgba(0,0,0,0.05);
-  border-bottom: 1px solid #e5e7eb;
+  background-color: transparent;
   gap: 12px;
 }
+
+.header {
+  position: sticky;  /* keeps the header in view */
+  top: 0;            /* sticks to the top of the viewport */
+  z-index: 1000;     /* ensures it stays above other content */
+  background-color: transparent; /* same as your header background */
+}
+
 
 header.header .logo {
   display: flex;
@@ -60,7 +66,7 @@ header.header .nav a:hover {
 
 .filter-bar {
   position: sticky;
-  top: 70px;
+  top: 150px;
   z-index: 100;
 }
 .about-section {
@@ -180,7 +186,7 @@ section.hero {
   padding: 8px 12px;
   border: 1px solid #cbd5e1;
   border-radius: 8px;
-  background: #f8fafc;
+  background: transparent;
   font-size: 0.95rem;
   cursor: pointer;
   transition: border-color 0.2s, background 0.2s;
@@ -188,7 +194,7 @@ section.hero {
 
 .sort-bar select:focus {
   border-color: #0369a1;
-  background: #ffffff;
+  background: transparent;
 }
 
 /* Filter Bar */
@@ -207,7 +213,7 @@ section.hero {
   border: 1px solid #cbd5e1;
   border-radius: 8px;
   font-size: 1rem;
-  background: #f8fafc;
+  background: transparent;
   transition: border-color 0.2s, background 0.2s;
   width: 175px;
 }
@@ -217,7 +223,7 @@ section.hero {
   border: 1px solid #cbd5e1;
   border-radius: 8px;
   font-size: 1rem;
-  background: #f8fafc;
+  background: transparent;
   transition: border-color 0.2s, background 0.2s;
   width: 315px;
 }
