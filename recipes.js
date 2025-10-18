@@ -4,7 +4,6 @@ let allRecipes = [];
 const recipesPerPage = 24;
 let currentPage = parseInt(new URLSearchParams(window.location.search).get("page")) || 1;
 
-// Fetch recipes
 async function fetchRecipes() {
   try {
     const response = await fetch(SHEET_URL);
@@ -26,7 +25,6 @@ async function fetchRecipes() {
   }
 }
 
-// Display recipes
 function displayRecipes(recipes) {
   const container = document.getElementById("recipesContainer");
   container.innerHTML = "";
@@ -48,7 +46,6 @@ function displayRecipes(recipes) {
   });
 }
 
-// Filter recipes
 function filterRecipes(recipes) {
   const category = document.getElementById("filter-category").value.toLowerCase();
   const search = document.getElementById("searchCombined").value.toLowerCase();
@@ -64,7 +61,6 @@ function filterRecipes(recipes) {
   });
 }
 
-// Sort recipes
 function sortRecipes(recipes, criteria) {
   const sorted = [...recipes];
   switch (criteria) {
@@ -85,21 +81,17 @@ function sortRecipes(recipes, criteria) {
   return sorted;
 }
 
-// Update pagination controls
 function updatePaginationControls(totalRecipes) {
   const totalPages = Math.ceil(totalRecipes / recipesPerPage);
   const pageNumbers = document.getElementById("pageNumbers");
   const prevBtn = document.getElementById("prevPage");
   const nextBtn = document.getElementById("nextPage");
 
-  // Clear current buttons
   pageNumbers.innerHTML = "";
 
-  // Disable prev/next when appropriate
   prevBtn.disabled = currentPage === 1;
   nextBtn.disabled = currentPage === totalPages;
 
-  // Show max 5 numbered page buttons
   const maxVisible = 5;
   let startPage = Math.max(1, currentPage - Math.floor(maxVisible / 2));
   let endPage = Math.min(totalPages, startPage + maxVisible - 1);
@@ -120,7 +112,6 @@ function updatePaginationControls(totalRecipes) {
   }
 }
 
-// Update display
 function updateDisplay(pushState = false) {
   const filtered = filterRecipes(allRecipes);
   const sorted = sortRecipes(filtered, document.getElementById("sortSelect").value);
@@ -141,7 +132,6 @@ function updateDisplay(pushState = false) {
   }
 }
 
-// Setup previous/next buttons
 function setupPagination() {
   const prevBtn = document.getElementById("prevPage");
   const nextBtn = document.getElementById("nextPage");
@@ -163,7 +153,6 @@ function setupPagination() {
   });
 }
 
-// Initialize filters dropdown
 function populateFilters(recipes) {
   const categorySet = new Set(recipes.map(r => r.category).filter(Boolean));
   const categoryFilter = document.getElementById("filter-category");
@@ -177,7 +166,6 @@ function populateFilters(recipes) {
   });
 }
 
-// Back to top button
 const backToTopBtn = document.getElementById("backToTopBtn");
 function handleScroll() {
   if (window.scrollY > 200 || window.pageYOffset > 200) {
@@ -190,21 +178,18 @@ backToTopBtn.addEventListener("click", () => {
   window.scrollTo({ top: 0, behavior: "smooth" });
 });
 
-// Initialize everything
 async function init() {
   allRecipes = await fetchRecipes();
   populateFilters(allRecipes);
   updateDisplay();
   setupPagination();
 
-  // Filters, search, sorting
   document.querySelectorAll("#filter-category, #searchCombined, #sortSelect")
     .forEach(el => el.addEventListener("input", () => {
       currentPage = 1;
       updateDisplay(true);
     }));
 
-  // Scroll listener
   window.addEventListener("scroll", handleScroll);
 }
 

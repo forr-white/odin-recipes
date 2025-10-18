@@ -13,7 +13,6 @@
     <h1>Recipe Builder</h1>
   </header>
 
-  <!-- Recipe Builder -->
   <section id="builder" class="cta">
     <div class="cta-left">
       <h3>Create a New Recipe</h3>
@@ -113,14 +112,12 @@ generateBtn.addEventListener("click", async () => {
   const filename = `${name.replace(/\s+/g, "-").toLowerCase()}.html`;
   const link = `recipes/${filename}`;
 
-  // Build FormData to avoid preflight
   const form = new FormData();
   form.append('name', name);
   form.append('category', category);
   form.append('link', link);
   form.append('cuisine', cuisine);
   form.append('tags', tags);
-  // Optionally include image, ingredients/directions/notes as JSON strings (if you want to store them)
   form.append('image', image);
   form.append('ingredients', JSON.stringify(ingredients));
   form.append('directions', JSON.stringify(directions));
@@ -130,10 +127,8 @@ generateBtn.addEventListener("click", async () => {
     const resp = await fetch("https://script.google.com/macros/s/AKfycbxnZGlirHNibP1tXTYL4oN1G7_FliKrjfmnDZrrIQ4WA4JCwS6BBqJwA4Ee_Hu3gbpf-Q/exec", {
       method: "POST",
       body: form
-      // NOTE: do NOT set Content-Type header — let the browser set it for FormData
     });
 
-    // If the server returns JSON, read it
     const result = await resp.json();
     if (result.status === "success") {
       alert("Recipe saved to Google Sheet successfully!");
@@ -142,12 +137,10 @@ generateBtn.addEventListener("click", async () => {
     }
 
   } catch (err) {
-    // If something still blocks the fetch, we'll see the error here
     alert("Network or server error: " + err.message);
     console.error(err);
   }
 
-  // Generate HTML file locally (same as before)
 const htmlContent = `<!doctype html>
 <html lang="en">
 <head>
@@ -219,7 +212,6 @@ const htmlContent = `<!doctype html>
 
 
 
-  // download
   const blob = new Blob([htmlContent], { type: "text/html" });
   const url = URL.createObjectURL(blob);
   const a = document.createElement("a");
@@ -228,11 +220,9 @@ const htmlContent = `<!doctype html>
   a.click();
   URL.revokeObjectURL(url);
 
-  // clear form fields
   document.querySelectorAll("#new-name,#new-image,#new-category,#new-cuisine,#new-tags,#new-ingredients,#new-directions,#new-notes").forEach(el => el.value = "");
 });
 
-// small helper to avoid XSS in generated HTML
 function escapeHtml(str) {
   return String(str)
     .replace(/&/g, "&amp;")
