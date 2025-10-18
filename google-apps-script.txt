@@ -1,4 +1,4 @@
-// Code.gs (Google Apps Script)
+// Code.gs (Google Apps Script) Sheet should be set up as following: date | name | category | image | link | cuisine | tags
 
 function doGet() {
   const sheet = SpreadsheetApp.openById('Enter Sheet ID Here').getSheets()[0];
