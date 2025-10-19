@@ -10,7 +10,7 @@ body {
 
 /* Header */
 .header {
-  position: sticky;
+  position: fixed-center;
   top: 0;
   z-index: 10;
   background: #ffffff;
@@ -22,7 +22,7 @@ body {
 }
 
 .header .logo img {
-  height: 50px;
+  height: 120px;
 }
 
 /* --- License Section --- */
