@@ -8,6 +8,28 @@ body {
   line-height: 1.6;
 }
 
+.demo-banner {
+  background: #0369a1;
+  color: #ffffff;
+  text-align: center;
+  padding: 10px 12px;
+  font-weight: 600;
+  font-size: 0.95rem;
+  letter-spacing: 0.01em;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.1);
+  position: sticky;
+  top: 0;
+  z-index: 1200;
+}
+.demo-banner a {
+  color: #fff;
+  text-decoration: underline;
+  font-weight: 700;
+}
+.demo-banner a:hover {
+  opacity: 0.9;
+}
+
 /* Header */
 .header {
   top: 0;

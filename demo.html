@@ -1,0 +1,169 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Live Demo | Cook Anything Kitchen Template</title>
+  <meta name="description" content="Try the Cook Anything Kitchen template live — filter, search, and explore recipes instantly.">
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="style.css">
+
+  <style>
+    body {
+      background: var(--bg, #f1f5f9);
+      color: var(--text, #111827);
+    }
+    .demo-banner {
+      background: #0369a1;
+      color: white;
+      text-align: center;
+      padding: 12px;
+      font-weight: 600;
+      font-size: 0.95rem;
+    }
+    .demo-banner a {
+      color: #fff;
+      font-weight: 700;
+      text-decoration: underline;
+    }
+    .demo-banner a:hover {
+      opacity: 0.9;
+    }
+    .hero p {
+      color: #374151;
+    }
+    .cta-box {
+      background: #f1f5f9;
+      padding: 30px;
+      border-radius: 16px;
+      max-width: 900px;
+      margin: 40px auto;
+      text-align: center;
+    }
+    .cta-box h2 {
+      color: #0369a1;
+      font-weight: 700;
+    }
+    .cta-box p {
+      color: #374151;
+    }
+    .cta-box .support-btn {
+      margin-top: 14px;
+    }
+  </style>
+
+  <!-- Scripts -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js" defer></script>
+  <script src="recipes.js" defer></script>
+</head>
+
+<body>
+
+  <!-- Demo Banner -->
+  <div class="demo-banner">
+    🔍 You’re viewing a <strong>live demo</strong> of the Cook Anything Kitchen Template. 
+    <a href="license.html">Get your own copy →</a>
+  </div>
+
+  <!-- Header -->
+  <header class="header">
+    <div class="logo">
+      <a href="demo.html"><img src="images/logo.svg" alt="Cook Anything Kitchen Logo"></a>
+    </div>
+    <nav class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="recipe-builder.html">Recipe Builder</a>
+      <a href="license.html">License</a>
+    </nav>
+  </header>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="hero-text">
+      <h1>Try the Recipe Finder</h1>
+      <p>Instant search, clean design, and zero clutter — built for home chefs and creators.</p>
+    </div>
+  </section>
+
+  <!-- Filters -->
+  <div class="filter-bar">
+    <select id="filter-category">
+      <option value="">All Categories</option>
+    </select>
+
+    <input type="text" id="searchCombined" placeholder="Search recipes...">
+    
+    <select id="sortSelect">
+      <option value="recent">Recently Added</option>
+      <option value="name">Name (A–Z)</option>
+      <option value="cuisine">Cuisine</option>
+      <option value="category">Category</option>
+    </select>
+
+    <button id="randomRecipeBtn" style="background:#0369a1;color:#fff;border:none;border-radius:8px;padding:8px 14px;cursor:pointer;">🎲 Random</button>
+  </div>
+
+  <!-- Recipe Grid -->
+  <div id="recipesContainer" class="info-cards">
+    <div class="loading-spinner" id="loadingSpinner"></div>
+  </div>
+
+  <!-- Pagination -->
+  <nav class="pagination" role="navigation" aria-label="Recipe pages">
+    <button id="prevPage" aria-label="Previous page">← Previous</button>
+    <div id="pageNumbers" role="group" aria-label="Page numbers"></div>
+    <button id="nextPage" aria-label="Next page">Next →</button>
+  </nav>
+  <div id="pageStatus" aria-live="polite" class="visually-hidden"></div>
+
+  <!-- CTA -->
+  <section class="cta-box">
+    <h2>Like What You See?</h2>
+    <p>License this exact template for your own recipes, brand, or cooking classes.</p>
+    <a href="license.html" class="support-btn">📦 Get Your License</a>
+    <p style="margin-top:8px;">Starting at just <strong>$99</strong> — one-time cost, yours forever.</p>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-content">
+      <div class="footer-logo">
+        <a href="index.html"><img src="https://cookanythingkitchen.com/images/logo.svg" alt="Site Logo"></a>
+      </div>
+      <div class="footer-nav">
+        <a href="index.html">Home</a>
+        <a href="recipe-builder.html">Recipe Builder</a>
+        <a href="license.html">License</a>
+      </div>
+      <p class="footer-copy">&copy; 2025 Cook Anything Kitchen. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script>
+    // Hide spinner after recipes load
+    const hideSpinner = () => document.getElementById("loadingSpinner").style.display = "none";
+    window.addEventListener("recipesLoaded", hideSpinner);
+  </script>
+<script>
+  // --- Demo Mode Banner ---
+  document.addEventListener("DOMContentLoaded", () => {
+    const params = new URLSearchParams(window.location.search);
+    if (params.get("demo") === "true") {
+      const banner = document.createElement("div");
+      banner.className = "demo-banner";
+      banner.innerHTML = `
+        👀 You’re viewing a <strong>live demo</strong> of Cook Anything Kitchen —
+        <a href="license.html">Get your own copy →</a>
+      `;
+      document.body.prepend(banner);
+    }
+  });
+</script>
+
+</body>
+</html>

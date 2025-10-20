@@ -4,90 +4,218 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Cook Anything Kitchen</title>
-  <meta name="description" content="A simple, ad-free recipe site. Find recipes by filtering categories or searching by name, cuisine, or tags.">
+  <meta name="description" content="An ad-free, minimalist recipe finder. Browse, filter, or build your own recipes.">
+
+  <!-- Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
 
+  <!-- Styles -->
   <link rel="stylesheet" href="style.css">
 
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js" defer></script>
+  <!-- Dark Mode Styles -->
+  <style>
+    :root {
+      --bg: #f1f5f9;
+      --text: #111827;
+      --card-bg: #ffffff;
+    }
+    [data-theme="dark"] {
+      --bg: #0f172a;
+      --text: #f1f5f9;
+      --card-bg: #1e293b;
+    }
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      transition: background 0.3s ease, color 0.3s ease;
+    }
+    .recipe-card {
+      background: var(--card-bg);
+      border-color: #334155;
+    }
+    .dark-toggle {
+      background: transparent;
+      border: none;
+      cursor: pointer;
+      font-size: 1.25rem;
+      color: var(--text);
+      transition: transform 0.2s;
+    }
+    .dark-toggle:hover { transform: scale(1.1); }
+    .loading-spinner {
+      margin: 60px auto;
+      border: 4px solid #e2e8f0;
+      border-top: 4px solid #0369a1;
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      animation: spin 0.8s linear infinite;
+    }
+    @keyframes spin { 100% { transform: rotate(360deg); } }
+    .visually-hidden {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0,0,0,0);
+      border: 0;
+    }
+  </style>
 
+  <!-- Scripts -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js" defer></script>
   <script src="recipes.js" defer></script>
 </head>
 <body>
 
+  <!-- Header -->
   <header class="header">
-    <div class="logo"><a href="index.html"><img src="images/logo.svg" alt="Logo"></a></div>
-    <div class="nav-links">
+    <div class="logo">
+      <a href="index.html"><img src="images/logo.svg" alt="Cook Anything Kitchen logo"></a>
+    </div>
+    <nav class="nav-links">
       <a href="index.html">Home</a>
       <a href="recipe-builder.html">Recipe Builder</a>
       <a href="license.html">License</a>
-    </div>
+      <button class="dark-toggle" id="themeToggle" aria-label="Toggle dark mode">🌙</button>
+    </nav>
   </header>
 
-
-    <div class="about-box">
-      <h2 class="about-title">Welcome to Cook Anything Kitchen!</h2>
-      <!--
-      <p class="about-text">I created this website for people who just want the recipe — no scrolling through life stories, pop-up ads, or endless filler. Cooking should be simple, and finding a recipe should be even simpler.</p>
-      <p class="about-text">Because I don’t run ads or accept sponsorships, I don’t earn money from page views or clicks. This project stays alive thanks to readers who appreciate an ad-free, clutter-free space and choose to show their support.</p>
-      <p class="about-text">If you enjoy what you find here, contributing a little helps me keep it fast, clean, and focused on what matters: great recipes.</p>
-    -->
-      <h2 class="about-title">Interested in Building Your Own Recipe Index?</h2> 
-      
-      <p class="about-text" >If you’d like to use this recipe site template for your own collection, I offer a simple setup service that includes installation, configuration, and a hands-on walkthrough to get your first recipes added.</p>
-      <p class="about-text">Once it’s running, you’ll be able to manage everything yourself — no coding required. To get started, visit <a href="license.html">License</a>, or to request more information, please reach out to me directly at forrest_white@msn.com.</p>
-      <div class="support-row">
-      <a class="support-btn" href="https://account.venmo.com/u/Forrest-WhiteIV" aria-label="Support this site">Support the site</a>
-     <!--<span class="support-note">Or share the site — every little bit helps.</span> -->
-    </div>
-
-
-  <!-- Hero Section -->
+  <!-- Hero -->
   <section class="hero">
     <div class="hero-text">
       <h1>Find Recipes</h1>
-      <p>Filter by category. Search by cuisine, tags, or name — all in a single view.</p>
+      <p>Filter by category, search by name, cuisine, or tag — fast, simple, ad-free.</p>
     </div>
   </section>
 
-  <!-- Recipe Finder -->
-<div class="filter-bar">
-  <select id="filter-category">
-    <option value="">All Categories</option>
-  </select>
+  <!-- Filters -->
+  <div class="filter-bar">
+    <select id="filter-category">
+      <option value="">All Categories</option>
+    </select>
 
-  <input type="text" id="searchCombined" placeholder="Search recipes by name, tag, or cuisine">
+    <input type="text" id="searchCombined" placeholder="Search recipes... (press / to focus)">
+    
+    <select id="sortSelect">
+      <option value="recent">Recently Added</option>
+      <option value="name">Name (A–Z)</option>
+      <option value="cuisine">Cuisine</option>
+      <option value="category">Category</option>
+    </select>
 
-  <select id="sortSelect">
-    <option value="recent">Recently Added</option>
-    <option value="name">Name (A–Z)</option>
-    <option value="cuisine">Cuisine</option>
-    <option value="category">Category</option>
-  </select>
-</div>
-
-    <!-- Recipe Grid -->
-    <div id="recipesContainer" class="info-cards"></div>
-<div class="pagination">
-  <button id="prevPage">← Previous</button>
-  <div id="pageNumbers"></div>
-  <button id="nextPage">Next →</button>
-</div>
-
-<button id="backToTopBtn" title="Back to top">↑</button>
-<footer class="footer">
-  <div class="footer-content">
-    <div class="footer-logo">
-      <a href="index.html"><img src="https://cookanythingkitchen.com/images/logo.svg" alt="Site Logo"></a>
-    </div>
-    <div class="footer-nav">
-      <a href="index.html">Home</a>
-      <a href="recipe-builder.html">Recipe Builder</a>
-      <a href="license.html">License</a>
-    </div>
-    <p class="footer-copy">&copy; 2025 Cook Anything Kitchen. All rights reserved.</p>
+    <button id="randomRecipeBtn" style="background:#0369a1;color:#fff;border:none;border-radius:8px;padding:8px 14px;cursor:pointer;">🎲 Random</button>
   </div>
-</footer>
+
+  <!-- Recipe Grid -->
+  <div id="recipesContainer" class="info-cards">
+    <div class="loading-spinner" id="loadingSpinner"></div>
+  </div>
+
+  <!-- Pagination -->
+  <nav class="pagination" role="navigation" aria-label="Recipe pages">
+    <button id="prevPage" aria-label="Previous page">← Previous</button>
+    <div id="pageNumbers" role="group" aria-label="Page numbers"></div>
+    <button id="nextPage" aria-label="Next page">Next →</button>
+  </nav>
+  <div id="pageStatus" aria-live="polite" class="visually-hidden"></div>
+
+  <!-- Back to Top -->
+  <button id="backToTopBtn" title="Back to top">↑</button>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-content">
+      <div class="footer-logo">
+        <a href="index.html"><img src="https://cookanythingkitchen.com/images/logo.svg" alt="Site Logo"></a>
+      </div>
+      <div class="footer-nav">
+        <a href="index.html">Home</a>
+        <a href="recipe-builder.html">Recipe Builder</a>
+        <a href="license.html">License</a>
+      </div>
+      <p class="footer-copy">&copy; 2025 Cook Anything Kitchen. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script>
+    // --- Dark Mode Toggle ---
+    const themeToggle = document.getElementById("themeToggle");
+    const currentTheme = localStorage.getItem("theme");
+    if (currentTheme) document.documentElement.setAttribute("data-theme", currentTheme);
+
+    themeToggle.addEventListener("click", () => {
+      const theme = document.documentElement.getAttribute("data-theme") === "dark" ? "light" : "dark";
+      document.documentElement.setAttribute("data-theme", theme);
+      localStorage.setItem("theme", theme);
+      themeToggle.textContent = theme === "dark" ? "☀️" : "🌙";
+    });
+
+    // --- Search Shortcut (/ key) ---
+    window.addEventListener("keydown", e => {
+      if (e.key === "/" && document.activeElement.tagName !== "INPUT") {
+        e.preventDefault();
+        document.getElementById("searchCombined").focus();
+      }
+    });
+
+    // --- Random Recipe Button ---
+   // Random Recipe Button (now guaranteed to work)
+const randomBtn = document.getElementById("randomRecipeBtn");
+if (randomBtn) {
+  randomBtn.addEventListener("click", () => {
+    if (!allRecipes.length) {
+      alert("Recipes are still loading — please wait a moment!");
+      return;
+    }
+    const rand = allRecipes[Math.floor(Math.random() * allRecipes.length)];
+    if (rand.link && rand.link !== "#") window.location.href = rand.link;
+  });
+}
+
+
+    // --- Hide Spinner After Load ---
+    const hideSpinner = () => document.getElementById("loadingSpinner").style.display = "none";
+    window.addEventListener("recipesLoaded", hideSpinner);
+  </script>
+
+<script>
+  // --- Demo Mode Banner with Config Support ---
+  document.addEventListener("DOMContentLoaded", async () => {
+    let isDemo = false;
+
+    try {
+      // Try to load config.json
+      const response = await fetch("config.json", { cache: "no-store" });
+      if (response.ok) {
+        const config = await response.json();
+        isDemo = config.demo === true;
+      }
+    } catch (err) {
+      console.warn("Could not load config.json, assuming demo=false.");
+    }
+
+    // Also allow demo mode via URL or session (for testing)
+    const params = new URLSearchParams(window.location.search);
+    if (params.get("demo") === "true" || sessionStorage.getItem("demoMode") === "true") {
+      isDemo = true;
+      sessionStorage.setItem("demoMode", "true");
+    }
+
+    if (isDemo) {
+      const banner = document.createElement("div");
+      banner.className = "demo-banner";
+      banner.innerHTML = `
+        👀 You’re viewing a <strong>live demo</strong> of Cook Anything Kitchen —
+        <a href="license.html">Get your own copy →</a>
+      `;
+      document.body.prepend(banner);
+    }
+  });
+</script>
 
 </body>
 </html>
