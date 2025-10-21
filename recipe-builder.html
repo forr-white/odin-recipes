@@ -129,7 +129,7 @@ generateBtn.addEventListener("click", async () => {
   form.append('notes', JSON.stringify(notes));
 
   try {
-    const resp = await fetch("https://script.google.com/macros/s/AKfycbw24t6xX8ffpA7vjdHf76FpC6GaumH2YsDd8CCx35ta8R3ULUv6O8aBiDlsThqNAEYpxw/exec", {
+    const resp = await fetch("https://script.google.com/macros/s/AKfycbxcutn-u8_A-uKiAfiy1bH4y-JsLoDhrbDFCiDIXXX34NfOL6vtnVS9raubpbPUkVkGYA/exec", {
       method: "POST",
       body: form
     });
