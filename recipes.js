@@ -2,7 +2,7 @@
 // Cook Anything Kitchen - Enhanced & Accessible recipes.js
 // =========================================================
 
-const SHEET_URL = "https://script.google.com/macros/s/AKfycbxcutn-u8_A-uKiAfiy1bH4y-JsLoDhrbDFCiDIXXX34NfOL6vtnVS9raubpbPUkVkGYA/exec";
+const SHEET_URL = "https://script.google.com/macros/s/AKfycbwt4jnO_NRJNqmbFdp3MK6HnIv-o2cGKkP185cmeIAx4xHgI4KJ5KQGs5tl8vO0GGOjTw/exec";
 const CACHE_KEY = "cookanything_recipes";
 const CACHE_TTL = 0; // 30 minutes
 
