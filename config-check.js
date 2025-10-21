@@ -28,7 +28,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     banner.className = "demo-banner";
     banner.innerHTML = `
       👀 You’re viewing a <strong>live demo</strong> of Cook Anything Kitchen —
-      <a href="license.html">Get your own copy →</a>
+      <a href="https://cookanythingkitchen.com/license.html">Get your own copy →</a>
     `;
     document.body.prepend(banner);
   }
