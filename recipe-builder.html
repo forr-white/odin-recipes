@@ -102,12 +102,12 @@ generateBtn.addEventListener("click", async () => {
   const directions = document.getElementById("new-directions").value.split("\n").map(d => d.trim()).filter(Boolean);
   const notes = document.getElementById("new-notes").value.split("\n").map(n => n.trim()).filter(Boolean);
   const nutrition = {
-  servingSize: document.getElementById("nutrition-serving-size").value,
-  calories: document.getElementById("nutrition-calories").value,
-  fat: document.getElementById("nutrition-fat").value,
-  carbs: document.getElementById("nutrition-carbs").value,
-  protein: document.getElementById("nutrition-protein").value
-};
+    servingSize: document.getElementById("nutrition-serving-size").value,
+    calories: document.getElementById("nutrition-calories").value,
+    fat: document.getElementById("nutrition-fat").value,
+    carbs: document.getElementById("nutrition-carbs").value,
+    protein: document.getElementById("nutrition-protein").value
+  };
 
   if (!name || !category || ingredients.length === 0 || directions.length === 0) {
     alert("Please fill in at least the name, category, ingredients, and directions.");
@@ -133,7 +133,6 @@ generateBtn.addEventListener("click", async () => {
   form.append('nutrition_carbs', nutrition.carbs);
   form.append('nutrition_protein', nutrition.protein);
 
-
   try {
     const resp = await fetch("https://script.google.com/macros/s/AKfycbwZs17gy25pg22WgmT163bCDilHnHrh2uIoM8ekgmD88OFSRaDLEf5yFv9Tu2yuGE3ItA/exec", {
       method: "POST",
@@ -142,9 +141,11 @@ generateBtn.addEventListener("click", async () => {
 
     const result = await resp.json();
     if (result.status === "success") {
-      alert("Recipe saved to Google Sheet successfully!");
+      alert("✅ Recipe successfully pushed to GitHub!");
+    } else if (result.status === "partial") {
+      alert("⚠️ Saved to sheet, but GitHub upload failed: " + (result.message || "Unknown error"));
     } else {
-      alert("Error saving recipe: " + (result.message || "unknown"));
+      alert("❌ Error saving recipe: " + (result.message || "Unknown"));
     }
 
   } catch (err) {
@@ -152,89 +153,8 @@ generateBtn.addEventListener("click", async () => {
     console.error(err);
   }
 
-const htmlContent = `<!doctype html>
-<html lang="en">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>${name}</title>
-
-<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700;900&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="recipe.css">
-</head>
-<body>
-
-<header class="recipe-header">
-  <a href="../index.html"><img src="../images/logo.svg" alt="Cook Anything Kitchen Logo"></a>
-  <nav class="nav-links">
-    <a href="../index.html">Home</a>
-    <a href="../recipe-builder.html">Recipe Builder</a>
-    <a href="../license.html">License</a>
-  </nav>
-</header>
-
-<main class="recipe-container">
-  <h1 class="recipe-title">${escapeHtml(name)}</h1>
-  <div class="recipe-meta">${escapeHtml(category)}${cuisine ? " • " + escapeHtml(cuisine) : ""}</div>
-
-  ${image ? `<img src="${escapeHtml(image)}" alt="${escapeHtml(name)}" class="recipe-image">` : ""}
-
-  <section class="recipe-section">
-    <h2>Ingredients</h2>
-    <ul>${ingredients.map(i => `<li>${escapeHtml(i)}</li>`).join("")}</ul>
-  </section>
-
-  <section class="recipe-section">
-    <h2>Directions</h2>
-    <ol>${directions.map(d => `<li>${escapeHtml(d)}</li>`).join("")}</ol>
-  </section>
-
-  ${notes.length ? `
-  <section class="recipe-section notes">
-    <h2>Notes</h2>
-    <ol>${notes.map(n => `<li>${escapeHtml(n)}</li>`).join("")}</ol>
-  </section>` : ""}
-
-  ${(nutrition.servingSize || nutrition.calories || nutrition.fat || nutrition.carbs || nutrition.protein) ? `
-<section class="recipe-section nutrition">
-  <h2>Nutritional Information</h2>
-  <div class="nutrition-card">
-    ${nutrition.servingSize ? `<p><strong>Serving Size:</strong> ${nutrition.servingSize}</p>` : ""}
-    ${nutrition.calories ? `<p><strong>Calories:</strong> ${nutrition.calories}</p>` : ""}
-    ${nutrition.fat ? `<p><strong>Fat:</strong> ${nutrition.fat} g</p>` : ""}
-    ${nutrition.carbs ? `<p><strong>Carbohydrates:</strong> ${nutrition.carbs} g</p>` : ""}
-    ${nutrition.protein ? `<p><strong>Protein:</strong> ${nutrition.protein} g</p>` : ""}
-  </div>
-</section>` : ""}
-
-</main>
-<footer class="footer">
-  <div class="footer-content">
-    <div class="footer-logo">
-      <img src="../images/logo.svg" alt="Site Logo">
-    </div>
-    <div class="footer-nav">
-      <a href="../index.html">Home</a>
-      <a href="../recipe-builder.html">Recipe Builder</a>
-      <a href="../license.html">License</a>
-    </div>
-    <p class="footer-copy">&copy; 2025 Cook Anything Kitchen. All rights reserved.</p>
-  </div>
-</footer>
-</body>
-</html>`;
-
-
-
-  const blob = new Blob([htmlContent], { type: "text/html" });
-  const url = URL.createObjectURL(blob);
-  const a = document.createElement("a");
-  a.href = url;
-  a.download = filename;
-  a.click();
-  URL.revokeObjectURL(url);
-
-  document.querySelectorAll("#new-name,#new-image,#new-category,#new-cuisine,#new-tags,#new-ingredients,#new-directions,#new-notes").forEach(el => el.value = "");
+  // Clear inputs after submission
+  document.querySelectorAll("#new-name, #new-image, #new-category, #new-cuisine, #new-tags, #new-ingredients, #new-directions, #new-notes, #nutrition-serving-size, #nutrition-calories, #nutrition-fat, #nutrition-carbs, #nutrition-protein").forEach(el => el.value = "");
 });
 
 function escapeHtml(str) {
@@ -246,6 +166,7 @@ function escapeHtml(str) {
     .replace(/'/g, "&#039;");
 }
 </script>
+
 
 <footer class="footer">
   <div class="footer-content">
