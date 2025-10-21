@@ -51,6 +51,17 @@ async function fetchRecipes() {
       date: r.date || ""
     }));
 
+    // ✅ Normalize relative URLs so all recipes display correctly
+recipes.forEach(r => {
+  if (r.image && !r.image.startsWith("http")) {
+    r.image = `https://cookanythingkitchen.com/${r.image.replace(/^\/+/, "")}`;
+  }
+  if (r.link && !r.link.startsWith("http")) {
+    r.link = `https://cookanythingkitchen.com/${r.link.replace(/^\/+/, "")}`;
+  }
+});
+
+
     setCache(recipes);
     if (spinner) spinner.style.display = "none";
     return recipes;
