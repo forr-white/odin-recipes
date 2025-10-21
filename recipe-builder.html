@@ -127,9 +127,15 @@ generateBtn.addEventListener("click", async () => {
   form.append('ingredients', JSON.stringify(ingredients));
   form.append('directions', JSON.stringify(directions));
   form.append('notes', JSON.stringify(notes));
+  form.append('nutrition_serving_size', nutrition.servingSize);
+  form.append('nutrition_calories', nutrition.calories);
+  form.append('nutrition_fat', nutrition.fat);
+  form.append('nutrition_carbs', nutrition.carbs);
+  form.append('nutrition_protein', nutrition.protein);
+
 
   try {
-    const resp = await fetch("https://script.google.com/macros/s/AKfycbwt4jnO_NRJNqmbFdp3MK6HnIv-o2cGKkP185cmeIAx4xHgI4KJ5KQGs5tl8vO0GGOjTw/exec", {
+    const resp = await fetch("https://script.google.com/macros/s/AKfycbwZs17gy25pg22WgmT163bCDilHnHrh2uIoM8ekgmD88OFSRaDLEf5yFv9Tu2yuGE3ItA/exec", {
       method: "POST",
       body: form
     });
