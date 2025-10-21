@@ -4,7 +4,7 @@
 
 const SHEET_URL = "https://script.google.com/macros/s/AKfycbxcutn-u8_A-uKiAfiy1bH4y-JsLoDhrbDFCiDIXXX34NfOL6vtnVS9raubpbPUkVkGYA/exec";
 const CACHE_KEY = "cookanything_recipes";
-const CACHE_TTL = 30 * 60 * 1000; // 30 minutes
+const CACHE_TTL = 0; // 30 minutes
 
 let allRecipes = [];
 const recipesPerPage = 24;
@@ -15,15 +15,15 @@ function setCache(data) {
   localStorage.setItem(CACHE_KEY, JSON.stringify({ timestamp: Date.now(), data }));
 }
 function getCache() {
-  const cached = localStorage.getItem(CACHE_KEY);
-  if (!cached) return null;
-  const parsed = JSON.parse(cached);
-  if (Date.now() - parsed.timestamp > CACHE_TTL) {
-    localStorage.removeItem(CACHE_KEY);
+ // const cached = localStorage.getItem(CACHE_KEY);
+ // if (!cached) return null;
+ // const parsed = JSON.parse(cached);
+ // if (Date.now() - parsed.timestamp > CACHE_TTL) {
+  //  localStorage.removeItem(CACHE_KEY);
     return null;
   }
-  return parsed.data;
-}
+//  return parsed.data;
+//}
 
 // Fetch Recipes
 async function fetchRecipes() {
