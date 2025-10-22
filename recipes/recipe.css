@@ -83,6 +83,15 @@ main.recipe-container {
   text-align: center;
 }
 
+.recipe-credit {
+  font-size: 0.95rem;
+  color: #6b7280;
+  margin-top: -6px;
+  margin-bottom: 20px;
+  text-align: center;
+  font-style: italic;
+}
+
 /* Recipe Image */
 .recipe-image {
   width: 100%;
