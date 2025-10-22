@@ -8,94 +8,94 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <header class="builder-header">
-    <a href="index.html"><img src="images/logo.svg" alt="Logo"></a>
-    <div class="nav-links">
-      <a href="index.html">Home</a>
-      <a href="recipe-builder.html">Recipe Builder</a>
-      <a href="license.html">License</a>
+<header class="builder-header">
+  <a href="index.html"><img src="images/logo.svg" alt="Logo"></a>
+  <div class="nav-links">
+    <a href="index.html">Home</a>
+    <a href="recipe-builder.html">Recipe Builder</a>
+    <a href="license.html">License</a>
+  </div>
+  <h1 class="recipe-builder">Recipe Builder</h1>
+</header>
+
+<section id="builder" class="cta">
+  <div class="cta-left">
+    <h3>Create a New Recipe</h3>
+    <nav><a href="index.html">Home</a></nav>
+    <p>Fill out the form below to generate a custom recipe page.</p>
+    <p>Recipes will show up at the top of the homepage. They will be available to view within 30–60 seconds.</p>
+  </div>
+
+  <div class="cta-right">
+    <label for="new-name">Recipe Name</label>
+    <input type="text" id="new-name">
+
+    <label for="credit">Submitted by (optional):</label>
+    <input type="text" id="credit" name="credit" placeholder="Your name or source">
+
+    <label for="new-image">Image URL (optional)</label>
+    <input type="text" id="new-image" placeholder="https://example.com/recipe.jpg">
+
+    <label for="new-category">Category</label>
+    <select id="new-category">
+      <option value="">Select a Category</option>
+      <option value="appetizers">Appetizers</option>
+      <option value="bread">Bread</option>
+      <option value="breakfast">Breakfast</option>
+      <option value="desserts">Desserts</option>
+      <option value="dinner">Dinner</option>
+      <option value="drinks">Drinks</option>
+      <option value="lunch">Lunch</option>
+      <option value="salads">Salads</option>
+      <option value="sauce">Sauce</option>
+      <option value="sides">Sides</option>
+      <option value="snacks">Snacks</option>
+      <option value="soups">Soups</option>
+    </select>
+
+    <label for="new-cuisine">Cuisine</label>
+    <input type="text" id="new-cuisine" placeholder="e.g. Italian, Mexican, American">
+
+    <label for="new-tags">Tags (comma separated)</label>
+    <input type="text" id="new-tags" placeholder="e.g. easy, gluten-free, family">
+
+    <label for="new-ingredients">Ingredients (one per line)</label>
+    <textarea id="new-ingredients"></textarea>
+
+    <label for="new-directions">Directions (one step per line)</label>
+    <textarea id="new-directions"></textarea>
+
+    <label for="new-notes">Notes (optional, one per line)</label>
+    <textarea id="new-notes"></textarea>
+
+    <div class="nutrition-inputs">
+      <h3>Nutrition (optional)</h3>
+      <label>Serving Size</label>
+      <input type="text" id="nutrition-serving-size" placeholder="e.g. 1 serving">
+
+      <label>Calories</label>
+      <input type="text" id="nutrition-calories" placeholder="e.g. 230">
+
+      <label>Fat (g)</label>
+      <input type="text" id="nutrition-fat" placeholder="e.g. 8">
+
+      <label>Carbs (g)</label>
+      <input type="text" id="nutrition-carbs" placeholder="e.g. 27">
+
+      <label>Protein (g)</label>
+      <input type="text" id="nutrition-protein" placeholder="e.g. 5">
     </div>
-    <h1 class="recipe-builder">Recipe Builder</h1>
-  </header>
 
-  <section id="builder" class="cta">
-    <div class="cta-left">
-      <h3>Create a New Recipe</h3>
-      <nav><a href="index.html">Home</a></nav>
-      <p>Fill out the form below to generate a custom recipe page.</p>
-      <p>Recipes will show up at the top of the homepage. They will be available to view within 30-60 seconds.</p>
-    </div>
+    <button id="generate-btn">Generate & Save Recipe</button>
+  </div>
+</section>
 
-    <div class="cta-right">
-      <label for="new-name">Recipe Name</label>
-      <input type="text" id="new-name">
-
-      <label for="credit">Submitted by (optional):</label>
-      <input type="text" id="credit" name="credit" placeholder="Your name or source">
-
-      <label for="new-image">Image URL (optional)</label>
-      <input type="text" id="new-image" placeholder="https://example.com/recipe.jpg">
-
-      <label for="new-category">Category</label>
-      <select id="new-category">
-        <option value="">Select a Category</option>
-        <option value="appetizers">Appetizers</option>
-        <option value="bread">Bread</option>
-        <option value="breakfast">Breakfast</option>
-        <option value="desserts">Desserts</option>
-        <option value="dinner">Dinner</option>
-        <option value="drinks">Drinks</option>
-        <option value="lunch">Lunch</option>
-        <option value="salads">Salads</option>
-        <option value="sauce">Sauce</option>
-        <option value="sides">Sides</option>
-        <option value="snacks">Snacks</option>
-        <option value="soups">Soups</option>
-      </select>
-
-      <label for="new-cuisine">Cuisine</label>
-      <input type="text" id="new-cuisine" placeholder="e.g. Italian, Mexican, American">
-
-      <label for="new-tags">Tags (comma separated)</label>
-      <input type="text" id="new-tags" placeholder="e.g. easy, gluten-free, family">
-
-      <label for="new-ingredients">Ingredients (one per line)</label>
-      <textarea id="new-ingredients"></textarea>
-
-      <label for="new-directions">Directions (one step per line)</label>
-      <textarea id="new-directions"></textarea>
-
-      <label for="new-notes">Notes (optional, one per line)</label>
-      <textarea id="new-notes"></textarea>
-
-      <div class="nutrition-inputs">
-  <h3>Nutrition (optional)</h3>
-  <label>Serving Size</label>
-  <input type="text" id="nutrition-serving-size" placeholder="e.g. 1 serving">
-
-  <label>Calories</label>
-  <input type="text" id="nutrition-calories" placeholder="e.g. 230">
-  
-  <label>Fat (g)</label>
-  <input type="text" id="nutrition-fat" placeholder="e.g. 8">
-  
-  <label>Carbs (g)</label>
-  <input type="text" id="nutrition-carbs" placeholder="e.g. 27">
-  
-  <label>Protein (g)</label>
-  <input type="text" id="nutrition-protein" placeholder="e.g. 5">
-</div>
-
-
-      <button id="generate-btn">Generate & Save Recipe</button>
-    </div>
-  </section>
-
-  <script>
+<script>
 const generateBtn = document.getElementById("generate-btn");
 
 generateBtn.addEventListener("click", async () => {
   const name = document.getElementById("new-name").value.trim();
+  const credit = document.getElementById("credit").value.trim();
   const image = document.getElementById("new-image").value.trim();
   const category = document.getElementById("new-category").value;
   const cuisine = document.getElementById("new-cuisine").value.trim();
@@ -122,6 +122,7 @@ generateBtn.addEventListener("click", async () => {
 
   const form = new FormData();
   form.append('name', name);
+  form.append('credit', credit); // ✅ NEW FIELD
   form.append('category', category);
   form.append('link', link);
   form.append('cuisine', cuisine);
@@ -137,7 +138,7 @@ generateBtn.addEventListener("click", async () => {
   form.append('nutrition_protein', nutrition.protein);
 
   try {
-    const resp = await fetch("https://script.google.com/macros/s/AKfycbwZs17gy25pg22WgmT163bCDilHnHrh2uIoM8ekgmD88OFSRaDLEf5yFv9Tu2yuGE3ItA/exec", {
+    const resp = await fetch("https://script.google.com/macros/s/AKfycbw4xabtXRGLeGaN39OCfJLJ1dfLJg-vbcRdExtPpfhjbZcihnXIcq943O7TZfIYOgDxCg/exec", {
       method: "POST",
       body: form
     });
@@ -157,17 +158,10 @@ generateBtn.addEventListener("click", async () => {
   }
 
   // Clear inputs after submission
-  document.querySelectorAll("#new-name, #new-image, #new-category, #new-cuisine, #new-tags, #new-ingredients, #new-directions, #new-notes, #nutrition-serving-size, #nutrition-calories, #nutrition-fat, #nutrition-carbs, #nutrition-protein").forEach(el => el.value = "");
+  document.querySelectorAll(
+    "#new-name, #credit, #new-image, #new-category, #new-cuisine, #new-tags, #new-ingredients, #new-directions, #new-notes, #nutrition-serving-size, #nutrition-calories, #nutrition-fat, #nutrition-carbs, #nutrition-protein"
+  ).forEach(el => el.value = "");
 });
-
-function escapeHtml(str) {
-  return String(str)
-    .replace(/&/g, "&amp;")
-    .replace(/</g, "&lt;")
-    .replace(/>/g, "&gt;")
-    .replace(/"/g, "&quot;")
-    .replace(/'/g, "&#039;");
-}
 </script>
 
 <footer class="legal-footer">
