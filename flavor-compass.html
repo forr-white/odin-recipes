@@ -5,18 +5,29 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>The Flavor Compass</title>
   <style>
+    :root {
+      --bg: #111;
+      --text: #fff;
+      --card: #222;
+    }
+    body.light {
+      --bg: #f9fafb;
+      --text: #111;
+      --card: #ffffff;
+    }
     body {
       font-family: system-ui, sans-serif;
-      background: #111;
-      color: #fff;
+      background: var(--bg);
+      color: var(--text);
       text-align: center;
       margin: 0;
       padding: 2rem;
+      transition: background 0.3s, color 0.3s;
     }
     .wheel {
       position: relative;
-      width: 320px;
-      height: 320px;
+      width: 340px;
+      height: 340px;
       margin: 2rem auto;
       border-radius: 50%;
     }
@@ -32,22 +43,43 @@
       cursor: pointer;
       color: #000;
       font-weight: bold;
-      transition: transform 0.2s;
+      transition: transform 0.2s, box-shadow 0.2s;
     }
-    .flavor:hover { transform: scale(1.1); }
+    .flavor:hover { 
+      transform: scale(1.1); 
+      box-shadow: 0 0 10px rgba(0,0,0,0.3);
+    }
     .info {
-      background: #222;
+      background: var(--card);
       padding: 1rem;
       border-radius: 1rem;
-      max-width: 300px;
+      max-width: 320px;
       margin: 1rem auto;
-      box-shadow: 0 0 10px rgba(0,0,0,0.3);
+      box-shadow: 0 0 10px rgba(0,0,0,0.2);
+      transition: background 0.3s;
+    }
+    .toggle-btn {
+      background: var(--card);
+      color: var(--text);
+      border: 1px solid #444;
+      border-radius: 8px;
+      padding: 0.5rem 1rem;
+      cursor: pointer;
+      margin-bottom: 1rem;
+      transition: all 0.3s;
+    }
+    .toggle-btn:hover {
+      background: #444;
+    }
+    @media (max-width: 500px) {
+      .wheel { transform: scale(0.8); }
     }
   </style>
 </head>
 <body>
   <h1>🧭 The Flavor Compass</h1>
   <p>Click a flavor to learn what it adds and when to use it.</p>
+  <button class="toggle-btn" id="themeToggle">Toggle Light/Dark</button>
 
   <div class="wheel" id="wheel"></div>
   <div class="info" id="info">Tap a flavor to learn more.</div>
@@ -84,22 +116,42 @@
         adds: 'Body, savoriness, satisfaction',
         use: 'When food feels thin or lacks punch'
       }},
+      { name: 'Fat', emoji: '🧈', color: '#fcd34d', info: {
+        sensation: 'Adds richness and carries flavor',
+        ingredients: 'Butter, oil, cream, nuts, avocado',
+        adds: 'Smoothness and depth',
+        use: 'When food tastes sharp or thin'
+      }},
+      { name: 'Heat', emoji: '🌶️', color: '#f87171', info: {
+        sensation: 'Adds excitement and contrast',
+        ingredients: 'Chili, pepper, mustard, horseradish',
+        adds: 'Energy and boldness',
+        use: 'When food feels too mild or flat'
+      }},
+      { name: 'Aromatics', emoji: '🌿', color: '#4ade80', info: {
+        sensation: 'Adds fragrance and dimension',
+        ingredients: 'Herbs, garlic, citrus zest, spices',
+        adds: 'Freshness and lift',
+        use: 'When food tastes one-note or heavy'
+      }},
     ];
 
     const wheel = document.getElementById('wheel');
     const infoBox = document.getElementById('info');
+    const themeToggle = document.getElementById('themeToggle');
 
     flavors.forEach((flavor, i) => {
       const angle = (i / flavors.length) * 2 * Math.PI;
-      const x = 120 * Math.cos(angle) + 120;
-      const y = 120 * Math.sin(angle) + 120;
+      const radius = 120;
+      const x = radius * Math.cos(angle) + radius;
+      const y = radius * Math.sin(angle) + radius;
 
       const el = document.createElement('div');
       el.className = 'flavor';
       el.style.background = flavor.color;
       el.style.left = x + 'px';
       el.style.top = y + 'px';
-      el.innerHTML = `<div style="font-size:1.5rem">${flavor.emoji}</div><div>${flavor.name}</div>`;
+      el.innerHTML = `<div style=\"font-size:1.5rem\">${flavor.emoji}</div><div>${flavor.name}</div>`;
       el.onclick = () => {
         infoBox.innerHTML = `
           <h2>${flavor.emoji} ${flavor.name}</h2>
@@ -111,6 +163,10 @@
       };
       wheel.appendChild(el);
     });
+
+    themeToggle.onclick = () => {
+      document.body.classList.toggle('light');
+    };
   </script>
 </body>
 </html>
