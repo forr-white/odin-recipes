@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Flavor Equation Builder | Cook Anything Kitchen</title>
+  <link rel="icon" href="../images/logo.svg" type="image/svg+xml" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    :root {
+      --bg: #f9fafb;
+      --card: #ffffff;
+      --text: #111827;
+      --accent: #60a5fa;
+    }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: system-ui, sans-serif;
+      margin: 0;
+      padding: 0;
+      line-height: 1.6;
+    }
+    nav {
+      background: var(--card);
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      padding: 1rem;
+      border-bottom: 1px solid #ddd;
+    }
+    nav a {
+      text-decoration: none;
+      color: var(--text);
+      font-weight: 600;
+      transition: color 0.3s;
+    }
+    nav a:hover { color: var(--accent); }
+    .logo {
+      display: block;
+      margin: 1.5rem auto 0.5rem;
+      width: 100px;
+    }
+    main {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 2rem;
+    }
+    h1 { text-align: center; margin-bottom: 0.25rem; }
+    p.subtitle { text-align: center; color: #555; margin-bottom: 2rem; }
+    form {
+      background: var(--card);
+      padding: 1.5rem;
+      border-radius: 0.75rem;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+    label { display: block; font-weight: 600; margin-top: 1rem; }
+    input, select {
+      width: 100%;
+      padding: 0.5rem;
+      margin-top: 0.25rem;
+      border-radius: 0.5rem;
+      border: 1px solid #ccc;
+      font-size: 1rem;
+      box-sizing: border-box;
+    }
+    .slider-group { margin-bottom: 1rem; }
+    input[type="range"] { width: 100%; }
+    .slider-group output { float: right; font-weight: 600; }
+    .buttons { text-align: center; margin-top: 1.5rem; }
+    button {
+      background: var(--accent);
+      color: #fff;
+      border: none;
+      border-radius: 0.5rem;
+      padding: 0.6rem 1.2rem;
+      margin: 0.5rem;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+    button:hover { background: #3b82f6; }
+    .chart-container {
+      background: var(--card);
+      border-radius: 0.75rem;
+      padding: 1.5rem;
+      margin-top: 2rem;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      text-align: center;
+    }
+    .recent {
+      margin-top: 2rem;
+      background: var(--card);
+      border-radius: 0.75rem;
+      padding: 1.5rem;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    }
+    footer {
+      text-align: center;
+      font-size: 0.9rem;
+      color: #666;
+      margin: 2rem 0;
+    }
+    .entry {
+      border-bottom: 1px solid #eee;
+      padding: 0.75rem 0;
+    }
+    .entry:last-child { border-bottom: none; }
+  </style>
+</head>
+<body>
+  <nav>
+    <a href="../index.html">Home</a>
+    <a href="../recipe-builder.html">Recipe Builder</a>
+    <a href="../flavor-compass.html">Flavor Compass</a>
+    <a href="../license.html">License</a>
+  </nav>
+
+  <a href="../index.html"><img src="../images/logo.svg" alt="Cook Anything Kitchen Logo" class="logo"></a>
+
+  <main>
+    <h1>Flavor Equation Builder</h1>
+    <p class="subtitle">Design, measure, and balance your flavor systems.</p>
+
+    <form id="flavorForm">
+      <label>Dish Name</label>
+      <input type="text" id="dish" placeholder="e.g., Lemon Herb Chicken" required>
+
+      <label>Target Experience</label>
+      <select id="target">
+        <option>Bright</option><option>Bold</option><option>Comforting</option>
+        <option>Fresh</option><option>Rich</option><option>Smoky</option><option>Balanced</option>
+      </select>
+
+      <label>Base Ingredient</label>
+      <select id="base">
+        <option>Protein</option><option>Vegetable</option>
+        <option>Grain</option><option>Other</option>
+      </select>
+
+      <label>Cooking Method</label>
+      <select id="method">
+        <option>Sear</option><option>Roast</option><option>Boil</option>
+        <option>Fry</option><option>Ferment</option><option>Mix</option><option>Bake</option>
+      </select>
+
+      <h2>Flavor Ratios (%)</h2>
+      <div id="sliders"></div>
+
+      <div class="buttons">
+        <button type="button" id="saveBtn">Save Equation</button>
+        <button type="button" id="exportBtn">Export TXT</button>
+        <button type="button" id="clearBtn">Clear Form</button>
+      </div>
+    </form>
+
+    <div class="chart-container">
+      <h2>Flavor Profile Visualization</h2>
+      <canvas id="flavorChart" width="300" height="300"></canvas>
+      <p><strong>Flavor Balance Score:</strong> <span id="balanceScore">0</span>/100</p>
+      <p id="analysis" style="font-style:italic;color:#444;"></p>
+    </div>
+
+    <div class="recent">
+      <h2>Recent Equations</h2>
+      <div id="recentEntries"></div>
+    </div>
+  </main>
+
+  <footer>© 2025 Cook Anything Kitchen — All Rights Reserved</footer>
+
+  <script>
+    const flavors = ['Salt','Fat','Acid','Sweet','Bitter','Umami','Texture'];
+    const sliderContainer = document.getElementById('sliders');
+    flavors.forEach(f => {
+      const div = document.createElement('div');
+      div.className = 'slider-group';
+      div.innerHTML = `
+        <label>${f} <output id="${f}Value">50</output></label>
+        <input type="range" min="0" max="100" value="50" id="${f}">
+      `;
+      sliderContainer.appendChild(div);
+      const slider = div.querySelector('input');
+      const output = div.querySelector('output');
+      slider.oninput = () => {
+        output.textContent = slider.value;
+        updateChart();
+      };
+    });
+
+    const ctx = document.getElementById('flavorChart').getContext('2d');
+    let chartColor = '#60a5fa';
+    let flavorChart = new Chart(ctx, {
+      type: 'radar',
+      data: {
+        labels: flavors,
+        datasets: [{
+          label: 'Flavor Equation',
+          data: [50,50,50,50,50,50,50],
+          backgroundColor: chartColor + '33',
+          borderColor: chartColor,
+          borderWidth: 2
+        }]
+      },
+      options: {
+        scales: { 
+          r: {
+            beginAtZero: true,
+            max: 100,
+            grid: { color: '#ddd' },
+            angleLines: { color: '#eee' },
+            pointLabels: { color: '#111' }
+          }
+        },
+        plugins: { legend: { display: false } }
+      }
+    });
+
+    const colors = {
+      'Bright': '#facc15','Bold': '#f87171','Comforting': '#86efac',
+      'Fresh': '#60a5fa','Rich': '#fb923c','Smoky': '#9ca3af','Balanced': '#6366f1'
+    };
+
+    function updateChart() {
+      const values = flavors.map(f => parseInt(document.getElementById(f).value));
+      const target = document.getElementById('target').value;
+      chartColor = colors[target] || '#60a5fa';
+      flavorChart.data.datasets[0].data = values;
+      flavorChart.data.datasets[0].backgroundColor = chartColor + '33';
+      flavorChart.data.datasets[0].borderColor = chartColor;
+      flavorChart.update();
+      updateScore(values);
+    }
+
+    document.getElementById('target').addEventListener('change', updateChart);
+
+    function updateScore(values) {
+      const avg = values.reduce((a,b)=>a+b,0)/values.length;
+      const variance = values.reduce((a,b)=>a+Math.pow(b-avg,2),0)/values.length;
+      const score = Math.max(0, Math.round(100 - variance/2));
+      document.getElementById('balanceScore').textContent = score;
+      updateAnalysis(values, score);
+    }
+
+    function updateAnalysis(values, score) {
+      const maxFlavor = flavors[values.indexOf(Math.max(...values))];
+      let message = "";
+      if (score > 85) message = "Perfectly balanced — harmonious flavor profile.";
+      else if (score > 70) message = "Mostly balanced — slightly " + maxFlavor.toLowerCase() + "-forward.";
+      else if (score > 50) message = "Uneven — " + maxFlavor + " dominates the mix.";
+      else message = "Highly unbalanced — experiment for control.";
+      document.getElementById('analysis').textContent = message;
+    }
+
+    // Save
+    document.getElementById('saveBtn').addEventListener('click', () => {
+      const entry = {
+        dish: document.getElementById('dish').value,
+        target: document.getElementById('target').value,
+        base: document.getElementById('base').value,
+        method: document.getElementById('method').value,
+        values: flavors.map(f => parseInt(document.getElementById(f).value)),
+        score: document.getElementById('balanceScore').textContent,
+        analysis: document.getElementById('analysis').textContent,
+        date: new Date().toLocaleDateString()
+      };
+      if (!entry.dish.trim()) { alert("Enter a dish name before saving."); return; }
+      let entries = JSON.parse(localStorage.getItem('flavorEquations') || '[]');
+      entries.unshift(entry);
+      localStorage.setItem('flavorEquations', JSON.stringify(entries.slice(0,10)));
+      updateRecent();
+      alert("Flavor Equation saved!");
+    });
+
+    // Export
+    document.getElementById('exportBtn').addEventListener('click', () => {
+      const dish = document.getElementById('dish').value || 'FlavorEquation';
+      let text = `Flavor Equation Builder — ${dish}\n\n`;
+      text += `Target Experience: ${document.getElementById('target').value}\n`;
+      text += `Base: ${document.getElementById('base').value}\nMethod: ${document.getElementById('method').value}\n\n`;
+      flavors.forEach(f => { text += `${f}: ${document.getElementById(f).value}%\n`; });
+      text += `\nBalance Score: ${document.getElementById('balanceScore').textContent}\n`;
+      text += `Analysis: ${document.getElementById('analysis').textContent}\n`;
+      const blob = new Blob([text], { type: "text/plain" });
+      const a = document.createElement("a");
+      a.href = URL.createObjectURL(blob);
+      a.download = dish.replace(/\s+/g, '_') + "_Equation.txt";
+      a.click();
+    });
+
+    // Clear
+    document.getElementById('clearBtn').addEventListener('click', () => {
+      if (confirm("Clear all form fields?")) {
+        document.getElementById('flavorForm').reset();
+        flavors.forEach(f => document.getElementById(f+'Value').textContent = 50);
+        updateChart();
+      }
+    });
+
+    function updateRecent() {
+      const container = document.getElementById('recentEntries');
+      const entries = JSON.parse(localStorage.getItem('flavorEquations') || '[]');
+      container.innerHTML = '';
+      entries.slice(0,3).forEach(e => {
+        const div = document.createElement('div');
+        div.className = 'entry';
+        div.innerHTML = `<strong>${e.dish}</strong> — ${e.date}<br>
+        Target: ${e.target} | Score: ${e.score}`;
+        container.appendChild(div);
+      });
+    }
+    updateRecent();
+    updateChart();
+  </script>
+</body>
+</html>
