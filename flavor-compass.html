@@ -3,27 +3,63 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>The Flavor Compass</title>
+  <title>The Flavor Compass | Cook Anything Kitchen</title>
   <style>
     :root {
       --bg: #111;
       --text: #fff;
       --card: #222;
+      --muted: #bbb;
+      --accent: #86efac;
     }
     body.light {
       --bg: #f9fafb;
       --text: #111;
       --card: #ffffff;
+      --muted: #555;
+      --accent: #16a34a;
     }
     body {
       font-family: system-ui, sans-serif;
       background: var(--bg);
       color: var(--text);
-      text-align: center;
       margin: 0;
-      padding: 2rem;
+      padding: 0;
       transition: background 0.3s, color 0.3s;
     }
+
+    /* ---------- NAVIGATION ---------- */
+    nav {
+      background: var(--card);
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      padding: 1rem;
+      border-bottom: 1px solid #333;
+    }
+    nav a {
+      color: var(--text);
+      text-decoration: none;
+      font-weight: 600;
+      transition: color 0.3s;
+    }
+    nav a:hover {
+      color: var(--accent);
+    }
+
+    /* ---------- PAGE LAYOUT ---------- */
+    main {
+      text-align: center;
+      padding: 2rem;
+    }
+    .logo {
+      width: 100px;
+      height: auto;
+      margin: 1rem auto;
+      display: block;
+      cursor: pointer;
+    }
+
     .wheel {
       position: relative;
       width: 340px;
@@ -58,18 +94,49 @@
       box-shadow: 0 0 10px rgba(0,0,0,0.2);
       transition: background 0.3s;
     }
-    .toggle-btn {
+    .btn {
       background: var(--card);
       color: var(--text);
       border: 1px solid #444;
       border-radius: 8px;
       padding: 0.5rem 1rem;
       cursor: pointer;
-      margin-bottom: 1rem;
+      margin: 0.5rem;
       transition: all 0.3s;
     }
-    .toggle-btn:hover {
-      background: #444;
+    .btn:hover {
+      background: var(--accent);
+      color: #000;
+    }
+
+    .legend {
+      margin-top: 2rem;
+      max-width: 420px;
+      margin-left: auto;
+      margin-right: auto;
+      text-align: left;
+      background: var(--card);
+      padding: 1rem;
+      border-radius: 1rem;
+    }
+    .legend h3 {
+      text-align: center;
+      margin-bottom: 0.5rem;
+    }
+    .legend-item {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-bottom: 0.4rem;
+    }
+    .color-box {
+      width: 16px;
+      height: 16px;
+      border-radius: 4px;
+    }
+    .muted {
+      color: var(--muted);
+      font-size: 0.9rem;
     }
     @media (max-width: 500px) {
       .wheel { transform: scale(0.8); }
@@ -77,12 +144,45 @@
   </style>
 </head>
 <body>
-  <h1>🧭 The Flavor Compass</h1>
-  <p>Click a flavor to learn what it adds and when to use it.</p>
-  <button class="toggle-btn" id="themeToggle">Toggle Light/Dark</button>
+  <!-- LOGO -->
+    <a href="index.html">
+      <img src="https://cookanythingkitchen.com/images/logo.svg" alt="Cook Anything Kitchen Logo" class="logo">
+    </a>
+  <!-- NAVIGATION -->
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="https://www.skool.com/cook-anything-kitchen-9636/about?ref=a42cb417403c47368cddd32ba708fd26">Learn To Cook!</a>
+    <a href="recipe-builder.html">Recipe Builder</a>
+    <a href="flavor-compass.html">Flavor Compass</a>
+    <a href="license.html">License</a>
+  </nav>
 
-  <div class="wheel" id="wheel"></div>
-  <div class="info" id="info">Tap a flavor to learn more.</div>
+  <main>
+    
+
+    <h1>🧭 The Flavor Compass</h1>
+    <p>Click a flavor to learn what it adds and when to use it.</p>
+    <button class="btn" id="themeToggle">Toggle Light/Dark</button>
+    <button class="btn" id="downloadBtn">Download Note Card</button>
+
+    <!-- FLAVOR WHEEL -->
+    <div class="wheel" id="wheel"></div>
+    <div class="info" id="info">Tap a flavor to learn more.</div>
+
+    <!-- LEGEND -->
+    <div class="legend">
+      <h3>🎨 Flavor Balancing Guide</h3>
+      <div class="legend-item"><div class="color-box" style="background:#93c5fd"></div> <b>Salt</b> enhances all flavors — wakes up dull dishes.</div>
+      <div class="legend-item"><div class="color-box" style="background:#fbbf24"></div> <b>Sweet</b> balances <b>Bitterness</b> and tempers acidity.</div>
+      <div class="legend-item"><div class="color-box" style="background:#fde68a"></div> <b>Sour</b> cuts through <b>Fat</b> and heaviness.</div>
+      <div class="legend-item"><div class="color-box" style="background:#a3a3a3"></div> <b>Bitter</b> adds intrigue to sweet or rich dishes.</div>
+      <div class="legend-item"><div class="color-box" style="background:#86efac"></div> <b>Umami</b> deepens flavor — boosts satisfaction.</div>
+      <div class="legend-item"><div class="color-box" style="background:#fcd34d"></div> <b>Fat</b> softens harsh edges (acid, spice, bitterness).</div>
+      <div class="legend-item"><div class="color-box" style="background:#f87171"></div> <b>Heat</b> adds energy — balanced by <b>Sweet</b> or <b>Fat</b>.</div>
+      <div class="legend-item"><div class="color-box" style="background:#4ade80"></div> <b>Aromatics</b> add freshness and lift to any dish.</div>
+      <p class="muted">💡 Tip: Balance opposites. Sweet tames heat, acid cuts fat, salt wakes up everything.</p>
+    </div>
+  </main>
 
   <script>
     const flavors = [
@@ -139,7 +239,11 @@
     const wheel = document.getElementById('wheel');
     const infoBox = document.getElementById('info');
     const themeToggle = document.getElementById('themeToggle');
+    const downloadBtn = document.getElementById('downloadBtn');
 
+    let selectedFlavor = null;
+
+    // Build the interactive wheel
     flavors.forEach((flavor, i) => {
       const angle = (i / flavors.length) * 2 * Math.PI;
       const radius = 120;
@@ -151,8 +255,9 @@
       el.style.background = flavor.color;
       el.style.left = x + 'px';
       el.style.top = y + 'px';
-      el.innerHTML = `<div style=\"font-size:1.5rem\">${flavor.emoji}</div><div>${flavor.name}</div>`;
+      el.innerHTML = `<div style="font-size:1.5rem">${flavor.emoji}</div><div>${flavor.name}</div>`;
       el.onclick = () => {
+        selectedFlavor = flavor;
         infoBox.innerHTML = `
           <h2>${flavor.emoji} ${flavor.name}</h2>
           <p><b>Sensation:</b> ${flavor.info.sensation}</p>
@@ -164,8 +269,27 @@
       wheel.appendChild(el);
     });
 
+    // Theme toggle
     themeToggle.onclick = () => {
       document.body.classList.toggle('light');
+    };
+
+    // Download Flavor Note Card
+    downloadBtn.onclick = () => {
+      if (!selectedFlavor) {
+        alert("Please select a flavor first!");
+        return;
+      }
+      const text = `Flavor Note Card - ${selectedFlavor.name}\n\n` +
+        `Sensation: ${selectedFlavor.info.sensation}\n` +
+        `Common Ingredients: ${selectedFlavor.info.ingredients}\n` +
+        `Adds: ${selectedFlavor.info.adds}\n` +
+        `Use: ${selectedFlavor.info.use}\n`;
+      const blob = new Blob([text], { type: "text/plain" });
+      const a = document.createElement("a");
+      a.href = URL.createObjectURL(blob);
+      a.download = `${selectedFlavor.name}_Flavor_Note.txt`;
+      a.click();
     };
   </script>
 </body>
