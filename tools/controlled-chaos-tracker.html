@@ -6,319 +6,154 @@
   <title>The Controlled Chaos Tracker | Cook Anything Kitchen</title>
   <link rel="icon" href="../images/logo.svg" type="image/svg+xml" />
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-  <style>
-    :root {
-      --bg: #f9fafb;
-      --text: #111827;
-      --card: #ffffff;
-      --accent: #60a5fa;
-      --success: #86efac;
-      --warning: #facc15;
-      --danger: #f87171;
-    }
-
-    body {
-      background: var(--bg);
-      color: var(--text);
-      font-family: system-ui, sans-serif;
-      margin: 0;
-      padding: 0;
-      line-height: 1.6;
-    }
-
-    nav {
-      background: var(--card);
-      display: flex;
-      justify-content: center;
-      gap: 2rem;
-      padding: 1rem;
-      border-bottom: 1px solid #ddd;
-    }
-
-    nav a {
-      text-decoration: none;
-      color: var(--text);
-      font-weight: 600;
-      transition: color 0.3s;
-    }
-
-    nav a:hover {
-      color: var(--accent);
-    }
-
-    .logo {
-      display: block;
-      margin: 1.5rem auto 0.5rem;
-      width: 100px;
-    }
-
-    main {
-      max-width: 800px;
-      margin: 0 auto;
-      padding: 2rem;
-    }
-
-    h1 {
-      text-align: center;
-      margin-bottom: 0.25rem;
-    }
-
-    h2 {
-      margin-top: 2rem;
-    }
-
-    p.subtitle {
-      text-align: center;
-      color: #555;
-      margin-bottom: 2rem;
-    }
-
-    form {
-      background: var(--card);
-      padding: 1.5rem;
-      border-radius: 0.75rem;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-    }
-
-    label {
-      display: block;
-      font-weight: 600;
-      margin-top: 1rem;
-    }
-
-    input, select, textarea {
-      width: 100%;
-      padding: 0.5rem;
-      margin-top: 0.25rem;
-      border-radius: 0.5rem;
-      border: 1px solid #ccc;
-      font-family: inherit;
-      font-size: 1rem;
-      box-sizing: border-box;
-    }
-
-    textarea { min-height: 80px; }
-
-    .sliders {
-      margin-top: 1.5rem;
-    }
-
-    .slider-group {
-      margin-bottom: 1rem;
-    }
-
-    .slider-group output {
-      float: right;
-      font-weight: 600;
-    }
-
-    input[type="range"] {
-      width: 100%;
-    }
-
-    .outcome {
-      margin: 1rem 0;
-    }
-
-    .outcome label {
-      display: inline-block;
-      margin-right: 1rem;
-      font-weight: 500;
-    }
-
-    .buttons {
-      text-align: center;
-      margin-top: 1.5rem;
-    }
-
-    button {
-      background: var(--accent);
-      color: #fff;
-      border: none;
-      border-radius: 0.5rem;
-      padding: 0.6rem 1.2rem;
-      margin: 0.5rem;
-      font-size: 1rem;
-      cursor: pointer;
-      transition: background 0.3s;
-    }
-
-    button:hover {
-      background: #3b82f6;
-    }
-
-    .chart-container {
-      background: var(--card);
-      border-radius: 0.75rem;
-      padding: 1.5rem;
-      margin-top: 2rem;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-      text-align: center;
-    }
-
-    .recent {
-      margin-top: 2rem;
-      background: var(--card);
-      border-radius: 0.75rem;
-      padding: 1.5rem;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-    }
-
-    .entry {
-      border-bottom: 1px solid #eee;
-      padding: 0.75rem 0;
-    }
-
-    .entry:last-child { border-bottom: none; }
-
-    .tag {
-      display: inline-block;
-      padding: 0.2rem 0.5rem;
-      border-radius: 0.5rem;
-      font-size: 0.85rem;
-      font-weight: 600;
-      color: #fff;
-    }
-
-    .tag.success { background: var(--success); color: #065f46; }
-    .tag.warning { background: var(--warning); color: #92400e; }
-    .tag.danger { background: var(--danger); color: #7f1d1d; }
-
-    footer {
-      text-align: center;
-      font-size: 0.9rem;
-      color: #666;
-      margin: 2rem 0;
-    }
-
-  </style>
+  <link rel="stylesheet" href="../style.css" />
 </head>
 <body>
-      <a href="index.html"><img src="images/logo.svg" alt="Cook Anything Kitchen Logo" class="logo"></a>
-  <nav>
-    <a href="index.html">Home</a>
-    <a href="recipe-builder.html">Recipe Builder</a>
-    <a href="flavor-compass.html">Flavor Compass</a>
-    <a href="license.html">License</a>
-  </nav>
+  <header class="header">
+    <div class="logo">
+      <a href="../index.html"><img src="../images/logo.svg" alt="Cook Anything Kitchen logo" /></a>
+    </div>
+    <nav class="header-nav">
+      <a href="../index.html">Home</a>
+      <a href="https://www.skool.com/cook-anything-kitchen-9636/about?ref=a42cb417403c47368cddd32ba708fd26">Learn To Cook!</a>
+
+      <div class="dropdown">
+        <button class="dropbtn">Tools ▾</button>
+        <div class="dropdown-content">
+          <a href="../recipe-builder.html">Recipe Builder</a>
+          <a href="../tools/flavor-compass.html">Flavor Compass</a>
+          <a href="../tools/controlled-chaos-tracker.html">Controlled Chaos Tracker</a>
+          <a href="../tools/flavor-equation-builder.html">Flavor Equation Builder</a>
+          <a href="../downloads/flavor-playbook.pdf" target="_blank">📘 Flavor Playbook (PDF)</a>
+        </div>
+      </div>
+
+      <a href="../license.html">License</a>
+    </nav>
+  </header>
 
   <main>
-    <h1>The Controlled Chaos Tracker</h1>
-    <p class="subtitle">Record, reflect, and learn from creative experiments.</p>
+    <section class="tool-card">
+      <h1>The Controlled Chaos Tracker</h1>
+      <p class="subtitle">Record, reflect, and learn from creative experiments.</p>
 
-    <form id="chaosForm">
-      <label>Experiment Title</label>
-      <input type="text" id="title" placeholder="e.g., Over-Salted Tomato Sauce" required>
+      <form id="chaosForm">
+        <label>Experiment Title</label>
+        <input type="text" id="title" placeholder="e.g., Over-Salted Tomato Sauce" required />
 
-      <label>Date</label>
-      <input type="text" id="date" readonly>
+        <label>Date</label>
+        <input type="text" id="date" readonly />
 
-      <label>Rule Broken</label>
-      <select id="rule">
-        <option>Too Salty</option>
-        <option>Over-Acidic</option>
-        <option>Too Sweet</option>
-        <option>Burnt</option>
-        <option>Clashing Pairing</option>
-        <option>Unusual Texture</option>
-        <option>Other</option>
-      </select>
+        <label>Rule Broken</label>
+        <select id="rule">
+          <option>Too Salty</option>
+          <option>Over-Acidic</option>
+          <option>Too Sweet</option>
+          <option>Burnt</option>
+          <option>Clashing Pairing</option>
+          <option>Unusual Texture</option>
+          <option>Other</option>
+        </select>
 
-      <label>Prediction / Intention</label>
-      <textarea id="prediction"></textarea>
+        <label>Prediction / Intention</label>
+        <textarea id="prediction" placeholder="What outcome did you expect?"></textarea>
 
-      <label>Image URL (optional)</label>
-      <input type="url" id="image" placeholder="https://example.com/image.jpg">
+        <label>Image URL (optional)</label>
+        <input type="url" id="image" placeholder="https://example.com/image.jpg" />
 
-      <label>Before Taste</label>
-      <textarea id="beforeTaste"></textarea>
+        <label>Before Taste</label>
+        <textarea id="beforeTaste"></textarea>
 
-      <label>After Taste</label>
-      <textarea id="afterTaste"></textarea>
+        <label>After Taste</label>
+        <textarea id="afterTaste"></textarea>
 
-      <label>Texture</label>
-      <select id="texture">
-        <option>Soft</option><option>Crunchy</option><option>Sticky</option><option>Oily</option>
-        <option>Crisp</option><option>Gritty</option><option>Other</option>
-      </select>
+        <label>Texture</label>
+        <select id="texture">
+          <option>Soft</option><option>Crunchy</option><option>Sticky</option>
+          <option>Oily</option><option>Crisp</option><option>Gritty</option><option>Other</option>
+        </select>
 
-      <label>Aroma</label>
-      <select id="aroma">
-        <option>Sharp</option><option>Flat</option><option>Smoky</option>
-        <option>Sweet</option><option>Earthy</option><option>Other</option>
-      </select>
+        <label>Aroma</label>
+        <select id="aroma">
+          <option>Sharp</option><option>Flat</option><option>Smoky</option>
+          <option>Sweet</option><option>Earthy</option><option>Other</option>
+        </select>
 
-      <div class="sliders">
-        <div class="slider-group">
-          <label>Balance <output id="balanceValue">5</output></label>
-          <input type="range" min="1" max="10" value="5" id="balance">
+        <div class="sliders">
+          <div class="slider-group">
+            <label>Balance <output id="balanceValue">5</output></label>
+            <input type="range" min="1" max="10" value="5" id="balance" />
+          </div>
+          <div class="slider-group">
+            <label>Surprise Factor <output id="surpriseValue">5</output></label>
+            <input type="range" min="1" max="10" value="5" id="surprise" />
+          </div>
+          <div class="slider-group">
+            <label>Enjoyability <output id="enjoyValue">5</output></label>
+            <input type="range" min="1" max="10" value="5" id="enjoy" />
+          </div>
+          <div class="slider-group">
+            <label>Chaos Level <output id="chaosValue">5</output></label>
+            <input type="range" min="1" max="10" value="5" id="chaos" />
+          </div>
         </div>
-        <div class="slider-group">
-          <label>Surprise Factor <output id="surpriseValue">5</output></label>
-          <input type="range" min="1" max="10" value="5" id="surprise">
+
+        <div class="outcome">
+          <label><input type="radio" name="outcome" value="Controlled Success" checked /> ✅ Controlled Success</label>
+          <label><input type="radio" name="outcome" value="Partial Success" /> ⚠️ Partial Success</label>
+          <label><input type="radio" name="outcome" value="Full Chaos" /> ❌ Full Chaos</label>
         </div>
-        <div class="slider-group">
-          <label>Enjoyability <output id="enjoyValue">5</output></label>
-          <input type="range" min="1" max="10" value="5" id="enjoy">
+
+        <label>Reflection</label>
+        <textarea id="reflection" placeholder="What did this experiment teach you about control vs. creativity?"></textarea>
+
+        <div class="buttons">
+          <button type="button" id="saveBtn">Save Entry</button>
+          <button type="button" id="exportBtn">Export TXT</button>
+          <button type="button" id="clearBtn">Clear Form</button>
         </div>
-        <div class="slider-group">
-          <label>Chaos Level <output id="chaosValue">5</output></label>
-          <input type="range" min="1" max="10" value="5" id="chaos">
-        </div>
-      </div>
+      </form>
+    </section>
 
-      <div class="outcome">
-        <label><input type="radio" name="outcome" value="Controlled Success" checked> ✅ Controlled Success</label>
-        <label><input type="radio" name="outcome" value="Partial Success"> ⚠️ Partial Success</label>
-        <label><input type="radio" name="outcome" value="Full Chaos"> ❌ Full Chaos</label>
-      </div>
-
-      <label>Reflection</label>
-      <textarea id="reflection" placeholder="What did this experiment teach you about control vs. creativity?"></textarea>
-
-      <div class="buttons">
-        <button type="button" id="saveBtn">Save Entry</button>
-        <button type="button" id="exportBtn">Export TXT</button>
-        <button type="button" id="clearBtn">Clear Form</button>
-      </div>
-    </form>
-
-    <div class="chart-container">
+    <section class="chart-container">
       <h2>Your Chaos Signature</h2>
       <canvas id="chaosChart" width="300" height="300"></canvas>
-    </div>
+    </section>
 
-    <div class="recent">
+    <section class="recent">
       <h2>Recent Experiments</h2>
       <div id="recentEntries"></div>
-    </div>
+    </section>
   </main>
 
-  <footer>
-    © 2025 Cook Anything Kitchen — All Rights Reserved
+  <footer class="footer">
+    <div class="footer-content">
+      <div class="footer-logo">
+        <img src="../images/logo.svg" alt="Cook Anything Kitchen logo" />
+        Cook Anything Kitchen
+      </div>
+      <p class="footer-copy">© 2025 Cook Anything Kitchen — All Rights Reserved</p>
+    </div>
   </footer>
 
   <script>
-    // Autofill date
     document.getElementById('date').value = new Date().toLocaleDateString();
 
-    // Slider value display
-    const sliders = ['balance','surprise','enjoy','chaos'];
+    const sliders = ['balance', 'surprise', 'enjoy', 'chaos'];
     sliders.forEach(id => {
       const slider = document.getElementById(id);
       const output = document.getElementById(id + 'Value');
       slider.oninput = () => output.textContent = slider.value;
     });
 
-    // Chart setup
     let ctx = document.getElementById('chaosChart').getContext('2d');
     let chaosChart = new Chart(ctx, {
       type: 'radar',
       data: {
-        labels: ['Balance','Surprise','Enjoyability','Chaos'],
+        labels: ['Balance', 'Surprise', 'Enjoyability', 'Chaos'],
         datasets: [{
           label: 'Chaos Signature',
-          data: [5,5,5,5],
+          data: [5, 5, 5, 5],
           backgroundColor: 'rgba(96,165,250,0.2)',
           borderColor: '#60a5fa',
           borderWidth: 2
@@ -338,7 +173,6 @@
       }
     });
 
-    // Save entry
     document.getElementById('saveBtn').addEventListener('click', () => {
       const entry = {
         title: document.getElementById('title').value,
@@ -365,14 +199,13 @@
 
       let entries = JSON.parse(localStorage.getItem('chaosEntries') || '[]');
       entries.unshift(entry);
-      localStorage.setItem('chaosEntries', JSON.stringify(entries.slice(0, 10))); // keep last 10
+      localStorage.setItem('chaosEntries', JSON.stringify(entries.slice(0, 10)));
 
       updateRecent();
       updateChart(entry);
       alert("Experiment saved locally!");
     });
 
-    // Update chart based on last entry
     function updateChart(entry) {
       let color;
       if (entry.outcome === "Controlled Success") color = '#86efac';
@@ -385,7 +218,6 @@
       chaosChart.update();
     }
 
-    // Update recent entries list
     function updateRecent() {
       const container = document.getElementById('recentEntries');
       const entries = JSON.parse(localStorage.getItem('chaosEntries') || '[]');
@@ -404,7 +236,6 @@
     }
     updateRecent();
 
-    // Export as TXT
     document.getElementById('exportBtn').addEventListener('click', () => {
       const title = document.getElementById('title').value || 'Experiment';
       let text = `Flavor Experiment Log — ${title}\n\n`;
@@ -429,7 +260,6 @@
       a.click();
     });
 
-    // Clear form
     document.getElementById('clearBtn').addEventListener('click', () => {
       if (confirm("Clear all form fields?")) {
         document.getElementById('chaosForm').reset();
