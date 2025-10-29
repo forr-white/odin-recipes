@@ -635,19 +635,45 @@ footer.footer{
     max-width: 90%;
   }
 }
-
 /* ---------- Nested Dropdowns (Resources Menu) ---------- */
+.dropdown {
+  position: relative;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  min-width: 240px;
+  background-color: var(--white);
+  box-shadow: 0 4px 14px rgba(0,0,0,0.08);
+  border-radius: 10px;
+  z-index: 2000;
+}
+
+.dropdown:hover > .dropdown-content {
+  display: block;
+}
+
+/* Submenu container (Downloads, Flavor Maps) */
 .dropdown-sub {
   position: relative;
 }
 
+/* Non-clickable submenu labels */
 .dropbtn-sub {
-  display: block;
+  background: none;
+  border: none;
   color: var(--text);
+  width: 100%;
+  text-align: left;
   padding: 10px 14px;
-  text-decoration: none;
+  font-family: 'Roboto', sans-serif;
+  font-size: 0.95rem;
   font-weight: 600;
-  cursor: pointer;
+  cursor: default;
+  display: block;
 }
 
 .dropbtn-sub:hover {
@@ -655,7 +681,7 @@ footer.footer{
   color: var(--accent-hover);
 }
 
-/* Submenu (second level) */
+/* Second-level submenu (slides to the right) */
 .dropdown-content-sub {
   display: none;
   position: absolute;
@@ -668,12 +694,18 @@ footer.footer{
   z-index: 3000;
 }
 
+/* Show submenu on hover */
+.dropdown-sub:hover > .dropdown-content-sub {
+  display: block;
+}
+
+/* Submenu link styling */
 .dropdown-content-sub a {
   display: block;
   padding: 10px 14px;
   color: var(--text);
   text-decoration: none;
-  transition: background 0.2s;
+  transition: background 0.2s, color 0.2s;
 }
 
 .dropdown-content-sub a:hover {
@@ -681,41 +713,39 @@ footer.footer{
   color: var(--accent-hover);
 }
 
-/* Show submenu when parent hovered */
+/* ---------- Fix: Allow nested dropdowns to open beside parent ---------- */
+.dropdown-content {
+  overflow: visible; /* Let submenus render outside parent bounds */
+  padding-right: 0;  /* Prevent hidden clipping */
+}
+
+.dropdown-sub {
+  position: relative;
+}
+
+.dropdown-content-sub {
+  left: 100%;          /* Open to the right of parent */
+  top: 0;
+  margin-left: 4px;    /* Small gap between menus */
+}
+
+.dropdown-content-sub::before {
+  content: "";
+  position: absolute;
+  top: 10px;
+  left: -6px;
+  width: 6px;
+  height: calc(100% - 20px);
+  background: transparent; /* creates a hover bridge between menus */
+}
+
+.dropdown-content,
+.dropdown-content-sub {
+  transition: opacity 0.2s ease;
+}
+
+.dropdown:hover > .dropdown-content,
 .dropdown-sub:hover > .dropdown-content-sub {
   display: block;
-}
-
-/* Keep everything aligned on hover */
-.dropdown-content {
-  display: none;
-  position: absolute;
-  background-color: var(--white);
-  min-width: 240px;
-  box-shadow: 0 4px 14px rgba(0,0,0,0.08);
-  border-radius: 10px;
-  overflow: hidden;
-  z-index: 2000;
-}
-
-.dropdown:hover > .dropdown-content {
-  display: block;
-}
-
-.dropbtn-sub {
-  background: none;
-  border: none;
-  color: var(--text);
-  width: 100%;
-  text-align: left;
-  padding: 10px 14px;
-  font-family: 'Roboto', sans-serif;
-  font-size: 0.95rem;
-  font-weight: 600;
-  cursor: default;
-}
-
-.dropbtn-sub:hover {
-  background-color: var(--bg);
-  color: var(--accent-hover);
+  opacity: 1;
 }
