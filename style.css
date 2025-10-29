@@ -222,10 +222,6 @@ button,
   transition: background 0.25s, transform 0.1s;
 }
 
-button:hover,
-.tool-btn:hover {
-}
-
 button:active,
 .tool-btn:active {
   transform: scale(0.98);
@@ -638,4 +634,88 @@ footer.footer{
   .info, .legend {
     max-width: 90%;
   }
+}
+
+/* ---------- Nested Dropdowns (Resources Menu) ---------- */
+.dropdown-sub {
+  position: relative;
+}
+
+.dropbtn-sub {
+  display: block;
+  color: var(--text);
+  padding: 10px 14px;
+  text-decoration: none;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.dropbtn-sub:hover {
+  background-color: var(--bg);
+  color: var(--accent-hover);
+}
+
+/* Submenu (second level) */
+.dropdown-content-sub {
+  display: none;
+  position: absolute;
+  top: 0;
+  left: 100%;
+  min-width: 240px;
+  background: var(--white);
+  box-shadow: 0 4px 14px rgba(0,0,0,0.08);
+  border-radius: 10px;
+  z-index: 3000;
+}
+
+.dropdown-content-sub a {
+  display: block;
+  padding: 10px 14px;
+  color: var(--text);
+  text-decoration: none;
+  transition: background 0.2s;
+}
+
+.dropdown-content-sub a:hover {
+  background-color: var(--bg);
+  color: var(--accent-hover);
+}
+
+/* Show submenu when parent hovered */
+.dropdown-sub:hover > .dropdown-content-sub {
+  display: block;
+}
+
+/* Keep everything aligned on hover */
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: var(--white);
+  min-width: 240px;
+  box-shadow: 0 4px 14px rgba(0,0,0,0.08);
+  border-radius: 10px;
+  overflow: hidden;
+  z-index: 2000;
+}
+
+.dropdown:hover > .dropdown-content {
+  display: block;
+}
+
+.dropbtn-sub {
+  background: none;
+  border: none;
+  color: var(--text);
+  width: 100%;
+  text-align: left;
+  padding: 10px 14px;
+  font-family: 'Roboto', sans-serif;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: default;
+}
+
+.dropbtn-sub:hover {
+  background-color: var(--bg);
+  color: var(--accent-hover);
 }

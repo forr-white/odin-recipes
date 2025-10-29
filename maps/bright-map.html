@@ -1,0 +1,146 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>The Bright Map | Cook Anything Kitchen</title>
+  <meta name="description" content="Explore vibrant, zesty flavor pairings that bring balance and freshness to your cooking.">
+  <link rel="icon" href="../images/logo.png" type="image/png">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../style.css">
+  <style>
+    .map-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1.5rem;
+      margin-top: 2rem;
+    }
+    .map-card {
+      background: var(--white);
+      border-radius: 16px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+      padding: 1.5rem;
+      transition: transform .2s, box-shadow .2s;
+    }
+    .map-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 6px 16px rgba(0,0,0,0.08);
+    }
+    .back-link {
+      display: inline-block;
+      margin-top: 1rem;
+      color: var(--accent);
+      font-weight: 600;
+      text-decoration: none;
+    }
+    .back-link:hover { text-decoration: underline; }
+    @media print {
+      nav, header, footer, .print-button, .back-link { display: none; }
+      body { margin: 1in; background: #fff; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header class="header">
+    <div class="logo">
+      <a href="../index.html"><img src="../images/logo.png" alt="Cook Anything Kitchen logo"></a>
+    </div>
+    <nav class="nav-links">
+      <a href="../index.html">Home</a>
+      <a href="https://www.skool.com/cook-anything-kitchen-9636/about?ref=a42cb417403c47368cddd32ba708fd26">Learn To Cook!</a>
+
+      <div class="dropdown">
+        <a href="../tools/index.html"><button class="dropbtn">Tools ▾</button></a>
+        <div class="dropdown-content">
+          <a href="../recipe-builder.html">Recipe Builder</a>
+          <a href="../tools/flavor-compass.html">Flavor Compass</a>
+          <a href="../tools/controlled-chaos-tracker.html">Controlled Chaos Tracker</a>
+          <a href="../tools/flavor-equation-builder.html">Flavor Equation Builder</a>
+        </div>
+      </div>
+
+      <div class="dropdown">
+        <a href="index.html"><button class="dropbtn">Flavor Maps ▾</button></a>
+        <div class="dropdown-content">
+          <a href="comfort-map.html">Comfort Map</a>
+          <a href="bright-map.html">Bright Map</a>
+          <a href="global-map.html">Global Map</a>
+        </div>
+      </div>
+
+      <div class="dropdown">
+        <button class="dropbtn">Downloads ▾</button>
+        <div class="dropdown-content">
+          <a href="../downloads/beginner-cooking-terms-glossary.pdf">Beginner Cooking Terms</a>
+          <a href="../downloads/beginner-kitchen-essentials-checklist.pdf">Beginner Kitchen Essentials</a>
+          <a href="../downloads/first-week-cooking-confidence-challenge.pdf">First Week Cooking Confidence Challenge</a>
+          <a href="../downloads/flavor-playbook.pdf">Flavor Playbook</a>
+          <a href="../downloads/pantry-starter-guide.pdf">Pantry Starter Guide</a>
+        </div>
+      </div>
+
+      <a href="../license.html">License</a>
+    </nav>
+  </header>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="hero-text">
+      <h1>🍋 The Bright Map</h1>
+      <p>Vibrant, zesty flavor pairings that bring balance and freshness to your cooking.</p>
+      <a href="index.html" class="back-link">← Back to All Maps</a>
+    </div>
+  </section>
+
+  <!-- Map Content -->
+  <main>
+    <section class="tool-card">
+      <button class="tool-btn print-button" onclick="window.print()">🖨️ Print This Map</button>
+
+      <div class="map-grid">
+        <div class="map-card">
+          <h2>🌿 Fresh & Light</h2>
+          <ul>
+            <li>Lemon + Dill + Salmon</li>
+            <li>Lime + Chili + Cilantro</li>
+            <li>Yogurt + Cucumber + Mint</li>
+          </ul>
+        </div>
+
+        <div class="map-card">
+          <h2>🥗 Sweet & Tangy</h2>
+          <ul>
+            <li>Vinegar + Honey + Mustard</li>
+            <li>Orange + Ginger + Soy</li>
+            <li>Pineapple + Garlic + Chili</li>
+          </ul>
+        </div>
+
+        <div class="map-card">
+          <h2>⚖️ Balance Tips</h2>
+          <p>Use <strong>acid</strong> for brightness, <strong>sweetness</strong> for harmony, and <strong>herbs</strong> for lift. Adjust each until no flavor dominates — that’s balance.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-content">
+      <div class="footer-logo">
+        <a href="../index.html"><img src="../images/logo.png" alt="Cook Anything Kitchen Logo"></a>
+      </div>
+      <div class="footer-nav">
+        <a href="../index.html">Home</a>
+        <a href="https://www.skool.com/cook-anything-kitchen-9636/about?ref=a42cb417403c47368cddd32ba708fd26">Learn To Cook!</a>
+        <a href="../recipe-builder.html">Recipe Builder</a>
+        <a href="../license.html">License</a>
+      </div>
+      <p class="footer-copy">&copy; 2025 Cook Anything Kitchen. All rights reserved.</p>
+    </div>
+  </footer>
+
+</body>
+</html>
