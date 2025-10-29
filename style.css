@@ -213,7 +213,6 @@ input[type="range"]::-webkit-slider-thumb:hover {
 button,
 .tool-btn {
   background: var(--accent);
-  color: var(--white);
   border: none;
   border-radius: 8px;
   padding: 10px 16px;
@@ -225,7 +224,6 @@ button,
 
 button:hover,
 .tool-btn:hover {
-  background: var(--accent-hover);
 }
 
 button:active,
