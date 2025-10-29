@@ -548,8 +548,8 @@ footer.footer{
 
 .flavor {
   position: absolute;
-  width: 80px;
-  height: 80px;
+  width: 90px;
+  height: 90px;
   border-radius: 50%;
   display: flex;
   align-items: center;
@@ -572,7 +572,7 @@ footer.footer{
   padding: 1rem 1.25rem;
   border-radius: 1rem;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
-  max-width: 340px;
+  max-width: fit-content;
   margin: 1.5rem auto;
   text-align: left;
   line-height: 1.5;
@@ -588,7 +588,7 @@ footer.footer{
   background: var(--white);
   border-radius: 1rem;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
-  max-width: 420px;
+  max-width: fit-content;
   margin: 2rem auto;
   padding: 1rem 1.25rem;
   text-align: left;
