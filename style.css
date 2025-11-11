@@ -749,3 +749,61 @@ footer.footer{
   display: block;
   opacity: 1;
 }
+
+/* =========================================================
+   Cooking 101 & Course Module Enhancements
+   Matches unified Cook Anything Kitchen design system
+   ========================================================= */
+
+.lesson {
+  margin-top: 1.75rem;
+  padding-top: 1rem;
+  border-top: 1px solid #e5e7eb;
+}
+
+.lesson h3 {
+  color: var(--accent);
+  font-size: 1.25rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+}
+
+.lesson ul {
+  margin: 0.5rem 0 1rem 1.25rem;
+  padding-left: 0.5rem;
+  color: var(--text);
+}
+
+.lesson ul li {
+  margin-bottom: 0.35rem;
+  line-height: 1.5;
+}
+
+.lesson p {
+  margin-bottom: 0.8rem;
+  color: var(--text);
+  font-size: 1rem;
+}
+
+.lesson p strong {
+  color: var(--accent);
+}
+
+.lesson em {
+  color: var(--muted);
+}
+
+.tool-card h2 {
+  color: var(--accent);
+  font-weight: 800;
+}
+
+.tool-card .subtitle {
+  font-size: 1.05rem;
+  color: var(--muted);
+  margin-bottom: 1.25rem;
+}
+
+@media (max-width: 640px) {
+  .lesson h3 { font-size: 1.1rem; }
+}
