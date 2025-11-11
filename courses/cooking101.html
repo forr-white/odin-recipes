@@ -58,7 +58,21 @@
     <p>By the end of this course, you'll know how to handle key tools, follow recipes effectively, maintain kitchen safety, and prepare balanced meals confidently and efficiently.</p>
   </section>
 
-  <section class="tool-card">
+  <!-- Course Navigation -->
+<nav class="module-nav">
+  <h3>Jump to a Module</h3>
+  <ul>
+    <li><a href="#module1">Module 1 – Getting Started in the Kitchen</a></li>
+    <li><a href="#module2">Module 2 – Ingredients & Flavor Foundations</a></li>
+    <li><a href="#module3">Module 3 – Cooking Techniques & Tools Mastery</a></li>
+    <li><a href="#module4">Module 4 – Flavor Pairing & Seasoning Strategies</a></li>
+    <li><a href="#module5">Module 5 – Meal Planning & Efficiency Habits</a></li>
+    <li><a href="#module6">Module 6 – Confidence & Creative Cooking Mastery</a></li>
+    <li><a href="#final-challenge">Final Challenge</a></li>
+  </ul>
+</nav>
+
+  <section class="tool-card" id="module1">
     <h2>Module 1: Getting Started in the Kitchen</h2>
     <p class="subtitle">Learn setup, recipe comprehension, and safety fundamentals.</p>
 
@@ -100,7 +114,7 @@
   </section>
 
   <!-- Module 2 -->
-<section class="tool-card">
+<section class="tool-card" id="module2">
   <h2>Module 2: Ingredients & Flavor Foundations</h2>
   <p class="subtitle">Learn to select quality ingredients and build balanced, memorable flavors through taste awareness and technique.</p>
 
@@ -142,7 +156,7 @@
 </section>
 
 <!-- Module 3 -->
-<section class="tool-card">
+<section class="tool-card" id="module3">
   <h2>Module 3: Cooking Techniques & Tools Mastery</h2>
   <p class="subtitle">Develop hands-on skills to cook with precision, confidence, and efficiency using the right tools and methods for every dish.</p>
 
@@ -187,7 +201,7 @@
 </section>
 
 <!-- Module 4 -->
-<section class="tool-card">
+<section class="tool-card" id="module4">
   <h2>Module 4: Flavor Pairing & Seasoning Strategies</h2>
   <p class="subtitle">Discover how ingredients interact, learn to balance seasoning, and craft harmonious flavors using herbs, spices, and textures.</p>
 
@@ -232,7 +246,7 @@
 </section>
 
 <!-- Module 5 -->
-<section class="tool-card">
+<section class="tool-card" id="module5">
   <h2>Module 5: Meal Planning & Efficiency Habits</h2>
   <p class="subtitle">Master organization in the kitchen through smart planning, efficient prep, and systems that save time without sacrificing flavor.</p>
 
@@ -277,7 +291,7 @@
 </section>
 
 <!-- Module 6 -->
-<section class="tool-card">
+<section class="tool-card" id="module6">
   <h2>Module 6: Confidence & Creative Cooking Mastery</h2>
   <p class="subtitle">Bring together all your skills to cook intuitively, think like a chef, and express creativity in every meal you make.</p>
 
@@ -322,12 +336,26 @@
 </section>
 
 <!-- Final Challenge -->
-<section class="tool-card">
+<section class="tool-card" id="final-challenge">
   <h2>🎉 Final Challenge: Your Cooking Journey</h2>
   <p>Congratulations—you’ve completed <strong>Cooking 101</strong>! You’ve built foundational techniques, developed intuition, and transformed uncertainty into confidence. Now it’s time to put everything together: plan a full meal using lessons across all six modules. From mise en place to plating, capture your process through notes or photos. Reflect on how your mindset has changed—from beginner to instinctive, creative home cook. Remember, mastery is never final—it’s a journey of curiosity, learning, and delicious discovery.</p>
   <p><strong>Pro Tip:</strong> Host a “Celebration Dinner” for friends or family using your course skills; teach one new trick as you serve.</p>
   <p><strong>Challenge:</strong> Design and cook a three‑course menu that expresses your personal cooking style, combining flavor, technique, and heart.</p>
 </section>
+
+<!-- Back to Top Button -->
+<button id="backToTopBtn" title="Back to top">↑</button>
+
+<script>
+  const backToTopBtn = document.getElementById("backToTopBtn");
+  window.addEventListener("scroll", () => {
+    backToTopBtn.style.display = window.scrollY > 400 ? "block" : "none";
+  });
+  backToTopBtn.addEventListener("click", () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  });
+</script>
+
 </main>
 
 <!-- Footer -->
