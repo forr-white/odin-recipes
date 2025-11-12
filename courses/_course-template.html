@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>[Course Title] | Cook Anything Kitchen</title>
+  <meta name="description" content="Free course from Cook Anything Kitchen – learn [brief description here]." />
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../style.css" />
+</head>
+<body>
+
+<!-- Header -->
+<header class="header">
+  <div class="logo">
+    <a href="../index.html"><img src="../images/logo.svg" alt="Cook Anything Kitchen logo" /></a>
+  </div>
+  <nav class="nav-links">
+    <a href="../index.html">Home</a>
+    <a href="../courses.html" class="active">Courses</a>
+    <div class="dropdown">
+      <button class="dropbtn">Resources ▾</button>
+      <div class="dropdown-content">
+        <div class="dropdown-sub">
+          <a href="../tools/index.html" class="dropbtn-sub">Tools ▸</a>
+          <div class="dropdown-content-sub">
+            <a href="../recipe-builder.html">Recipe Builder</a>
+            <a href="../tools/flavor-compass.html">Flavor Compass</a>
+            <a href="../tools/controlled-chaos-tracker.html">Controlled Chaos Tracker</a>
+            <a href="../tools/flavor-equation-builder.html">Flavor Equation Builder</a>
+          </div>
+        </div>
+        <div class="dropdown-sub">
+          <button class="dropbtn-sub" type="button">Downloads ▸</button>
+          <div class="dropdown-content-sub">
+            <a href="../downloads/beginner-cooking-terms-glossary.pdf">Cooking Terms Glossary</a>
+            <a href="../downloads/beginner-kitchen-essentials-checklist.pdf">Kitchen Essentials</a>
+            <a href="../downloads/pantry-starter-guide.pdf">Pantry Starter Guide</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <a href="../license.html">License</a>
+  </nav>
+</header>
+
+<main>
+  <!-- Hero / Course Intro -->
+  <section class="hero">
+    <div class="hero-text">
+      <h1>🍴 [Course Title]</h1>
+      <p>[Short descriptive tagline — what students learn in one sentence.]</p>
+      <a href="#module1" class="support-btn">Begin Course</a>
+    </div>
+  </section>
+
+  <!-- In‑Page Module Navigation -->
+  <nav class="module-nav">
+    <h3>Jump to a Module</h3>
+    <ul>
+      <li><a href="#module1">Module 1 – [Title]</a></li>
+      <li><a href="#module2">Module 2 – [Title]</a></li>
+      <li><a href="#module3">Module 3 – [Title]</a></li>
+      <li><a href="#module4">Module 4 – [Title]</a></li>
+      <li><a href="#module5">Module 5 – [Title]</a></li>
+      <li><a href="#module6">Module 6 – [Title]</a></li>
+    </ul>
+  </nav>
+
+  <!-- ===================== -->
+  <!-- == Course Modules == -->
+  <!-- ===================== -->
+
+  <!-- Example Module Block -->
+  <section class="tool-card" id="module1">
+    <h2>Module 1: [Module Title]</h2>
+    <p class="subtitle">[Brief module overview.]</p>
+
+    <div class="lesson">
+      <h3>Lesson 1.1 — [Lesson Title]</h3>
+      <ul>
+        <li>[Key Idea 1]</li>
+        <li>[Key Idea 2]</li>
+        <li>[Key Idea 3]</li>
+      </ul>
+      <p>[~900–1000 character lesson buildout describing content, concepts, and approach.]</p>
+      <p><strong>Pro Tip:</strong> [Actionable tip for students.]</p>
+      <p><strong>Challenge:</strong> [Practical exercise or reflection.]</p>
+    </div>
+  </section>
+
+  <!-- Duplicate / Edit module blocks for #module2–#module6 -->
+
+  <!-- Final Challenge -->
+  <section class="tool-card" id="final">
+    <h2>🎯 Final Challenge: [Course Milestone Summary]</h2>
+    <p>Summarize course achievement, reinforce key takeaways, and encourage continued learning.</p>
+    <p><strong>Pro Tip:</strong> [Closing advice or habit to maintain.]</p>
+    <p><strong>Challenge:</strong> [Capstone task to apply the entire course.]</p>
+  </section>
+</main>
+
+<!-- Back to Top Button -->
+<button id="backToTopBtn" title="Back to top">↑</button>
+<script>
+  const backBtn = document.getElementById("backToTopBtn");
+  window.addEventListener("scroll", () => {
+    backBtn.style.display = window.scrollY > 400 ? "block" : "none";
+  });
+  backBtn.onclick = () => window.scrollTo({ top: 0, behavior: "smooth" });
+</script>
+
+<!-- Footer -->
+<footer class="footer">
+  <div class="footer-content">
+    <div class="footer-logo">
+      <a href="../index.html"><img src="https://cookanythingkitchen.com/images/logo.svg" alt="Site Logo" /></a>
+    </div>
+    <div class="footer-nav">
+      <a href="../index.html">Home</a>
+      <a href="../courses.html">Courses</a>
+      <a href="../recipe-builder.html">Recipe Builder</a>
+      <a href="../license.html">License</a>
+    </div>
+    <p class="footer-copy">&copy; 2025 Cook Anything Kitchen. All rights reserved.</p>
+  </div>
+</footer>
+
+<script src="../config-check.js" defer></script>
+</body>
+</html>

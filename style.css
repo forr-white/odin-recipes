@@ -808,3 +808,54 @@ footer.footer{
   .lesson h3 { font-size: 1.1rem; }
 }
 
+/* ---------- Fix Overflow & Improve Readability for Lesson Pages ---------- */
+
+/* Ensure long lessons stay within the layout fluidly */
+.tool-card {
+  max-width: 900px;
+  margin: 2rem auto;
+  padding: 2rem 1.5rem;
+  background: var(--white);
+  border-radius: 12px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  word-break: break-word;
+  line-height: 1.75;
+}
+
+/* Improve body text flow and spacing */
+.tool-card p {
+  font-size: 1.05rem;
+  line-height: 1.75;
+  margin-bottom: 1rem;
+}
+
+/* Better spacing for lesson lists */
+.tool-card ul {
+  padding-left: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.tool-card li {
+  margin-bottom: 0.35rem;
+  line-height: 1.6;
+}
+
+/* Adjust subtitles on narrow screens */
+.subtitle {
+  font-size: 1.1rem;
+  line-height: 1.5;
+  margin-bottom: 1.2rem;
+}
+
+/* Prevent text from touching the edges on mobile */
+@media (max-width: 768px) {
+  .tool-card {
+    padding: 1.5rem 1rem;
+  }
+  .tool-card p {
+    font-size: 1rem;
+    line-height: 1.7;
+  }
+}
