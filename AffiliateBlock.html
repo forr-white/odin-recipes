@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Affiliate HTML Generator</title>
+
+  <style>
+    /* Keep it minimal and non-invasive */
+    .gen-container {
+      max-width: 900px;
+      margin: 2rem auto;
+      padding: 1rem;
+    }
+
+    .gen-group {
+      margin-bottom: 1.2rem;
+    }
+
+    .gen-label {
+      font-weight: 600;
+      display: block;
+      margin-bottom: 0.3rem;
+    }
+
+    textarea, input[type="text"] {
+      width: 100%;
+      padding: 0.6rem;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+      font-size: 1rem;
+    }
+
+    button {
+      padding: 0.6rem 1.2rem;
+      font-size: 1rem;
+      cursor: pointer;
+      border-radius: 6px;
+      border: none;
+      background: #ff7a1a;
+      color: white;
+      font-weight: 600;
+    }
+
+    pre {
+      background: #111;
+      color: #0f0;
+      padding: 1rem;
+      border-radius: 6px;
+      overflow-x: auto;
+      white-space: pre-wrap;
+      word-break: break-word;
+      margin-top: 1rem;
+    }
+  </style>
+
+</head>
+<body>
+
+<div class="gen-container">
+
+  <h1>Affiliate Section HTML Generator</h1>
+  <p>Enter your details below and copy the output HTML into any recipe.</p>
+
+  <!-- SECTION TITLE -->
+  <div class="gen-group">
+    <label class="gen-label">Section Title</label>
+    <input type="text" id="sectionTitle" placeholder="e.g., Recommended Tools & Ingredients">
+  </div>
+
+  <!-- DISCLAIMER -->
+  <div class="gen-group">
+    <label class="gen-label">Optional Disclaimer</label>
+    <input type="text" id="disclaimer" placeholder="e.g., As an Amazon Associate I earn from qualifying purchases.">
+  </div>
+
+  <!-- AFFILIATE ITEMS -->
+  <div class="gen-group">
+    <label class="gen-label">
+      Affiliate Items  
+      <span style="font-weight:400;">(Format: Label | URL | Optional note)</span>
+    </label>
+
+    <textarea id="items" rows="10" placeholder="Example:
+Cast Iron Skillet | https://amzn.to/... | My favorite for searing
+Chef's Knife | https://amzn.to/..."></textarea>
+  </div>
+
+  <button onclick="generateAffiliateHTML()">Generate HTML</button>
+
+  <pre id="output"></pre>
+
+</div>
+
+<script>
+function generateAffiliateHTML() {
+  const title = document.getElementById("sectionTitle").value.trim() || "Recommended Products";
+  const disclaimer = document.getElementById("disclaimer").value.trim();
+  const itemsRaw = document.getElementById("items").value.trim();
+
+  let items = "";
+
+  if (itemsRaw) {
+    items = itemsRaw
+      .split("\n")
+      .map(line => {
+        const parts = line.split("|").map(p => p.trim());
+        if (!parts[0] || !parts[1]) return "";
+        const note = parts[2] ? ` — <span class=\"note\">${parts[2]}</span>` : "";
+        return `<li><a href="${parts[1]}" target="_blank" rel="noopener">${parts[0]}</a>${note}</li>`;
+      })
+      .join("\n");
+  }
+
+  const htmlOutput = `
+<section class="recipe-section notes affiliate">
+  <h2>${title}</h2>
+
+  ${disclaimer ? `<p class="affiliate-disclaimer">${disclaimer}</p>` : ""}
+
+  <ul>
+${items}
+  </ul>
+</section>`;
+
+  document.getElementById("output").textContent = htmlOutput;
+}
+</script>
+
+</body>
+</html>
