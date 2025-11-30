@@ -973,3 +973,26 @@ footer.footer{
   font-weight:600;
   margin:8px 4px 4px;
 }
+
+/* Disclaimer inside hero section */
+.hero .disclaimer,
+.recipe-section .disclaimer {
+  margin-top: 0.5rem;
+  font-size: 0.85rem;
+  color: #666;
+  opacity: 0.85;
+  line-height: 1.4;
+}
+
+/* Optional: center disclaimer only inside hero */
+.hero .disclaimer {
+  display: block;
+  text-align: center;
+}
+
+/* If you want even more subtle */
+.hero .disclaimer.subtle {
+  font-size: 0.8rem;
+  color: #777;
+  opacity: 0.7;
+}
