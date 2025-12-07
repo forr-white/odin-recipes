@@ -1,50 +1,88 @@
 <!doctype html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Fluffy Homestyle Pancakes</title>
-<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700;900&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="recipe.css">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Fluffy Homestyle Pancakes</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="recipe.css">
 </head>
 <body>
+
 <header class="recipe-header">
-  <a href="../index.html"><img src="../images/logo.svg" alt="Cook Anything Kitchen Logo"></a>
-  <nav><a href="../index.html">Home</a> | <a href="../recipe-builder.html">Recipe Builder</a> | <a href="../license.html">License</a></nav>
+  <a href="../index.html">
+    <img src="../images/logo.svg" alt="Cook Anything Kitchen Logo">
+  </a>
+  <nav>
+    <a href="../index.html">Home</a> |
+    <a href="../recipe-builder.html">Recipe Builder</a> |
+    <a href="../license.html">License</a>
+  </nav>
 </header>
+
 <main class="recipe-container">
   <h1 class="recipe-title">Fluffy Homestyle Pancakes</h1>
-  <p class="recipe-credit">Submitted by Cook Anything Kitchen
   <div class="recipe-meta">breakfast • American</div>
-  
-  <section class="recipe-section"><h2>Ingredients</h2><ul><li>A</li></ul></section>
-  <section class="recipe-section"><h2>Directions</h2><ol><li>A</li></ol></section>
-  <section class="recipe-section notes"><h2>Notes</h2><ul><li>A</li></ul></section>
-  
+
+  <img src="../images/fluffy-homestyle-pancakes.png" alt="Stack of fluffy pancakes with butter and syrup">
+
+  <section class="recipe-section ingredients">
+    <h2>Ingredients</h2>
+    <ul>
+      <li>1&nbsp;½ cups all-purpose flour</li>
+      <li>3&nbsp;½ teaspoons baking powder</li>
+      <li>1 tablespoon sugar</li>
+      <li>½ teaspoon salt</li>
+      <li>1&nbsp;¼ cups whole milk (add up to 2 tbsp more if batter is very thick)</li>
+      <li>1 large egg</li>
+      <li>3 tablespoons melted butter, plus more for the pan</li>
+      <li>1 teaspoon vanilla extract (optional)</li>
+    </ul>
+  </section>
+
+  <section class="recipe-section directions">
+    <h2>Directions</h2>
+    <ol>
+      <li><strong>Mix dry ingredients:</strong> Whisk together the flour, baking powder, sugar, and salt.</li>
+      <li><strong>Add wet ingredients:</strong> Add milk, egg, melted butter, and vanilla. Whisk just until combined—small lumps are okay.</li>
+      <li><strong>Rest batter:</strong> Let the batter sit for 5 minutes to activate the baking powder.</li>
+      <li><strong>Heat the griddle:</strong> Warm a skillet or griddle over medium heat and lightly butter it.</li>
+      <li><strong>Cook:</strong> Scoop ¼ cup batter per pancake. Cook until bubbles appear and edges set, then flip and cook until golden.</li>
+      <li><strong>Serve:</strong> Top with butter, syrup, fruit, or whipped cream.</li>
+    </ol>
+  </section>
+
+  <section class="recipe-section notes">
+    <h2>Notes</h2>
+    <ul>
+      <li>Add milk if the batter is too thick; add flour if too thin.</li>
+      <li>Fold in whipped egg whites for extra-fluffy pancakes.</li>
+      <li>Add blueberries, chocolate chips, or nuts right after pouring batter on the griddle.</li>
+      <li>Keep pancakes warm in the oven at 200°F while cooking the rest.</li>
+    </ul>
+  </section>
+
   <section class="recipe-section nutrition">
     <h2>Nutritional Information</h2>
     <div class="nutrition-card">
-      <p><strong>Serving Size:</strong> 1</p>
-      <p><strong>Calories:</strong> 1</p>
-      <p><strong>Fat:</strong> 1 g</p>
-      <p><strong>Carbohydrates:</strong> 1 g</p>
-      <p><strong>Protein:</strong> 1 g</p>
+      <p><strong>Serving Size:</strong> 1 pancake</p>
+      <p><strong>Calories:</strong> 118</p>
+      <p><strong>Fat:</strong> 4 g</p>
+      <p><strong>Carbohydrates:</strong> 17 g</p>
+      <p><strong>Protein:</strong> 3 g</p>
     </div>
   </section>
+
 </main>
-<footer class="footer">
-  <div class="footer-content">
-    <div class="footer-logo">
-      <a href="../index.html"><img src="../images/logo.svg" alt="Site Logo"></a>
-    </div>
-    <div class="footer-nav">
-      <a href="../index.html">Home</a>
-      <a href="../recipe-builder.html">Recipe Builder</a>
-      <a href="../license.html">License</a>
-    </div>
-    <p class="footer-copy">&copy; 2025 Cook Anything Kitchen. All rights reserved.</p>
-  </div>
+
+<footer class="site-footer">
+  <p>&copy; <span id="currentYear"></span> Cook Anything Kitchen. All rights reserved.</p>
 </footer>
-<script src="../config-check.js" defer></script>
+
+<script>
+  document.getElementById("currentYear").textContent = new Date().getFullYear();
+</script>
+
 </body>
 </html>
