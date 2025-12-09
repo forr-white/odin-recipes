@@ -3,12 +3,12 @@ const CACHE_NAME = 'cak-cache-v1';
 // You can tweak these to match your actual files
 const CORE_ASSETS = [
   '/',
-  '/index.html',
-  '/recipe-builder.html',
-  '/license.html',
-  '/recipe.css',
-  '/images/logo.svg',
-  '/manifest.json'
+  'index.html',
+  'recipe-builder.html',
+  'license.html',
+  'recipe.css',
+  'images/logo.svg',
+  'manifest.json'
 ];
 
 // Install: pre-cache core assets
