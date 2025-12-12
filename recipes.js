@@ -89,7 +89,7 @@ function displayRecipes(recipes) {
     div.className = "recipe-card";
     div.innerHTML = `
       <a href="${r.link}" class="btn">
-        <img src="${r.image}" alt="${r.name}" loading="lazy" onerror="this.src='images/placeholder.jpg';">
+        <img src="${r.image}" alt="${r.name}" loading="lazy" decoding="async" onerror="this.src='images/logo.png';">
       </a>
       <a href="${r.link}" class="btn"><h3>${r.name}</h3></a>
       <p>${r.category} | ${r.cuisine}</p>
